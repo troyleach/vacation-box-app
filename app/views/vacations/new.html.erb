@@ -1,1 +1,28 @@
 <h1>Lets create a new vacation!</h1>
+<section>
+  <%= form_tag '/vacations' do %>
+
+    <div>
+      <%= label_tag :vacation_name, "Vacation Name:" %>
+      <%= text_field_tag :vacation_name %> 
+    </div>
+  <br>
+    <%= label_tag :title %>
+    <%= text_field_tag :title %>
+  <br>
+    <%= label_tag :image %>
+    <%= text_field_tag :image %>
+  <br>
+    <%= label_tag :description %>
+    <%= text_field_tag :description %>
+  <br>
+    <%= label_tag :category_id %>
+    <%= text_field_tag :category_id %>
+  <br>
+    <%= label_tag :vendor_id %>
+    <%= text_field_tag :vendor_id %>
+  <br>
+    <%= submit_tag "Let's Go!" %>
+
+  <% end %>
+</section>

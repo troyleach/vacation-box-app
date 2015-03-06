@@ -12,12 +12,13 @@
       <header>
         <div class="header_one row">
           <div class="col-lg-12">
+            <span>Home Dashboard</span>
             <div class="gravatar_image_div">
             <%= image_tag current_user.gravatar_url,  :class => "gravatar_image" %>
             </div>
             <h1>Vacation Box.html / application.html header one</h1>
             <% if current_user %>
-            <p class="nav_current_user">Hello <%= current_user.email %></p>
+            <p class="nav_current_user">Hello <%= current_user.first_name %></p>
             <% end %>
             <% if current_user %>
               <p><a href="/users/sign_out">logout</a></p>

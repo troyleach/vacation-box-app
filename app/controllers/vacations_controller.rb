@@ -8,4 +8,8 @@ class VacationsController < ApplicationController
     
   end
 
+  def create
+    
+  end
+
 end

@@ -3,6 +3,7 @@
   <div class="row">
   <%= form_tag '/vacations' do %>
     <div class="accomondations col-xs-6 col-md-4">
+    <p>Where do you plan on staying while your in ...ERB...</p>
       <div>
         <%= label_tag :accomondations, "Living Quarters:" %>
       </div>
@@ -18,6 +19,7 @@
     </div>
 
     <div class="vacation_name col-xs-6 col-md-4">
+    <p>What would you like to name your vacation?</p>
       <div>
         <%= label_tag :vacation_name, "Vacation Name:" %>
       </div>
@@ -51,15 +53,29 @@
         <%= check_box_tag :walking %>
       </div>
       <hr>
-      <div><%= submit_tag "Let's Go!" %></div>
+      <div><%= submit_tag "Set up my vacation!" %></div>
     </div>
 
     <div class="arive_by col-xs-6 col-md-4">
-      <div>
-        <%= label_tag :arive_by, "arive_by:" %>
+    <p>Arrive by:</p>
+        <div>
+          <%= label_tag :by_air, "By air" %>
+          </div>
+          <div>
+          <%= check_box_tag :by_air %>
         </div>
         <div>
-        <%= text_field_tag :arive_by %>
+          <%= label_tag :car, "Car" %>
+          </div>
+          <div>
+          <%= check_box_tag :car %>
+        </div>
+        <div>
+          <%= label_tag :train, "Train" %>
+          </div>
+          <div>
+          <%= check_box_tag :train %>
+        </div>
       </div>
     </div>
 

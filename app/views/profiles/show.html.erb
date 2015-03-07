@@ -1,0 +1,71 @@
+<h2>About <%= current_user.first_name.capitalize %></h2>
+<span><%= submit_tag "Update me" %></span>
+
+  <div class="row profile_row">
+  <div class="users_profile_image col-xs-6 col-md-4">
+    <%= image_tag current_user.gravatar_url,  :class => "gravatar_image_profile" %>
+  </div>
+  <%= form_tag vacations_path do %>
+    <div class="users_name col-xs-6 col-md-4">
+      <div>
+        <%= label_tag :first_name, "First Name:" %>
+      </div>
+      <div>
+        <%= text_field_tag :first_name, current_user.first_name.capitalize %> 
+      </div>
+      <div>
+        <%= label_tag :last_name, "Last Name:" %>
+      </div>
+      <div>
+        <%= text_field_tag :last_name, current_user.last_name.capitalize %> 
+      </div>
+      <div>
+        <%= label_tag :email, "Email:" %>
+      </div>
+      <div>
+        <%= text_field_tag :email, current_user.email %> 
+      </div>
+      <div>
+        <%= label_tag :username, "Username:" %>
+      </div>
+      <div>
+        <%= text_field_tag :username, current_user.username %> 
+      </div>
+    </div><!-- End of second box users_name -->
+
+    <div class="users_address col-xs-6 col-md-4">
+    <p>Where do you live. We only need city and state.</p>
+      <div>
+        <%= label_tag :address, "Address:" %>
+      </div>
+      <div>
+        <%= text_field_tag :address %> 
+      </div>
+
+      <div>
+        <%= label_tag :city, "City:" %>
+      </div>
+      <div>
+        <%= text_field_tag :city, current_user.city.capitalize %> 
+      </div>
+
+      <div>
+        <%= label_tag :state, "State:" %>
+      </div>
+      <div>
+        <%= text_field_tag :state, current_user.state.upcase %> 
+      </div>
+
+      <div>
+        <%= label_tag :zip, "Zip:" %>
+      </div>
+      <div>
+        <%= text_field_tag :zip %> 
+      </div>
+
+    </div><!-- End of third box users_address -->
+
+    
+    <% end %>
+  </div><!-- End of row -->
+

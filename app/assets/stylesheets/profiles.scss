@@ -1,0 +1,31 @@
+// Place all the styles related to the profiles controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+.profile_row {
+  border: 3px solid black;
+  margin: 5px;
+}
+
+.users_profile_image {
+  border: 1px solid #000000;
+  background-color: #fbeed6;
+  padding: 15px;
+  text-align: center;
+}
+
+.gravatar_image_profile {
+  width: 150px;
+  height: auto;
+}
+
+.users_name {
+  border: 1px solid #000000;
+  background-color: #fbeed6;
+  padding: 15px;
+}
+
+.users_address {
+  border: 1px solid #000000;
+  background-color: #fbeed6;
+  padding: 15px;
+}

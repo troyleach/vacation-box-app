@@ -12,5 +12,6 @@ Rails.application.routes.draw do
    end
 
    resources :vacations
+   resources :profiles
 
 end

@@ -17,10 +17,14 @@
             <div class="gravatar_image_div">
             <%= image_tag current_user.gravatar_url,  :class => "gravatar_image" %>
             </div>
-            <h1>Home link, title of the page(or home citie)</h1>
+            <h1>Home link, title of the page(or home city)</h1>
             <% if current_user %>
             <p class="nav_current_user">Hello <%= current_user.first_name %></p>
             <% end %>
+            <div class="new_vacation_link">
+            
+              <a href="/profiles/<%= current_user.id %>/edit"><h5><%= current_user.first_name %>'s profile page</h5></a>
+            </div>
             <% if current_user %>
               <p><a href="/users/sign_out">logout</a></p>
               <% else %>

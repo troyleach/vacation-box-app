@@ -1,0 +1,89 @@
+<h2>Create a new vacation</h2>
+<section>
+  <div class="row">
+  <%= form_tag '/vacations' do %>
+    <div class="accomondations col-xs-6 col-md-4">
+    <p>Where do you plan on staying while your in ...ERB...</p>
+      <div>
+        <%= label_tag :accomondations, "Living Quarters:" %>
+      </div>
+      <div>
+        <%= text_field_tag :accomondations %> 
+      </div>
+      <div>
+        <%= label_tag :address, "Address:" %>
+      </div>
+      <div>
+        <%= text_field_tag :address %> 
+      </div>
+    </div>
+
+    <div class="vacation_name col-xs-6 col-md-4">
+    <p>What would you like to name your vacation?</p>
+      <div>
+        <%= label_tag :vacation_name, "Vacation Name:" %>
+      </div>
+      <div>
+        <%= text_field_tag :vacation_name %> 
+      </div>
+      <div>
+        <%= label_tag :city, "City:" %>
+        </div>
+        <div>
+        <%= text_field_tag :city %>
+      </div>
+      <p>how do you plan on getting around while on vacation</p>
+      <!-- The below code will need to be enum, so I think I have to change it to arive_by to match the table -->
+      <div>
+        <%= label_tag :car_rental, "Car rental" %>
+        </div>
+        <div>
+        <%= check_box_tag :car_rental %>
+      </div>
+      <div>
+        <%= label_tag :bus_train, "Bus/Train" %>
+        </div>
+        <div>
+        <%= check_box_tag :bus_train %>
+      </div>
+      <div>
+        <%= label_tag :walking, "walking" %>
+        </div>
+        <div>
+        <%= check_box_tag :walking %>
+      </div>
+      <hr>
+      <div><%= submit_tag "Set up my vacation!" %></div>
+    </div>
+
+    <div class="arive_by col-xs-6 col-md-4">
+    <p>Arrive by:</p>
+        <div>
+          <%= label_tag :by_air, "By air" %>
+          </div>
+          <div>
+          <%= check_box_tag :by_air %>
+        </div>
+        <div>
+          <%= label_tag :car, "Car" %>
+          </div>
+          <div>
+          <%= check_box_tag :car %>
+        </div>
+        <div>
+          <%= label_tag :train, "Train" %>
+          </div>
+          <div>
+          <%= check_box_tag :train %>
+        </div>
+      </div>
+    </div>
+
+    <% end %>
+  </div>
+</section>
+
+
+
+
+

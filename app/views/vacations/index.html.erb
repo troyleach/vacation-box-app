@@ -2,7 +2,7 @@
   <a href='<%= new_vacation_path %>'><h5>Create a vacation</h5></a>
 </div>
 <div class="new_vacation_link">
-  <a href='#'><h5>Create a profile</h5></a>
+  <a href="/profiles/<%= current_user.id %>"><h5><%= current_user.first_name %>'s profile page</h5></a>
 </div>
 
 <section class"section_one">

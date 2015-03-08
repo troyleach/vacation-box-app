@@ -4,13 +4,26 @@ class ProfilesController < ApplicationController
   end
 
   def show
-    # flash[:success] = "Your profile has been updated!"
-    # redirect_to profile_path(current_user.id)
-    # write an if statement that if they want to add their own picture
-    # instead of the gravatar pic.
+    
+  end
+
+  def edit
+    #@profile = current_profile.first_name
+    @profile = Profile.find_by(:user_id => current_user.id)
+    if !@profile
+      Profile.create({:user_id => current_user.id})
+    end
+    puts "***********************************************"
+    p @profile
   end
 
   def update
+    @profile = Profile.find_by(:user_id => current_user.id)
+    
+      @profile.update({:first_name => params[:first_name], :last_name => params[:last_name], :username => params[:username], :address => params[:address], :city => params[:city], :state => params[:state], :zip => params[:zip]})
+
+
+
     flash[:success] = "Your profile has been updated!"
     redirect_to "/vacations"
   end

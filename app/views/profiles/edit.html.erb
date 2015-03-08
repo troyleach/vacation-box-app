@@ -1,4 +1,4 @@
-<h2>About <%= current_user.first_name.capitalize %></h2>
+<h2>About <%= current_user.email %></h2>
 <h4>Update your profile</h4>
 
   <div class="row profile_row">
@@ -12,13 +12,13 @@
         <%= label_tag :first_name, "First Name:" %>
       </div>
       <div>
-        <%= text_field_tag :first_name, current_user.first_name.capitalize %> 
+        <%= text_field_tag :first_name, @profile.first_name %> 
       </div>
       <div>
         <%= label_tag :last_name, "Last Name:" %>
       </div>
       <div>
-        <%= text_field_tag :last_name, current_user.last_name.capitalize %> 
+        <%= text_field_tag :last_name, @profile.last_name %> 
       </div>
       <div>
         <%= label_tag :email, "Email:" %>
@@ -30,7 +30,7 @@
         <%= label_tag :username, "Username:" %>
       </div>
       <div>
-        <%= text_field_tag :username, current_user.username %> 
+        <%= text_field_tag :username, @profile.username %> 
       </div>
     </div><!-- End of second box users_name -->
 
@@ -40,29 +40,31 @@
         <%= label_tag :address, "Address:" %>
       </div>
       <div>
-        <%= text_field_tag :address %> 
+        <%= text_field_tag :address, @profile.address %> 
       </div>
 
       <div>
         <%= label_tag :city, "City:" %>
       </div>
       <div>
-        <%= text_field_tag :city, current_user.city.capitalize %> 
+        <%= text_field_tag :city, @profile.city %> 
       </div>
 
       <div>
         <%= label_tag :state, "State:" %>
       </div>
       <div>
-        <%= text_field_tag :state, current_user.state.upcase %> 
+        <%= text_field_tag :state, @profile.state %> 
       </div>
 
       <div>
         <%= label_tag :zip, "Zip:" %>
       </div>
       <div>
-        <%= text_field_tag :zip %> 
+        <%= text_field_tag :zip, @profile.zip %> 
       </div>
+
+      <%= hidden_field_tag :user_id, current_user.id %>
 
     </div><!-- End of third box users_address -->
     <div class="profiles_submit_button"><%= submit_tag "Update me" %></div>

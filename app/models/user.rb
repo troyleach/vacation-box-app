@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
   has_many :profiles
+  has_many :vacations
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,

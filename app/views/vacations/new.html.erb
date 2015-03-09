@@ -6,16 +6,31 @@
     <div class="accomondations col-xs-6 col-md-4">
     <p>Where do you plan on staying while on vacation?</p>
       <div>
-        <%= label_tag :accomondations, "Living Quarters:" %>
+        <%= label_tag :name, "Living Quarters:" %>
       </div>
       <div>
-        <%= text_field_tag :accomondations %> 
+        <%= text_field_tag :name %> 
       </div>
+      
       <div>
         <%= label_tag :address, "Address:" %>
       </div>
       <div>
         <%= text_field_tag :address %> 
+      </div>
+
+      <div>
+        <%= label_tag :city, "City:" %>
+      </div>
+      <div>
+        <%= text_field_tag :city %> 
+      </div>
+
+      <div>
+        <%= label_tag :zip, "Zip code:" %>
+      </div>
+      <div>
+        <%= text_field_tag :zip %> 
       </div>
     </div>
 

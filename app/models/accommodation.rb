@@ -1,3 +1,3 @@
 class Accommodation < ActiveRecord::Base
-  has_many :vacations
+  belongs_to :vacation
 end

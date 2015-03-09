@@ -15,7 +15,7 @@ class ApplicationController < ActionController::Base
   #     OpenStruct.new(first_name: 'Guest')
   #   end
   # end
-  
+
 
     protected
 

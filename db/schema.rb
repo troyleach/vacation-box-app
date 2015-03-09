@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150309203221) do
+ActiveRecord::Schema.define(version: 20150309204015) do
 
   create_table "accommodations", force: :cascade do |t|
     t.string   "name",        limit: 255
@@ -24,6 +24,7 @@ ActiveRecord::Schema.define(version: 20150309203221) do
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
     t.integer  "vacation_id", limit: 4
+    t.string   "zip",         limit: 255
   end
 
   create_table "profiles", force: :cascade do |t|

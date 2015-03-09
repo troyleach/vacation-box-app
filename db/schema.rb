@@ -11,7 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150307233504) do
+ActiveRecord::Schema.define(version: 20150309171257) do
+
+  create_table "accommodations", force: :cascade do |t|
+    t.string   "name",       limit: 255
+    t.string   "address",    limit: 255
+    t.string   "city",       limit: 255
+    t.string   "phone",      limit: 255
+    t.string   "website",    limit: 255
+    t.float    "lat",        limit: 24
+    t.float    "long",       limit: 24
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
 
   create_table "profiles", force: :cascade do |t|
     t.string   "first_name", limit: 255
@@ -45,5 +57,20 @@ ActiveRecord::Schema.define(version: 20150307233504) do
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+
+  create_table "vacations", force: :cascade do |t|
+    t.string   "vacation_name",    limit: 255
+    t.string   "city",             limit: 255
+    t.string   "state",            limit: 255
+    t.float    "lat",              limit: 24
+    t.float    "long",             limit: 24
+    t.integer  "arrive_by",        limit: 4,     default: 0
+    t.integer  "transpertation",   limit: 4,     default: 0
+    t.text     "note",             limit: 65535
+    t.integer  "user_id",          limit: 4
+    t.datetime "created_at",                                 null: false
+    t.datetime "updated_at",                                 null: false
+    t.integer  "accommodation_id", limit: 4
+  end
 
 end

@@ -14,6 +14,8 @@ gem 'devise'
 
 gem 'gravtastic'
 
+gem 'enum_help'
+
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'

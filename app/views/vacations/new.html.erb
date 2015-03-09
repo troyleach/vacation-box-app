@@ -1,9 +1,10 @@
 <h2>Create a new vacation</h2>
 <section>
   <div class="row">
+
   <%= form_tag vacations_path do %>
     <div class="accomondations col-xs-6 col-md-4">
-    <p>Where do you plan on staying while your in ...ERB...</p>
+    <p>Where do you plan on staying while on vacation?</p>
       <div>
         <%= label_tag :accomondations, "Living Quarters:" %>
       </div>
@@ -32,22 +33,29 @@
         <div>
         <%= text_field_tag :city %>
       </div>
-      <p>how do you plan on getting around while on vacation</p>
+      <div>
+        <%= label_tag :state, "State:" %>
+        </div>
+        <div>
+        <%= text_field_tag :state %>
+      </div>
+      <p>how do you plan on getting around while on vacation?</p>
       <!-- The below code will need to be enum, so I think I have to change it to arive_by to match the table -->
       <div>
-        <%= label_tag :car_rental, "Car rental" %>
+        <%= label_tag :transpertation, "Car rental" %>
         </div>
         <div>
         <%= check_box_tag :car_rental %>
+
       </div>
       <div>
-        <%= label_tag :bus_train, "Bus/Train" %>
+        <%= label_tag :transpertation, "Bus/Train" %>
         </div>
         <div>
         <%= check_box_tag :bus_train %>
       </div>
       <div>
-        <%= label_tag :walking, "walking" %>
+        <%= label_tag :transpertation, "walking" %>
         </div>
         <div>
         <%= check_box_tag :walking %>
@@ -57,24 +65,24 @@
     </div>
 
     <div class="arive_by col-xs-6 col-md-4">
-    <p>Arrive by:</p>
+    <p>How are you getting to your destination?</p>
         <div>
-          <%= label_tag :by_air, "By air" %>
+          <%= label_tag :arrive_by, "By air" %>
           </div>
           <div>
-          <%= check_box_tag :by_air %>
+          <%= check_box_tag :arrive_by %>
         </div>
         <div>
-          <%= label_tag :car, "Car" %>
+          <%= label_tag :arrive_by, "Car" %>
           </div>
           <div>
-          <%= check_box_tag :car %>
+          <%= check_box_tag :arrive_by %>
         </div>
         <div>
-          <%= label_tag :train, "Train" %>
+          <%= label_tag :arrive_by, "Train" %>
           </div>
           <div>
-          <%= check_box_tag :train %>
+          <%= check_box_tag :arrive_by %>
         </div>
       </div>
     </div>

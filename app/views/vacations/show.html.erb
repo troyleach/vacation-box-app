@@ -1,0 +1,66 @@
+<div class="show_page_wrapper">
+<span class="vacation_title"><%= @vacation.vacation_name %></span>
+
+<section class="bing_search_container">
+  <div class="row">
+    <div class="col-lg-12">
+      <iframe src="http://www.bing.com" frameborder="2"></iframe>
+    </div>
+  </div>
+</section>
+
+<h4>Save a spot</h4>
+
+<section class="vacation_section_two">
+  <div class="save_spot row">
+    <div class="save_spot col-md-3"><h1>Save a spot</h1></div>
+    <div class="logo col-md-3"><h1>Submit Logo button</h1></div>
+    <div class="city_image col-md-3"><h1>Cities picture</h1></div>
+    <div class="current_stats col-md-3">
+      <table class="current_stats">
+        <th class="table_header" colspan="2">Current stats:</th>
+        <tr class="table_row">
+          <td class="table_col_description">Local time:</td>
+          <td class="table_col"><%= @current_time_date %></td>
+        </tr>
+        <tr class="table_row">
+          <td class="table_col_description">Living Quarters:</td>
+          <td class="table_col">Right HERE</td>
+        </tr>
+        <tr class="table_row">
+          <td class="table_col_description">Transpertation:</td>
+          <td class="table_col"><%= @vacation.transpertation %></td>
+        </tr>
+      </table>
+      <hr>
+      <p>weather bug goes here</p>
+    </div>
+  </div>
+</section>
+Saved spots
+<section class="vacation_section_three">
+  <div class="outter_box_row row">
+    <div class="col-sm-8">
+      
+      <div class="inner_box_row row">
+        <div class="col-xs-8 col-sm-6">
+          white house 
+        </div>
+        <div class="col-xs-4 col-sm-6">
+          National air and space museum
+        </div>
+        <div class="col-xs-4 col-sm-6">
+          united states capital
+        </div>
+        <div class="col-xs-4 col-sm-6">
+          Washington Monument
+        </div>
+      </div>
+    </div>
+    <div class="second_box col-sm-4">
+      This is the information box about the spot
+    </div>
+  </div>
+</section>
+
+</div><!-- End of page wrapper -->

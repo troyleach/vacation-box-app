@@ -47,7 +47,21 @@
             <% end %>
             </ul>
           </div>
-        </div>
+
+          <div class="dropdown">
+            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
+              points of interest for <%= @profile.city %>
+              <span class="caret"></span>
+            </button>
+<!-- NOTE = need to replace the each method below with the api of points of interest -->
+            <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+            <% @vacations.each do |vacation_name| %>
+              <li role="presentation"><a role="menuitem" tabindex="-1" href="#">points of interest go here</a></li>
+            <% end %>
+            </ul>
+          </div>
+
+        </div><!-- End of header two -->
       </header>
   <% end %>
 

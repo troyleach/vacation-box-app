@@ -4,9 +4,9 @@ class VacationSpotController < ApplicationController
     # these is ending up to be everywhere, in every controller
     @vacations  = Vacation.where({:user_id => current_user.id})
     @profile    = Profile.find_by(:user_id => current_user.id)
-    @spot       = VacationSpot.all
+    @spots       = VacationSpot.all
     puts "****************"
-    p @spot.size
+    p @spots.size
   end
 
 end

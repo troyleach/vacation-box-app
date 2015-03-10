@@ -41,6 +41,7 @@
               saved vacations
               <span class="caret"></span>
             </button>
+<!-- THIS IS NOW THROWING A ERROR -->
             <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
             <% @vacations.each do |vacation_name| %>
               <li role="presentation"><a role="menuitem" tabindex="-1" href="/vacations/<%= vacation_name.id %>"><%= vacation_name.vacation_name %></a></li>

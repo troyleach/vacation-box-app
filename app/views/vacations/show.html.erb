@@ -43,18 +43,10 @@ Saved spots
     <div class="col-sm-8">
       
       <div class="inner_box_row row">
-        <div class="col-xs-8 col-sm-6">
-         <a href="<%= vacation_spot_path %>">white house</a>  
-        </div>
-        <div class="col-xs-4 col-sm-6">
-          National air and space museum
-        </div>
-        <div class="col-xs-4 col-sm-6">
-          united states capital
-        </div>
-        <div class="col-xs-4 col-sm-6">
-          Washington Monument
-        </div>
+        <% @spots.each do |spot| %>
+
+         <div class="col-xs-8 col-sm-6"><a href="#"><%= spot.spot_name %></a></div>
+        <% end %>
       </div>
     </div>
     <div class="second_box col-sm-4">
@@ -64,3 +56,19 @@ Saved spots
 </section>
 
 </div><!-- End of page wrapper -->
+
+<!-- this was the way it was before I messed with it -->
+    <!-- <div class="col-xs-8 col-sm-6">
+     <a href="<%= vacation_spot_path %>">white house</a>  
+    </div>
+    <div class="col-xs-4 col-sm-6">
+      National air and space museum
+    </div>
+    <div class="col-xs-4 col-sm-6">
+      united states capital
+    </div>
+    <div class="col-xs-4 col-sm-6">
+      Washington Monument
+    </div>
+  </div>
+</div> -->

@@ -10,7 +10,7 @@ class VacationsController < ApplicationController
   end
 
   def create
-    @vacation = Vacation.create ({:vacation_name => params[:vacation_name], :city => params[:city], :state => params[:state], :note => params[:note], :user_id => current_user.id})
+    @vacation = Vacation.create ({:vacation_name => params[:vacation_name], :city => params[:city], :state => params[:state], :note => params[:note], :transpertation => params[:transpertation], :arrive_by => params[:arrive_by], :user_id => current_user.id})
     
     @hotel    = Accommodation.create({:name => params[:name], :address => params[:address], :city => params[:city], :zip => params[:zip], :vacation_id => @vacation.id})
 
@@ -19,9 +19,6 @@ class VacationsController < ApplicationController
   end
 
   def show
-    time_date = Time.now
-      
-    @current_time_date = time_date.strftime("%b %e, %l:%M %p")
     
     @vacation = Vacation.find_by({:user_id => current_user.id, :id => params[:id]})
     @hotel = Accommodation.find_by(:vacation_id => @vacation.id)

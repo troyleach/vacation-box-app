@@ -60,20 +60,20 @@
         <%= label_tag :transpertation, "Car rental" %>
         </div>
         <div>
-        <%= check_box_tag :car_rental %>
+        <%= check_box_tag :transpertation, :'car_rental' %>
 
       </div>
       <div>
         <%= label_tag :transpertation, "Bus/Train" %>
         </div>
         <div>
-        <%= check_box_tag :bus_train %>
+        <%= check_box_tag :transpertation, :'bus or train' %>
       </div>
       <div>
         <%= label_tag :transpertation, "walking" %>
         </div>
         <div>
-        <%= check_box_tag :walking %>
+        <%= check_box_tag :transpertation, :walking %>
       </div>
       <hr>
       <div><%= submit_tag "Set up my vacation!" %></div>
@@ -85,19 +85,19 @@
           <%= label_tag :arrive_by, "By air" %>
           </div>
           <div>
-          <%= check_box_tag :arrive_by %>
+          <%= check_box_tag :arrive_by, :air %>
         </div>
         <div>
           <%= label_tag :arrive_by, "Car" %>
           </div>
           <div>
-          <%= check_box_tag :arrive_by %>
+          <%= check_box_tag :arrive_by, :car %>
         </div>
         <div>
           <%= label_tag :arrive_by, "Train" %>
           </div>
           <div>
-          <%= check_box_tag :arrive_by %>
+          <%= check_box_tag :arrive_by, :train %>
         </div>
       </div>
     </div>

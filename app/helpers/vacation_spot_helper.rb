@@ -1,0 +1,2 @@
+module VacationSpotHelper
+end

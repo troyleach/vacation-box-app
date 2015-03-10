@@ -14,4 +14,6 @@ Rails.application.routes.draw do
    resources :vacations
    resources :profiles
 
+   get 'vacation_spot' => 'vacation_spot#index', :as => :vacation_spot
+
 end

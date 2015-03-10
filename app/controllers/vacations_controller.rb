@@ -2,7 +2,8 @@ class VacationsController < ApplicationController
 
   def index
     #@profile = current_profile.first_name
-    # @vacations = Vacation.all 
+    @vacations = Vacation.where({:user_id => current_user.id})
+    puts "*********************"
     @profile = Profile.find_by(:user_id => current_user.id)
   end
 
@@ -20,7 +21,7 @@ class VacationsController < ApplicationController
   end
 
   def show
-
+    @vacations = Vacation.where({:user_id => current_user.id})
     @profile = Profile.find_by(:user_id => current_user.id)
     @vacation = Vacation.find_by({:user_id => current_user.id, :id => params[:id]})
     @hotel = Accommodation.find_by(:vacation_id => @vacation.id)

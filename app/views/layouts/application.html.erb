@@ -36,7 +36,17 @@
         </div>
 
         <div class="header_two row">
-          <p>menu goes here</p>
+          <div class="dropdown">
+            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
+              saved vacations
+              <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+            <% @vacations.each do |vacation_name| %>
+              <li role="presentation"><a role="menuitem" tabindex="-1" href="/vacations/<%= vacation_name.id %>"><%= vacation_name.vacation_name %></a></li>
+            <% end %>
+            </ul>
+          </div>
         </div>
       </header>
   <% end %>

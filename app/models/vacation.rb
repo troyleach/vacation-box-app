@@ -3,6 +3,7 @@ class Vacation < ActiveRecord::Base
   enum transpertation:  {:'car rental' => 3, "bus or train" => 4, :walking => 5}
   belongs_to :user
   has_many :accommodations
+  has_many :vacation_spots
 
   def time_date
     time_date = Time.now 

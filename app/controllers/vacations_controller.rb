@@ -20,6 +20,7 @@ class VacationsController < ApplicationController
   end
 
   def show
+
     @profile = Profile.find_by(:user_id => current_user.id)
     @vacation = Vacation.find_by({:user_id => current_user.id, :id => params[:id]})
     @hotel = Accommodation.find_by(:vacation_id => @vacation.id)

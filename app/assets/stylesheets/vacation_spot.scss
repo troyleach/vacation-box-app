@@ -1,3 +1,27 @@
 // Place all the styles related to the vacation_spot controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.vacation_spot_wrapper {
+  border: 1px solid pink;
+}
+
+.map {
+  border: 1px solid red;
+}
+
+.vacation_vitals {
+  border: 1px solid red;
+}
+
+.directions {
+  border: 1px solid blue;
+}
+
+.about {
+  border: 1px solid blue;
+}
+
+.note {
+ border: 1px solid red; 
+}

@@ -48,6 +48,13 @@
             </ul>
           </div>
 
+            <%= form_tag "#" do %>
+              <div>
+                <%= text_field_tag :quantity, 'Places been', :class => "places_been", :style => "background: #b5cbbe;" %>
+                <%= submit_tag "Add" %>
+              </div>
+            <% end %>
+
           <div class="dropdown">
             <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
               points of interest for <%= @profile.city %>

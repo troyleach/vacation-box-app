@@ -51,9 +51,9 @@
 
   <div class="note row">
     <%= form_tag "#" do %>
+    <p>Vacation Notes <%= submit_tag "Update" %></p>
       <div>
-        <%=text_field_tag :note, nil, :class => 'some-class'%>
-        <%= submit_tag "Update" %>
+        <%=text_area_tag :note, @spot.note, :size => "60" %>
       </div>
     <% end %>
   </div>

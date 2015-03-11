@@ -8,10 +8,22 @@
 
 .map {
   border: 1px solid red;
+  margin-left: 0;
+  margin-right: 0;
 }
 
 .vacation_vitals {
   border: 1px solid red;
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.description_text {
+  font-weight: bold;
+}
+
+.table_col_des {
+  font-weight: bold;
 }
 
 .directions {
@@ -23,5 +35,12 @@
 }
 
 .note {
- border: 1px solid red; 
+ border: 1px solid red;
+ margin-left: 0;
+ margin-right: 0; 
+}
+
+.some-class {
+  width: 450px;
+  height: 150px;
 }

@@ -26,8 +26,6 @@ class VacationsController < ApplicationController
     @vacations = Vacation.where({:user_id => current_user.id}) #these should be helpers, i have this code  all over.
 
     @spots     = VacationSpot.where({:vacation_id => params[:id]})
-    puts "*************************"
-    p @spots
     @profile   = Profile.find_by(:user_id => current_user.id)
     @vacation  = Vacation.find_by({:user_id => current_user.id, :id => params[:id]})
     @hotel     = Accommodation.find_by(:vacation_id => @vacation.id)

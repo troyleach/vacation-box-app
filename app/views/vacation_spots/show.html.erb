@@ -1,6 +1,6 @@
-<h2>VACATION SPOT TITLE</h2>
+<h1><%= @spot.spot_name.capitalize %></h1>
 <div class="vacation_spot_wrapper">
-
+<p>Back to vacation</p>
   <div class="map row">
     <div class="col-md-12">MAP</div>
   </div>
@@ -8,13 +8,54 @@
 
   <div class="vacation_vitals row">
     <div class="directions col-md-6">DIRECTIONS</div>
-    <div class="about col-md-6">THINGS ABOUT THE SPOT
+    <div class="about col-md-6"><h4>Things to know about <%= @spot.spot_name.capitalize %></h4>
+    <hr>
+      <div class="vacation_spot_image">Image goes here</div>
+      <div class="description_text">Description:</div>
+      <div class="vacation_spot_description"><%= @spot.description.capitalize %></div>
+      <hr>
+      <table>
+      <th></th>
+        <tr class="table_row">
+          <td class="table_col_des">Address:</td>
+          <td class="table_col"><%= @spot.address %>, <%= @spot.city %> <%= @spot.state %>, <%= @spot.zip %></td>
+        </tr>
+        <tr class="table_row">
+          <td class="table_col_des">Phone:</td>
+          <td class="table_col"><%= @spot.phone %></td>
+        </tr>
+        <tr class="table_row">
+          <td class="table_col_des">Hours:</td>
+          <td class="table_col"><%= @spot.hours %></td>
+        </tr>
+        <tr class="table_row">
+          <td class="table_col_des">reservation:</td>
+          <td class="table_col"><%= @spot.reservation %></td>
+        </tr>
+        <tr class="table_row">
+          <td class="table_col_des">website:</td>
+          <td class="table_col"><%= @spot.website %></td>
+        </tr>
+        <tr class="table_row">
+          <td class="table_col_des"></td>
+          <td class="table_col"></td>
+        </tr>
+        <tr class="table_row">
+          <td class="table_col_des"></td>
+          <td class="table_col"></td>
+        </tr>
+      </table>
       
     </div>
   </div>
 
   <div class="note row">
-    <div class="col-md-12">USER NOTES ON THE SPOT</div>
+    <%= form_tag "#" do %>
+      <div>
+        <%=text_field_tag :note, nil, :class => 'some-class'%>
+        <%= submit_tag "Update" %>
+      </div>
+    <% end %>
   </div>
 
 </div>

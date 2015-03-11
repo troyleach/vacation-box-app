@@ -8,6 +8,7 @@ class ProfilesController < ApplicationController
 
   def edit
     #@profile = current_profile.first_name
+    @vacations = Vacation.where({:user_id => current_user.id})
     @profile = Profile.find_by(:user_id => current_user.id)
     if !@profile
       Profile.create({:user_id => current_user.id})

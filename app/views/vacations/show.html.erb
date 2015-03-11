@@ -44,8 +44,7 @@ Saved spots
       
       <div class="inner_box_row row">
         <% @spots.each do |spot| %>
-
-         <div class="col-xs-8 col-sm-6"><a href="#"><%= spot.spot_name %></a></div>
+         <div class="col-xs-8 col-sm-6"><a href='/vacation_spots/<%= spot.id %>'><%= spot.spot_name %></a></div>
         <% end %>
       </div>
     </div>

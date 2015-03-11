@@ -3,6 +3,12 @@ body {
   background-color: #ffffff;
 }
 
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
 .container {
   background-color: #f7daa7;
   width: 95%;
@@ -17,6 +23,48 @@ header {
   margin: 0 5px 5px 5px;
   border: 1px solid #000000;
   background-color: tan;
+  vertical-align: bottom;
+}
+
+.main_nav_bar {
+
+}
+
+.col-md-4 {
+  padding-left: 5px;
+  margin: 0;
+}
+
+.first_menu {
+  border: 1px solid red;
+  display: block;
+  margin-top: 27px;
+}
+
+.header_one ul li {
+  display: inline-block;
+}
+
+.main_logo {
+  text-align: center;
+  font-size: 2em;
+  line-height: 1em;
+  margin-top: 10px;
+}
+
+.profile {
+  text-align: right;
+  padding: 5px;
+}
+
+.gravatar_image_div {
+
+}
+
+.gravatar_image {
+  border: 1px solid black;
+  border-radius: 50%;
+  width: 40px;
 }
 
 .header_two {
@@ -25,8 +73,16 @@ header {
   background-color: tan;
 }
 
-.gravatar_image {
-  border: 1px solid black;
-  border-radius: 50%;
-  width: 40px;
+.saved_vations {
+  padding-left: 15px;
+}
+
+.places_been_div {
+  text-align: center;
+  margin-top: 5px;
+}
+
+.points_of_interest {
+  text-align: right;
+  padding-right: 20px;
 }

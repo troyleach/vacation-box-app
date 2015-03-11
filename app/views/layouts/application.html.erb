@@ -10,65 +10,98 @@
   <% if user_signed_in? %>
     <div class="container">
       <header>
+
         <div class="header_one row">
           <div class="col-lg-12">
-            <a href="/"><span>Home Dashboard</span></a>
-            <p>time</p>
             
-            <div class="gravatar_image_div">
-            <%= image_tag current_user.gravatar_url,  :class => "gravatar_image" %>
-            </div>
-            <h2><%= @profile.city %></h2>
-            <div class="new_vacation_link">
-              <% if @profile == nil || @profile.first_name == nil  %>
-              <a href="/profiles/<%= current_user.id %>/edit"><p>Please update your profile</p></a>
+            <div class="main_nav_bar row">
+              <div class="first_menu col-md-4">
+                <ul>
+                  <li><a href="/">Home Dashboard |</a></li>
+                  <li>Local time:</li>
+                </ul>
+              </div>
+            
+              <div class="main_logo col-md-4">
+              <% if @profile == nil || @profile.city == nil  %>
+              <a href="/profiles/<%= current_user.id %>/edit"><p>- Please update your profile -</p></a>
               <% else %>
-              <a href="/profiles/<%= current_user.id %>/edit"><p><%= @profile.first_name %> profile</p></a>
+              <p>- <%= @profile.city %> -</p>
               <% end %>
+              
+              </div>
+
+              <div class="profile col-md-4">
+                <ul>
+                  <li class="logout_text">
+                    <div class="user_profile_info">
+                      <% if @profile == nil || @profile.first_name == nil  %>
+                      <a href="/profiles/<%= current_user.id %>/edit"><p>Please update your profile HERE |</p></a>
+                      <% else %>
+                      <a href="/profiles/<%= current_user.id %>/edit"><p><%= @profile.first_name %>'s profile |</p></a>
+                      <% end %>
+                    </div>
+                  </li>
+                  <li class="logout_text">
+                    <p><a href="/users/sign_out">logout |</a></p>
+                  </li>
+                  <li>
+                    <div class="gravatar_image_div">
+                    <%= image_tag current_user.gravatar_url,  :class => "gravatar_image" %>
+                    </div>
+                  </li>
+                </ul>
+              </div>
             </div>
-            <% if current_user %>
-              <p><a href="/users/sign_out">logout</a></p>
-              <% else %>
-              <p><a href="/users/sign_in">login</a></p>
-              <p><a href="/users/sign_up">Sign-up</a></p>
-            <% end %>
+            
           </div>
-        </div>
+        </div><!-- End of header one -->
 
         <div class="header_two row">
-          <div class="dropdown">
+          <div class="saved_vations row">
+            <div class="col-md-4">
+              <div class="dropdown">
             <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
               saved vacations
               <span class="caret"></span>
             </button>
-<!-- THIS IS NOW THROWING A ERROR -->
+
             <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
             <% @vacations.each do |vacation_name| %>
               <li role="presentation"><a role="menuitem" tabindex="-1" href="/vacations/<%= vacation_name.id %>"><%= vacation_name.vacation_name %></a></li>
             <% end %>
             </ul>
           </div>
-
-            <%= form_tag "#" do %>
+            </div>
+            <div class="places_been_div col-md-4">
+              <%= form_tag "#" do %>
               <div>
                 <%= text_field_tag :quantity, 'Places been', :class => "places_been", :style => "background: #b5cbbe;" %>
                 <%= submit_tag "Add" %>
               </div>
             <% end %>
-
-          <div class="dropdown">
-            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
-              points of interest for <%= @profile.city %>
-              <span class="caret"></span>
-            </button>
-<!-- NOTE = need to replace the each method below with the api of points of interest -->
-            <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-            <% @vacations.each do |vacation_name| %>
-              <li role="presentation"><a role="menuitem" tabindex="-1" href="#">points of interest go here</a></li>
-            <% end %>
-            </ul>
+            </div>
+            <div class="points_of_interest col-md-4">
+              <div class="dropdown">
+              <% if @profile == nil || @profile.city == nil  %>
+                <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
+                  'UPDATE PROFILE'
+                  <span class="caret"></span>
+                </button>
+              <% else %>
+                <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
+                  points of interest for <%= @profile.city %>
+                  <span class="caret"></span>
+              <% end %>
+    <!-- NOTE = need to replace the each method below with the api of points of interest -->
+                <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                <% @vacations.each do |vacation_name| %>
+                  <li role="presentation"><a role="menuitem" tabindex="-1" href="#">points of interest go here</a></li>
+                <% end %>
+                </ul>
+              </div>
+            </div>
           </div>
-
         </div><!-- End of header two -->
       </header>
   <% end %>

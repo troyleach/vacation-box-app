@@ -50,10 +50,10 @@
   </div>
 
   <div class="note row">
-    <%= form_tag "#" do %>
+    <%= form_tag "/vacation_spots/#{@spot.id}", :method => :patch do %>
     <p>Vacation Notes <%= submit_tag "Update" %></p>
       <div>
-        <%=text_area_tag :note, @spot.note, :size => "60" %>
+        <%=text_area_tag :note, @spot.note, :size => "60x8" %>
       </div>
     <% end %>
   </div>

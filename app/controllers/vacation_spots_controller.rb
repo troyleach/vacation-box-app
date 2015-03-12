@@ -8,4 +8,11 @@ class VacationSpotsController < ApplicationController
     p @notes
   end
 
+  def update
+    @spot       = VacationSpot.find_by(:id => params[:id])
+    @spot.update({:note => params[:note]})
+    redirect_to vacation_spot_path(@spot.id)
+  end
+
+
 end

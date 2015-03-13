@@ -16,6 +16,12 @@ gem 'gravtastic'
 
 gem 'enum_help'
 
+# to help with API's calls
+gem 'unirest'
+
+# Weather gem using forecast
+gem 'forecast_io'
+
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'

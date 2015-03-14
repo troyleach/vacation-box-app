@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  resources :place_beens
+  resources :vacations
+  resources :profiles
+  resources :vacation_spots
   devise_for :users
   
   devise_scope :user do
@@ -7,13 +11,10 @@ Rails.application.routes.draw do
      end
 
      unauthenticated do
-       root 'devise/registrations#new', as: :unauthenticated_root
+       root 'devise/sessions#new', as: :unauthenticated_root
      end
    end
 
-   resources :vacations
-   resources :profiles
-   resources :vacation_spots
 
    # get 'vacation_spots/:id' => 'vacation_spots#show', :as => :vacation_spot
 

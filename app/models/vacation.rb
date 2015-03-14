@@ -1,6 +1,10 @@
 class Vacation < ActiveRecord::Base
+  # geocoded_by :address
+  # after_validation :deocode
+
   enum arrive_by:       {:air => 0, :car => 1, :train => 2}
   enum transpertation:  {:'car rental' => 3, "bus or train" => 4, :walking => 5}
+  
   belongs_to :user
   has_many :accommodations
   has_many :vacation_spots

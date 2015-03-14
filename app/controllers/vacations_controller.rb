@@ -1,11 +1,12 @@
 class VacationsController < ApplicationController
-  # Unirest.get("https://api.forecast.io/forecast/43b5d766e91f96d89c060b58e2c71a01/38.8899,-77.009") DC
+#  # Unirest.get("https://api.forecast.io/forecast/43b5d766e91f96d89c060b58e2c71a01/38.8899,-77.009") DC
 #  # ForecastIO.api_key = '43b5d766e91f96d89c060b58e2c71a01'
   def index
-    #@profile = current_profile.first_name
+#    #@profile = current_profile.first_name
 #    ForecastIO.api_key = '43b5d766e91f96d89c060b58e2c71a01'
     @vacations = Vacation.where({:user_id => current_user.id})
     @profile   = Profile.find_by(:user_id => current_user.id)
+    @places_been = PlaceBeen.where(:user_id => current_user.id)
     p "#{@profile.latitude}"
     p "#{@profile.longitude}"
 
@@ -21,6 +22,13 @@ class VacationsController < ApplicationController
     @hash = Gmaps4rails.build_markers(@vacations) do |vacation, marker|
       marker.lat vacation.latitude
       marker.lng vacation.longitude
+    end
+
+    @hash2 = Gmaps4rails.build_markers(@places_been) do |vacation, marker_two|
+      marker_two.lat vacation.latitude
+      marker_two.lng vacation.longitude
+      marker_two.infowindow vacation.description
+      marker_two.json({ title: vacation.title })
     end
    
 

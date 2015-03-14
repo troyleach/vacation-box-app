@@ -1,0 +1,37 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Place Beens</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Latitude</th>
+      <th>Longitude</th>
+      <th>User</th>
+      <th>Address</th>
+      <th>Description</th>
+      <th>Title</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @place_beens.each do |place_been| %>
+      <tr>
+        <td><%= place_been.latitude %></td>
+        <td><%= place_been.longitude %></td>
+        <td><%= place_been.user_id %></td>
+        <td><%= place_been.address %></td>
+        <td><%= place_been.description %></td>
+        <td><%= place_been.title %></td>
+        <td><%= link_to 'Show', place_been %></td>
+        <td><%= link_to 'Edit', edit_place_been_path(place_been) %></td>
+        <td><%= link_to 'Destroy', place_been, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Place been', new_place_been_path %>

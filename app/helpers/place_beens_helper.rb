@@ -1,0 +1,2 @@
+module PlaceBeensHelper
+end

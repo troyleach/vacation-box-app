@@ -55,11 +55,12 @@
 <script type="text/javascript">
   handler = Gmaps.build('Google');
   handler.buildMap({ provider: {
-    maxZoom: 8
+    mapTypeId: google.maps.MapTypeId.TERRAIN
     // pass in other Google Maps API options here
   }, internal: {id: 'map'}}, function(){
-    markers = handler.addMarkers(<%=raw @hash.to_json %>);
-    markers2 = handler.addMarkers(<%=raw @hash2.to_json %>);
+
+    markers = handler.addMarkers(<%=raw @hash.to_json %>, { opacity: 0.5 });
+    markers2 = handler.addMarkers(<%=raw @hash2.to_json %>, { fillColor: "green" });
     handler.bounds.extendWith(markers2);
     handler.fitMapToBounds();
   });

@@ -9,6 +9,7 @@ class VacationsController < ApplicationController
     @places_been = PlaceBeen.where(:user_id => current_user.id)
     p "#{@profile.latitude}"
     p "#{@profile.longitude}"
+    @letter = "T"
 
 
 
@@ -22,16 +23,27 @@ class VacationsController < ApplicationController
     @hash = Gmaps4rails.build_markers(@vacations) do |vacation, marker|
       marker.lat vacation.latitude
       marker.lng vacation.longitude
+      marker.picture({
+           :url => "http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=t|FF0000|000000",
+           :width   => 32,
+           :height  => 32
+         })
     end
+    
 
     @hash2 = Gmaps4rails.build_markers(@places_been) do |vacation, marker_two|
       marker_two.lat vacation.latitude
       marker_two.lng vacation.longitude
+      marker_two.picture({
+           :url => "https://chart.googleapis.com/chart?chst=d_map_pin_letter_withshadow&chld=A|FF0000|0000FF",
+           :width   => 30,
+           :height  => 30
+         })
       marker_two.infowindow vacation.description
-      marker_two.json({ title: vacation.title })
+
     end
    
-
+    
   end
 
   def new

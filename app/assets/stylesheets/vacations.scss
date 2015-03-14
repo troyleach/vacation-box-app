@@ -16,6 +16,12 @@ section {
   border: 1px solid #000000;
   background-color: #c9b89c;
 }
+// look in my google_maps branch and see how big I made the box, it seems that it just fit the box provided
+#map-canvas {
+  border: 1px solid black;
+  width: 100%;
+  height: 300px;
+}
 
 
 /************************************

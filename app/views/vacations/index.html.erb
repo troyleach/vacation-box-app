@@ -3,20 +3,26 @@
 </div>
 
 <section class"section_one">
-  <div class="body_one row">
-    <div class="chat_box col-md-6"><h1>Chat box</h1></div>
-    <div class="places_been col-md-6">
-      <img src="http://maps.google.com/maps/api/staticmap?center=33.993082,13.160571&zoom=1&size=550x300&sensor=TRUE_OR_FALSE" alt="Google static world map">
+  <div class="section_one_div row">
+    <div class="chat_box col-md-6">
+    <p>Message Center</p>
+    <h1>Chat box</h1>
+    </div>
+    <div class="places_been_map col-md-6">
+    Places I have been<%=image_tag "ylw-blank.png", alt: "Yellow push pin", :class => "yellow_push_pin" %> Places I am going<%=image_tag "grn-blank.png", alt: "Green push pin", :class => "green_push_pin" %> 
+      <img src="<%= @places_been %>" alt="Static Google map of places been and going" />
     </div>
   </div>
 </section>
 <h4>Home city</h4>
 
 <section class"section_two">
-  <div class="body_two row">
-    <div class="chat_box col-md-6"><h1>home city image and map</h1></div>
-    <div class="places_been col-md-6">
-    <iframe id="forecast_embed" class="weather_iframe" type="text/html" frameborder="0" height="60" width="100%" src="http://forecast.io/embed/#lat=<%= @profile.latitude %>&lon=<%= @profile.longitude %>&name=<%= @profile.city %>"> </iframe>
+  <div class="section_two_div row">
+    <div class="home_city col-md-6">
+    <h1>home city image and map</h1>
+    </div>
+    <div class="weather_box col-md-6">
+    
       <hr>
     </div>
   </div>
@@ -32,4 +38,5 @@
     <div class="places_been col-md-3"><h1>Saved vacation</h1></div>
   </div>
 </section>
+
 

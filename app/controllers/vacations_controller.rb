@@ -3,15 +3,27 @@ class VacationsController < ApplicationController
   ForecastIO.api_key = '43b5d766e91f96d89c060b58e2c71a01'
   def index
     #@profile = current_profile.first_name
-    ForecastIO.api_key = '43b5d766e91f96d89c060b58e2c71a01'
     @vacations = Vacation.where({:user_id => current_user.id})
     @profile   = Profile.find_by(:user_id => current_user.id)
+
+    going = []
+      @vacations.each do |latlong|
+        going << "#{latlong.latitude},#{latlong.longitude}"
+      end
+    @going = going.join("|")
+
+    places_been = "T"
+    places_going = "G"
+
+    @places_been = "http://maps.google.com/maps/api/staticmap?center=#{@profile.latitude},#{@profile.longitude}&markers=color:yellow|label:#{places_been}|#{@profile.latitude},#{@profile.longitude}|&markers=color:green|label:#{places_going}|#{@going}&size=750x300"
+
+    
 
     # Below can be put into a helper...
     # @current_weather = Unirest.get("https://api.forecast.io/forecast/43b5d766e91f96d89c060b58e2c71a01/#{@profile.latitude},#{@profile.longitude}").body["currently"]
 
-    current_weather = ForecastIO.forecast(@profile.latitude, @profile.longitude)
-    @current_weather = current_weather["currently"]
+    #current_weather = ForecastIO.forecast(@profile.latitude, @profile.longitude)
+    #@current_weather = current_weather["currently"]
 
    
 

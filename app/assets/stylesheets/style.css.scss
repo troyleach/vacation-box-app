@@ -27,7 +27,7 @@ header {
 }
 
 .main_nav_bar {
-
+  
 }
 
 .col-md-4 {
@@ -36,9 +36,10 @@ header {
 }
 
 .first_menu {
-  border: 1px solid red;
-  display: block;
-  margin-top: 27px;
+  border: none;
+  text-align: left;
+  padding-top: 17px;
+  height: 52px;
 }
 
 .header_one ul li {
@@ -53,6 +54,7 @@ header {
 }
 
 .profile {
+  border: none;
   text-align: right;
   padding: 5px;
 }
@@ -78,8 +80,13 @@ header {
 }
 
 .places_been_div {
+  border: none;
   text-align: center;
   margin-top: 5px;
+}
+
+.places_been_map {
+  border: 1px solid #000000;
 }
 
 .points_of_interest {

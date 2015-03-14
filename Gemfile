@@ -22,6 +22,13 @@ gem 'unirest'
 # Weather gem using forecast
 gem 'forecast_io'
 
+# for google maps and tracking
+# Look up street addresses, IP addresses, and geographic coordinates
+gem 'geocoder'
+
+# Google-Maps-for-Rails-2.0
+gem 'gmaps4rails'
+
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'

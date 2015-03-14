@@ -9,12 +9,19 @@ class VacationsController < ApplicationController
     p "#{@profile.latitude}"
     p "#{@profile.longitude}"
 
+
+
     # Below can be put into a helper...
     # @current_weather = Unirest.get("https://api.forecast.io/forecast/43b5d766e91f96d89c060b58e2c71a01/#{@profile.latitude},#{@profile.longitude}").body["currently"]
 
 #    # current_weather = ForecastIO.forecast(@profile.latitude, @profile.longitude)
 #    # @current_weather = current_weather["currently"]
 
+    
+    @hash = Gmaps4rails.build_markers(@vacations) do |vacation, marker|
+      marker.lat vacation.latitude
+      marker.lng vacation.longitude
+    end
    
 
   end

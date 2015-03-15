@@ -9,9 +9,8 @@
 </head>
 <body>
   <% if user_signed_in? %>
-    <div class="container">
+    
       <header>
-
         <div class="header_one row">
           <div class="col-lg-12">
             
@@ -61,46 +60,63 @@
         <div class="header_two row">
           <div class="saved_vations row">
             <div class="col-md-4">
-              <div class="dropdown">
-            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
-              saved vacations
-              <span class="caret"></span>
-            </button>
+              <nav id="primary_nav_wrap" class="saved_vac_menu">
+                <ul>
+                  <li>Saved Vacations <span class="caret"></span>
+                    <ul>
+                      <% @vacations.each do |vacation_name| %>
+                      <li><a href="/vacations/<%= vacation_name.id %>"><%= vacation_name.vacation_name %></a></li>
+                      <% end %>
+                    </ul>
+                  </li>
+                </ul>
+              </nav>
 
-            <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-            <% @vacations.each do |vacation_name| %>
-              <li role="presentation"><a role="menuitem" tabindex="-1" href="/vacations/<%= vacation_name.id %>"><%= vacation_name.vacation_name %></a></li>
-            <% end %>
-            </ul>
-          </div>
+
+
+
+
+              <div class="dropdown">
+
+            
+
+            
+
+
+
             </div>
-            <div class="class_name col-md-4">
+          </div>
+
+            <div class="app_alerts col-md-4">
               put my alerts here....
             </div>
             <div class="points_of_interest col-md-4">
               <div class="dropdown">
-              <% if @profile == nil || @profile.city == nil  %>
-                <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
-                  'UPDATE PROFILE'
-                  <span class="caret"></span>
-                </button>
-              <% else %>
-                <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
-                  points of interest for <%= @profile.city %>
-                  <span class="caret"></span>
-              <% end %>
-    <!-- NOTE = need to replace the each method below with the api of points of interest -->
-                <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-                <% @vacations.each do |vacation_name| %>
-                  <li role="presentation"><a role="menuitem" tabindex="-1" href="#">points of interest go here</a></li>
+                <% if @profile == nil || @profile.city == nil  %>
+                    <span class="caret"></span>
+                    'UPDATE PROFILE'
+                <% else %>
+                  <nav id="primary_nav_wrap">
+                    <ul>
+                      <li><span class="caret"></span> Points of interest for <%= @profile.city %>
+                        <ul>
+                          <li><a href="#">Sub Menu 1</a></li>
+                          <li><a href="#">Sub Menu 2</a></li>
+                          <li><a href="#">Sub Menu 3</a></li>
+                          <li><a href="#">Sub Menu 4</a></li>
+                        </ul>
+                      </li>
+                    </ul>
+                  </nav>
                 <% end %>
-                </ul>
-              </div>
-            </div>
-          </div>
+<!-- NOTE = need to replace the each method below with the api of points of interest -->
+              </div><!-- End of dropdown -->
+            </div><!-- End of points of interest -->
+          </div><!-- End of header two row -->
         </div><!-- End of header two -->
       </header>
   <% end %>
+  <div class="container">
 
   <% flash.each do |name, message| %>
     <div class="alert alert-<%= name %> alert-dismissible" role="alert">

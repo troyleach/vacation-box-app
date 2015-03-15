@@ -28,21 +28,21 @@ ul {
   padding: 0;
 }
 
-.container {
-  background-color: #f7daa7;
-  width: 95%;
-}
+
 
 header {
-  border: 1px solid #000000;
+  z-index: 100;
+  width:100%;
+  position:fixed;
+  top:0px;
   background-color: #ffffff;
 }
 
 .header_one {
-  margin: 0 5px 5px 5px;
-  border: 1px solid #000000;
-  background-color: tan;
-  vertical-align: bottom;
+  padding-left: 1%;
+  padding-right: 1%;
+  border: none;
+  background-color: #232d33;
 }
 
 .main_nav_bar {
@@ -55,18 +55,20 @@ header {
 }
 
 .first_menu {
-  border: 1px solid red;
-  display: block;
-  margin-top: 27px;
+  border: none;
+  text-align: left;
+  padding-top: 17px;
+  height: 52px;
 }
 
 .header_one ul li {
   display: inline-block;
 }
 
-.main_logo {
+.main_logo p {
   text-align: center;
   font-size: 2em;
+  color: #FF972C;
   line-height: 1em;
   margin-top: 10px;
 }
@@ -87,13 +89,18 @@ header {
 }
 
 .header_two {
-  margin: 0 5px 5px 5px;
+  padding-left: 1%;
+  padding-right: 1%;
   border: 1px solid #000000;
-  background-color: tan;
+  background-color: #ffffff;
 }
 
 .saved_vations {
   padding-left: 15px;
+}
+
+.app_alerts {
+  text-align: center
 }
 
 .places_been_div {
@@ -104,4 +111,10 @@ header {
 .points_of_interest {
   text-align: right;
   padding-right: 20px;
+}
+
+.container {
+  margin-top: 100px;
+  background-color: #f7daa7;
+  width: 95%;
 }

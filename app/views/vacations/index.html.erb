@@ -11,20 +11,22 @@
     
     <div class="places_been col-md-6">
       
-      <div style='width: 800px;'>
+      <div>
+      <span>HOME</span> <img src="http://chart.apis.google.com/chart?chst=d_map_xpin_icon_withshadow&chld=pin_sright|home|C9DE55|FCFAE1" alt="">
+      <span>Places Going</span> <img src="http://chart.apis.google.com/chart?chst=d_map_xpin_letter_withshadow&chld=pin_star|G|B9121B|FCFAE1|FCFAE1" alt="Places going pin">
+      <span>Places Been</span> <img src="https://chart.googleapis.com/chart?chst=d_map_pin_letter_withshadow&chld=B|E6E2AF|046380" alt="Places I've been pin">
+      <span>Cluster of pins</span> <img src="http://www.mq.edu.footprintcompany.com.au/images/cluster-icon.png" alt="Image of cluster">
         <div id="map" style='width: 620px; height: 300px;'></div>
       </div>
-      <hr>
+      <p>Keep track of the places you have traveled. Simply type in the city and a description and click 'pin it'.</p>
       <%= form_tag '/place_beens' do %>
         <div class="places_been_form">
           <%= text_field_tag :address, 'City, state, address', :class => "been_address", :style => "background: #b5cbbe;" %>
           <%= text_field_tag :description, 'Brief description', :class => "been_description", :style => "background: #b5cbbe;" %>
           <%= text_field_tag :title, 'Title of the vacation', :class => "been_title", :style => "background: #b5cbbe;" %>
-          <%= submit_tag "Create Marker" %>
+          <%= submit_tag "Pin it" %>
         </div>
       <% end %>
-
-
 
     </div>
   </div>
@@ -59,8 +61,10 @@
     // pass in other Google Maps API options here
   }, internal: {id: 'map'}}, function(){
 
-    markers = handler.addMarkers(<%=raw @hash.to_json %>, { opacity: 0.5 });
-    markers2 = handler.addMarkers(<%=raw @hash2.to_json %>, { fillColor: "green" });
+    markers = handler.addMarkers(<%=raw @hash.to_json %>);
+    // markers = handler.addMarkers(<%=raw @hash.to_json %>, { opacity: 0.5 });
+    markers2 = handler.addMarkers(<%=raw @hash2.to_json %>);
+    markers3 = handler.addMarkers(<%=raw @hash3.to_json %>);
     handler.bounds.extendWith(markers2);
     handler.fitMapToBounds();
   });

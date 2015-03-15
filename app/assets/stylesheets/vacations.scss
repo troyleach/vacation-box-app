@@ -13,12 +13,17 @@ section {
 }
 
 .places_been {
-  border: 1px solid #000000;
-  background-color: #c9b89c;
+  border: 1px solid #849696;
+  background-color: #FEFFFB;
+}
+
+.places_been img {
+  padding-bottom: 10px;
 }
 
 .places_been_form {
-  padding-bottom: 5px;
+  padding: 0 0 8px 0;
+  text-align: center;
 }
 
 // look in my google_maps branch and see how big I made the box, it seems that it just fit the box provided

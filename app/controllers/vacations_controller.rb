@@ -7,11 +7,7 @@ class VacationsController < ApplicationController
     @vacations = Vacation.where({:user_id => current_user.id})
     @profile   = Profile.find_by(:user_id => current_user.id)
     @places_been = PlaceBeen.where(:user_id => current_user.id)
-    p "#{@profile.latitude}"
-    p "#{@profile.longitude}"
-    @letter = "T"
-
-
+    
 
     # Below can be put into a helper...
     # @current_weather = Unirest.get("https://api.forecast.io/forecast/43b5d766e91f96d89c060b58e2c71a01/#{@profile.latitude},#{@profile.longitude}").body["currently"]
@@ -24,25 +20,35 @@ class VacationsController < ApplicationController
       marker.lat vacation.latitude
       marker.lng vacation.longitude
       marker.picture({
-           :url => "http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=t|FF0000|000000",
-           :width   => 32,
-           :height  => 32
+           :url => "http://chart.apis.google.com/chart?chst=d_map_xpin_letter_withshadow&chld=pin_star|G|B9121B|FCFAE1|FCFAE1",
+                                                                                 #|<fill_color>|<text_color>|<star_fill_color>
+           :width   => 50,
+           :height  => 58
          })
     end
     
-
+    
+    # http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=t|FF0000|000000
     @hash2 = Gmaps4rails.build_markers(@places_been) do |vacation, marker_two|
       marker_two.lat vacation.latitude
       marker_two.lng vacation.longitude
       marker_two.picture({
-           :url => "https://chart.googleapis.com/chart?chst=d_map_pin_letter_withshadow&chld=A|FF0000|0000FF",
+           :url => "https://chart.googleapis.com/chart?chst=d_map_pin_letter_withshadow&chld=B|E6E2AF|046380",
            :width   => 30,
            :height  => 30
          })
       marker_two.infowindow vacation.description
-
     end
    
+   @hash3 = Gmaps4rails.build_markers(@profile) do |home, marker_three|
+     marker_three.lat home.latitude
+     marker_three.lng home.longitude
+     marker_three.picture({
+          :url => "http://chart.apis.google.com/chart?chst=d_map_xpin_icon_withshadow&chld=pin_sright|home|C9DE55|FCFAE1",
+          :width   => 30,
+          :height  => 30
+        })
+   end
     
   end
 

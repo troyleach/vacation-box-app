@@ -6,6 +6,11 @@ class VacationSpotsController < ApplicationController
     @spot       = VacationSpot.find_by(:id => params[:id])
     @notes      = @spot.note
     p @notes
+
+
+
+
+    
   end
 
   def update

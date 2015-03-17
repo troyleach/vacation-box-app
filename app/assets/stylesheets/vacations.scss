@@ -6,6 +6,25 @@ section {
   margin: 0 15px 5px 15px;
 }
 
+.new_vacation_link {
+  text-align: center;
+  font-weight: 900;
+  font-size: 1.8em;
+  color: #ff972c;
+  padding: 5px;
+}
+
+.lounge_title {
+  font-size: 1.8em;
+  border-bottom: 1px solid #849696;
+  padding-bottom: 2px;
+  padding-top: 5px;
+}
+
+.new_vacation_link a {
+  color: #232d33;
+}
+
 .body_one {
   border: 1px solid blue;
   height: 450px;
@@ -17,10 +36,16 @@ section {
   background-color: #c9b89c;
 }
 
+.btn {
+  background-color: red;
+}
+
 .places_been {
   border: 1px solid #849696;
-  background-color: #FEFFFB;
+  background-color: #fefffb;
   height: 100%;
+  float: right;
+  // margin-left: 140px;
 }
 
 .places_been img {
@@ -70,9 +95,12 @@ message box
 ************************************/
 
 .message_center_box {
-  border: 1px solid #849696;
+  border: 2px solid #849696;
+  background-color: #fefffb;
+  width: 520px;
   height: 100%;
   overflow: scroll;
+  margin-left: 60px;
 }
 
 .message_box {

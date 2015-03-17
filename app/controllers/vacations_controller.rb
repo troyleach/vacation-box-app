@@ -1,16 +1,24 @@
 class VacationsController < ApplicationController
 #  # Unirest.get("https://api.forecast.io/forecast/43b5d766e91f96d89c060b58e2c71a01/38.8899,-77.009") DC
 #  # ForecastIO.api_key = '43b5d766e91f96d89c060b58e2c71a01'
+
   def index
 #    #@profile = current_profile.first_name
 #    ForecastIO.api_key = '43b5d766e91f96d89c060b58e2c71a01'
-    @vacations = Vacation.where({:user_id => current_user.id})
-    @profile   = Profile.find_by(:user_id => current_user.id)
-    @places_been = PlaceBeen.where(:user_id => current_user.id)
+    @helper       = Vacation.new
+    @vacations    = Vacation.where({:user_id => current_user.id})
+    @user_profile = Profile.all 
+    @profile      = Profile.find_by(:user_id => current_user.id)
+    @places_been  = PlaceBeen.where(:user_id => current_user.id)
+    @messages     = Message.all
+    @users        = User.all 
     
-
     # Below can be put into a helper...
-    # @current_weather = Unirest.get("https://api.forecast.io/forecast/43b5d766e91f96d89c060b58e2c71a01/#{@profile.latitude},#{@profile.longitude}").body["currently"]
+    if @profile == nil || @profile.city == nil
+      @current_weather = nil
+    else
+      @current_weather = Unirest.get("https://api.forecast.io/forecast/43b5d766e91f96d89c060b58e2c71a01/#{@profile.latitude},#{@profile.longitude}").body["currently"]
+    end
 
 #    # current_weather = ForecastIO.forecast(@profile.latitude, @profile.longitude)
 #    # @current_weather = current_weather["currently"]

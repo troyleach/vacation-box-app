@@ -36,7 +36,7 @@
                   <li class="logout_text">
                     <div class="user_profile_info">
                       <% if @profile == nil || @profile.first_name == nil  %>
-                      <a href="/profiles/<%= current_user.id %>/edit"><p>Please update your profile HERE |</p></a>
+                      <a href="/profiles/<%= current_user.id %>/edit"><p class="no_profile">| Please update your profile HERE |</p></a>
                       <% else %>
                       <a href="/profiles/<%= current_user.id %>/edit"><p><%= @profile.first_name %>'s profile |</p></a>
                       <% end %>

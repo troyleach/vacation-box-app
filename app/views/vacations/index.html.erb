@@ -7,7 +7,40 @@
 
 <section class"section_one">
   <div class="body_one row">
-    <div class="chat_box col-md-6"><h1>Chat box</h1></div>
+    <div class="message_center_box col-md-6"><h1>Community Lounge</h1>
+      
+    <!-- image_tag current_user.gravatar_url -->
+
+      <% @messages.each do |message| %>
+        <% user = @user_profile.find(message.profile_id) %>
+        <% user_email = @users.find(user.user_id) %>
+        <table border="0" class="message_center_table">
+          <tr class="message_table_row">
+            <td class="message_talbe_col_text" valign="top">
+              <%= image_tag user_email.gravatar_url,  :class => "gravatar_image" %>
+              <p class="message_user_name"><%= user.username %></p>
+              <p class="message_date"><%= @helper.convert_date(message.created_at) %></p>
+            </td>
+            <td class="message_talbe_col">
+              <div class="bubble">
+              <p class="message_title"><%= message.title %></p>
+              <p class ="message_message"><%= message.message %></p>
+              <p class ="message_reply">Replay to <span class="message_reply_button"><%= user.username %></span></p>
+              </div>
+            </td>
+          </tr>
+        </table>
+        
+        
+       
+      <% end %>
+
+      <% 15.times do %>
+      <div class="message_box">message box</div>
+      <% end %>
+
+    </div>
+
     
     <div class="places_been col-md-6">
       
@@ -16,7 +49,7 @@
       <span>Places Going</span> <img src="http://chart.apis.google.com/chart?chst=d_map_xpin_letter_withshadow&chld=pin_star|G|B9121B|FCFAE1|FCFAE1" alt="Places going pin">
       <span>Places Been</span> <img src="https://chart.googleapis.com/chart?chst=d_map_pin_letter_withshadow&chld=B|E6E2AF|046380" alt="Places I've been pin">
       <span>Cluster of pins</span> <img src="http://www.mq.edu.footprintcompany.com.au/images/cluster-icon.png" alt="Image of cluster">
-        <div id="map" style='width: 620px; height: 300px;'></div>
+        <div id="map" style='width: 100%; height: 300px;'></div>
       </div>
       <p>Keep track of the places you have traveled. Simply type in the city and a description and click 'pin it'.</p>
       <%= form_tag '/place_beens' do %>
@@ -37,7 +70,12 @@
   <div class="body_two row">
     <div class="chat_box col-md-6"><h1>home city image and map</h1></div>
     <div class="places_been col-md-6">
+    <% if @profile == nil || @profile.city == nil  %>
+    <p>- Current Weather -</p>
+      <a href="/profiles/<%= current_user.id %>/edit"><p class="no_profile">- Please update your profile -</p></a>
+    <% else %>
       <iframe id="forecast_embed" class="weather_iframe" type="text/html" frameborder="0" height="60" width="100%" src="http://forecast.io/embed/#lat=<%= @profile.latitude %>&lon=<%= @profile.longitude %>&name=<%= @profile.city %>"> </iframe>
+      <% end %>
     </div>
   </div>
 </section>

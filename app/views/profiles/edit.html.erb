@@ -4,6 +4,7 @@
   <div class="row profile_row">
   <div class="users_profile_image col-xs-6 col-md-4">
     <%= image_tag current_user.gravatar_url,  :class => "gravatar_image_profile" %>
+    <p>Don't have a gravatar? It is very easy to get one just go <a href="https://en.gravatar.com/" target="_blank">here</a></p>
   </div>
   <%= form_tag "/profiles/current_user.id", :method => :patch do %>
   

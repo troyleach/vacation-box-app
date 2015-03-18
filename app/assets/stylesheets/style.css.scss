@@ -1,10 +1,16 @@
 // This applies to all layouts
 body {
   background-color: #ffffff;
+  line-height: 1em;
 }
 
 .no_profile {
   color: #FF972C; 
+}
+
+.general_text {
+  margin-bottom: -1px;
+  margin-left: 10px;
 }
 
 hr {
@@ -14,6 +20,7 @@ hr {
   height: 1px;
   width: 100%;
   text-align: left;
+  margin: 5px;
 }
 
 

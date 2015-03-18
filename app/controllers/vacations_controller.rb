@@ -12,6 +12,9 @@ class VacationsController < ApplicationController
     @places_been  = PlaceBeen.where(:user_id => current_user.id)
     @messages     = Message.all
     @users        = User.all 
+
+    @helper.line
+    p @messages
     
     # Below can be put into a helper...
     if @profile == nil || @profile.city == nil

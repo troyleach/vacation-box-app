@@ -1,11 +1,13 @@
+
 class Message
-  attr_reader :id, :profile_id, :title, :message, :created_at, :updated_at
+  attr_reader :id, :profile_id, :title, :message, :replies, :created_at, :updated_at
 
   def initialize(args)
     @id         = args["id"]
     @profile_id = args["profile_id"]
     @title      = args["title"]
     @message    = args["message"]
+    @replies    = args["replies"]
     @created_at = args["created_at"]
     @updated_at = args["updated_at"]
   end

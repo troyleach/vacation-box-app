@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   resources :profiles
   resources :vacation_spots
   resources :messages
+  resources :replies
   devise_for :users
   
   devise_scope :user do

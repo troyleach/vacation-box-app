@@ -1,26 +1,48 @@
 // This applies to all layouts
 body {
   background-color: #ffffff;
+  line-height: 1em;
+}
+
+.no_profile {
+  color: #FF972C; 
+}
+
+.general_text {
+  margin-bottom: -1px;
+  margin-left: 10px;
 }
 
 hr {
-  height: 30px;
-  border-style: solid;
-  border-color: black;
-  border-width: 1px 0 0 0;
-  border-radius: 20px;
+  border: 0;
+  color: #849696;
+  background-color: #849696;
+  height: 1px;
+  width: 100%;
+  text-align: left;
+  margin: 5px;
 }
 
-hr:before {
-  display: block;
-  content: "";
-  height: 30px;
-  margin-top: -31px;
-  border-style: solid;
-  border-color: black;
-  border-width: 0 0 1px 0;
-  border-radius: 20px;
-}
+
+// The blocks below are cool but I don't think will work for this app
+// hr {
+//   height: 30px;
+//   border-style: solid;
+//   border-color: black;
+//   border-width: 1px 0 0 0;
+//   border-radius: 20px;
+// }
+
+// hr:before {
+//   display: block;
+//   content: "";
+//   height: 30px;
+//   margin-top: -31px;
+//   border-style: solid;
+//   border-color: black;
+//   border-width: 0 0 1px 0;
+//   border-radius: 20px;
+// }
 
 ul {
   list-style: none;

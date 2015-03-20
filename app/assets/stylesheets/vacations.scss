@@ -6,15 +6,46 @@ section {
   margin: 0 15px 5px 15px;
 }
 
+.new_vacation_link {
+  text-align: center;
+  font-weight: 900;
+  font-size: 1.8em;
+  color: #ff972c;
+  padding: 5px;
+}
+
+.lounge_title {
+  font-size: 1.8em;
+  border-bottom: 1px solid #849696;
+  padding-bottom: 2px;
+  padding-top: 5px;
+}
+
+.new_vacation_link a {
+  color: #232d33;
+}
+
+.body_one {
+  border: 1px solid blue;
+  height: 450px;
+}
+
 .chat_box {
   float: left;
   border: 1px solid #000000;
   background-color: #c9b89c;
 }
 
+.btn {
+  background-color: red;
+}
+
 .places_been {
   border: 1px solid #849696;
-  background-color: #FEFFFB;
+  background-color: #fefffb;
+  height: 100%;
+  float: right;
+  // margin-left: 140px;
 }
 
 .places_been img {
@@ -29,8 +60,6 @@ section {
 // look in my google_maps branch and see how big I made the box, it seems that it just fit the box provided
 #map-canvas {
   border: 1px solid black;
-  width: 100%;
-  height: 300px;
 }
 
 
@@ -58,6 +87,77 @@ vacations make up page
 
 .weather_iframe {
   border: none;
-  width: 100%;
   height: 235px;
+}
+
+/************************************
+message box
+************************************/
+
+.message_center_box {
+  border: 2px solid #849696;
+  background-color: #fefffb;
+  width: 520px;
+  height: 100%;
+  overflow: scroll;
+  margin-left: 60px;
+}
+
+.message_box {
+  border: 1px solid red;
+  width: 350px;
+  height: 80px;
+}
+
+.message_center_table {
+  margin-bottom: 5px;
+}
+
+.message_table_row {
+  
+}
+
+.message_talbe_col {
+  width: 398px;
+  text-align: left;
+  padding-left: 24px;
+}
+
+p.message_user_name {
+  font-size: .8em;
+  font-weight: 900;
+  padding: 5px 0 0 0;
+  line-height: 3px;
+}
+
+p.message_date {
+  font-size: .8em;
+  font-weight: 900;
+  padding: 0;
+  line-height: 3px;
+}
+
+.message_title {
+  color: #FF972C;
+  font-size: 1.2em;
+  font-weight: 900;
+  border-bottom: 1px solid #849696;
+}
+
+.message_message {
+  color: #FEFFFB;
+}
+
+.message_post_message {
+  color: #232d33;
+}
+
+.message_reply {
+  color: #FEFFFB;
+  text-align: left;
+  padding-left: 15px;
+}
+
+.message_reply_button {
+  color: #FF972C; 
 }

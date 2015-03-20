@@ -13,4 +13,18 @@ class Vacation < ActiveRecord::Base
     time_date = Time.now 
     @current_time_date = time_date.strftime("%b %e, %l:%M %p")
   end
+
+  def today
+    Time.now.strftime("%b %d, %Y")
+  end
+
+  def convert_date(date)
+    Date.parse(date).strftime("%b %d, %Y")
+  end
+ 
+
+  def line
+    puts "*" * 100
+  end
+
 end

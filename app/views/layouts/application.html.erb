@@ -36,7 +36,7 @@
                   <li class="logout_text">
                     <div class="user_profile_info">
                       <% if @profile == nil || @profile.first_name == nil  %>
-                      <a href="/profiles/<%= current_user.id %>/edit"><p>Please update your profile HERE |</p></a>
+                      <a href="/profiles/<%= current_user.id %>/edit"><p class="no_profile">| Please update your profile HERE |</p></a>
                       <% else %>
                       <a href="/profiles/<%= current_user.id %>/edit"><p><%= @profile.first_name %>'s profile |</p></a>
                       <% end %>
@@ -71,34 +71,24 @@
                   </li>
                 </ul>
               </nav>
-
-
-
-
-
-              <div class="dropdown">
-
-            
-
-            
-
-
-
             </div>
-          </div>
+              <div class="dropdown">
+              
+              </div>
 
             <div class="app_alerts col-md-4">
               put my alerts here....
             </div>
             <div class="points_of_interest col-md-4">
               <div class="dropdown">
+<!-- NOTE = need the api of points of interest -->
                 <% if @profile == nil || @profile.city == nil  %>
                     <span class="caret"></span>
                     'UPDATE PROFILE'
                 <% else %>
                   <nav id="primary_nav_wrap">
                     <ul>
-                      <li><span class="caret"></span> Points of interest for <%= @profile.city %>
+                      <li><span class="caret"></span> Points of interest in <%= @profile.city %>
                         <ul>
                           <li><a href="#">Sub Menu 1</a></li>
                           <li><a href="#">Sub Menu 2</a></li>
@@ -109,7 +99,6 @@
                     </ul>
                   </nav>
                 <% end %>
-<!-- NOTE = need to replace the each method below with the api of points of interest -->
               </div><!-- End of dropdown -->
             </div><!-- End of points of interest -->
           </div><!-- End of header two row -->

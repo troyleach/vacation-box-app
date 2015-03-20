@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-  has_many :profiles
+  has_many :profiles, :first_name => First Name, :last_name => Last Name
   has_many :vacations
   has_many :place_beens
   

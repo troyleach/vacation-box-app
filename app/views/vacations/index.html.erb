@@ -7,6 +7,12 @@
   <a href='<%= new_vacation_path %>'>- Create a vacation -</a>
 </div>
 
+<% if @profile == nil || @profile.username == nil  %>
+<% @user_name = "username" %>
+<% else %>
+<% @user_name = @profile.username %>
+<% end %>
+
 <section class"section_one">
   <div class="body_one row">
     <div class="message_center_box col-md-6"><p class="lounge_title">Community Lounge</p>
@@ -16,7 +22,7 @@
           <tr class="message_table_row">
             <td class="message_talbe_col_text" valign="top">
               <%= image_tag current_user.gravatar_url,  :class => "gravatar_image" %>
-              <p class="message_user_name"><%= @profile.username %></p>
+              <p class="message_user_name"><%= @user_name %></p>
               <p class="message_date"><%= @helper.today %></p>
             </td>
             <td class="message_talbe_col">
@@ -34,32 +40,33 @@
           <% end %>
         </table>
         
-        
-        <% @message_count = [] %>
-        <% @replies_count = [] %>
-        <% @replies_count_one = [] %>
-        <% @messages.each do |key, value| %>
-          <% @message_count << key.profile_id if key.profile_id == @profile.id %>
-          <% @replies_count << key.replies if key.profile_id == @profile.id %>
-        <% end %>
+        <% if @profile == nil || @profile.id == nil  %>
+        "update your profile"
+        <% else %>
+          <% @message_count = [] %>
+          <% @replies_count = [] %>
+          <% @replies_count_one = [] %>
+          <% @messages.each do |key, value| %>
+            <% @message_count << key.profile_id if key.profile_id == @profile.id %>
+            <% @replies_count << key.replies if key.profile_id == @profile.id %>
+          <% end %>
 
-        <% @replies_count.each do |replies| %>
-          <% @replies_count_one << replies.size %>
-        <% end %>
+          <% @replies_count.each do |replies| %>
+            <% @replies_count_one << replies.size %>
+          <% end %>
 
-    
-
-        <% if @m_count ==  "null"
-           @m_count = 0
-           @r_count = 0
-         elsif @m_count && @r_count == "null"
-             @m_count = @message_count.size
+          <% if @m_count ==  "null"
+             @m_count = 0
              @r_count = 0
-           else
-            @m_count = @message_count.size
-            @r_count = @replies_count_one.inject(:+)
-          end
-           %>
+           elsif @m_count && @r_count == "null"
+               @m_count = @message_count.size
+               @r_count = 0
+             else
+              @m_count = @message_count.size
+              @r_count = @replies_count_one.inject(:+)
+            end
+             %>
+        <% end %>
         
         <p class="general_text">You have a total of: | <span><%= @m_count %> posts</span> | <span><%= @r_count %> replies</span></p>
 <hr>
@@ -67,7 +74,13 @@
       <% link = "a" %>
       
       <% @messages = @messages.sort { |a, b| b.created_at <=> a.created_at } %>
+
       <% @messages.each do |message| %>
+      <% if @profile == nil || @profile.id == nil  %>
+      <% user = "update your profile" %>
+      <% user_email = "update your profile" %>
+      <% replies_count = "0" %>
+      <% else %>
         <% user = @user_profile.find(message.profile_id) %>
         <% user_email = @users.find(user.user_id) %>
         <% replies_count = message.replies.size %>
@@ -123,6 +136,9 @@
             </td>
           </tr>
         </table>
+        <!-- ends the if statement line 79 -->
+        <% end %>
+        <!-- ends the each statement 78-->
       <% end %>
     </div>
 

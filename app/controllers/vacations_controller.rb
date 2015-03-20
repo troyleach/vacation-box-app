@@ -16,11 +16,11 @@ class VacationsController < ApplicationController
 
   
     # Below can be put into a helper...
-    if @profile == nil || @profile.city == nil
-      @current_weather = nil
-    else
-      @current_weather = Unirest.get("https://api.forecast.io/forecast/43b5d766e91f96d89c060b58e2c71a01/#{@profile.latitude},#{@profile.longitude}").body["currently"]
-    end
+    # if @profile == nil || @profile.city == nil
+    #   @current_weather = nil
+    # else
+    #   @current_weather = Unirest.get("https://api.forecast.io/forecast/43b5d766e91f96d89c060b58e2c71a01/#{@profile.latitude},#{@profile.longitude}").body["currently"]
+    # end
 
 #    # current_weather = ForecastIO.forecast(@profile.latitude, @profile.longitude)
 #    # @current_weather = current_weather["currently"]

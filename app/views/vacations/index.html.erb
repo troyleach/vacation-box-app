@@ -65,7 +65,8 @@
 <hr>
 <!-- really.. get rid of the code below.. HACK job -->
       <% link = "a" %>
-      <% @messages = @messages.sort_by &:created_at %>
+      
+      <% @messages = @messages.sort { |a, b| b.created_at <=> a.created_at } %>
       <% @messages.each do |message| %>
         <% user = @user_profile.find(message.profile_id) %>
         <% user_email = @users.find(user.user_id) %>

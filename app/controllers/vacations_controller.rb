@@ -11,11 +11,10 @@ class VacationsController < ApplicationController
     @profile      = Profile.find_by(:user_id => current_user.id)
     @places_been  = PlaceBeen.where(:user_id => current_user.id)
     @messages     = Message.all
-    @users        = User.all 
+    @users        = User.all
+   
 
-    @helper.line
-    p @messages
-    
+  
     # Below can be put into a helper...
     if @profile == nil || @profile.city == nil
       @current_weather = nil
@@ -37,8 +36,7 @@ class VacationsController < ApplicationController
            :height  => 58
          })
     end
-    
-    
+# need to figure out how to make map center on home state not the ocean, also need to make the pins bigger, most likely the scalable
     # http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=t|FF0000|000000
     @hash2 = Gmaps4rails.build_markers(@places_been) do |vacation, marker_two|
       marker_two.lat vacation.latitude

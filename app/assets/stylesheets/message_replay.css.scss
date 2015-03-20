@@ -1,6 +1,6 @@
 .message_replies {
   border: none;
-  padding-left: 30px;
+  
 } 
 
 .reply_from {
@@ -20,4 +20,18 @@
   
   color: #ff972c;
   margin-bottom: 10px;
+}
+
+.reply_button {
+  border: none;
+  background-color: none;
+}
+
+.post_box {
+  text-align: left;
+}
+
+.reply_count {
+  text-align: right;
+  float: right;
 }

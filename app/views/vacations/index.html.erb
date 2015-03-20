@@ -10,7 +10,7 @@
 <section class"section_one">
   <div class="body_one row">
     <div class="message_center_box col-md-6"><p class="lounge_title">Community Lounge</p>
-
+      <p>Ask a question:</p>
         <table border="0" class="message_center_table">
         <%= form_tag "/messages" do %>
           <tr class="message_table_row">
@@ -33,44 +33,91 @@
           </tr>
           <% end %>
         </table>
-        <p class="general_text">Ask questions to others in the community</p>
+        
+        
+        <% @message_count = [] %>
+        <% @replies_count = [] %>
+        <% @replies_count_one = [] %>
+        <% @messages.each do |key, value| %>
+          <% @message_count << key.profile_id if key.profile_id == @profile.id %>
+          <% @replies_count << key.replies if key.profile_id == @profile.id %>
+        <% end %>
+
+        <% @replies_count.each do |replies| %>
+          <% @replies_count_one << replies.size %>
+        <% end %>
+
+    
+
+        <% if @m_count ==  "null"
+           @m_count = 0
+           @r_count = 0
+         elsif @m_count && @r_count == "null"
+             @m_count = @message_count.size
+             @r_count = 0
+           else
+            @m_count = @message_count.size
+            @r_count = @replies_count_one.inject(:+)
+          end
+           %>
+        
+        <p class="general_text">You have a total of: | <span><%= @m_count %> posts</span> | <span><%= @r_count %> replies</span></p>
 <hr>
+<!-- really.. get rid of the code below.. HACK job -->
+      <% link = "a" %>
+      <% @messages = @messages.sort_by &:created_at %>
       <% @messages.each do |message| %>
-      <% link = 0 %>
         <% user = @user_profile.find(message.profile_id) %>
         <% user_email = @users.find(user.user_id) %>
+        <% replies_count = message.replies.size %>
+        
         <table border="0" class="message_center_table">
           <tr class="message_table_row">
             <td class="message_talbe_col_text" valign="top">
               <%= image_tag user_email.gravatar_url,  :class => "gravatar_image" %>
               <p class="message_user_name"><%= user.username %></p>
               <p class="message_date"><%= @helper.convert_date(message.created_at) %></p>
+              <!-- @helper.convert_date(message.created_at) -->
             </td>
             <td class="message_talbe_col">
               <div class="bubble">
-              <p class="message_title"><%= message.title %></p>
+<!-- replies COUNT -->
+              <p class="message_title"><%= message.title %> <span class="reply_count"><%= replies_count %> replies</span></p>
               <p class ="message_message"><%= message.message %></p>
+
+<!-- the below div tag, message_replies, not sure where the end is for this -->
                 <div class="message_replies">
-<!-- REPLIES BUTTON -->
-                <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#<%= message.id %>" aria-expanded="false" aria-controls="collapseExample">
-                  Replies
-                </button>
-                <div class="collapse" id="<%= message.id %>">
-                  <div class="well">
-                  <% message.replies.each do |reply| %>
-                  <% reply_user_name = @user_profile.find(reply["profile_id"]) %>
-                      <hr class="reply_hr">
-                      <p class="reply_from">From: <%= reply_user_name.username %></p>
-                      <p class="reply_date"><%= @helper.convert_date(reply["created_at"]) %></p>
-                      <p class="reply_text"><%= reply["reply"] %></p>
-                  <% end %>
+                  <span class="reply_button" data-toggle="collapse" data-target="#<%= message.id %>" aria-expanded="false" aria-controls="<%= message.id %>">
+                    <p class ="message_reply"><span class="caret"></span>  See <span class="message_reply_button">replies</span></p>
+                  </span>
+                  <div class="collapse" id="<%= message.id %>">
+                    <div class="well">
+                    <% message.replies.each do |reply| %>
+                    <% reply_user_name = @user_profile.find(reply["profile_id"]) %>
+                        <hr class="reply_hr">
+                        <p class="reply_from">From: <%= reply_user_name.username %></p>
+                        <p class="reply_date"><%= @helper.convert_date(reply["created_at"]) %></p>
+                        <p class="reply_text"><%= reply["reply"] %></p>
+                    <% end %>
+                      </div>
                     </div>
                   </div>
-                </div>
 <!-- responded to messages (i think to get this working, each inside a each) -->
-                
+<!-- THIS IS THE POST TO A REPLY BUTTON -->
+                    <span data-toggle="collapse" data-target="#<%= link %>" aria-expanded="false" aria-controls="<%= link %>">
+                      <p class ="message_reply"><span class="caret"></span> Replay to <span class="message_reply_button"><%= user.username %></span></p>
+                    </span>
+                    <div class="collapse" id="<%= link %>">
+                      <div class="post_box">
+                        <%= form_tag "/replies" do %>
+                        <%=text_area_tag :reply, 'Type message here', :size => "40x3" %>
+                        <%= hidden_field_tag :message_id, message.id %>
+                        <p class ="message_reply"><%= submit_tag "Post", :class => "btn btn-warning"%></p>
+                        <% link.next! %>
+                        <% end %>
+                      </div>
+                    </div>  
 
-              <p class ="message_reply">Replay to <span class="message_reply_button"><%= user.username %></span></p>
               </div>
             </td>
           </tr>
@@ -127,20 +174,6 @@
     <div class="places_been col-md-3"><h1>Saved vacation</h1></div>
   </div>
 </section>
-
-
-
-
-
-<br>
-<br>
-<br>
-<br>
-
-  
-
-
-
 
 
 <script type="text/javascript">

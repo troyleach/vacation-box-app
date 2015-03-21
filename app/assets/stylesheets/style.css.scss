@@ -111,10 +111,14 @@ header {
 }
 
 .header_two {
+  color: #666;
+  width: 95%;
+  height: 30px;
+  margin: auto;
   padding-left: 1%;
   padding-right: 1%;
-  border: 1px solid #000000;
-  background-color: #ffffff;
+  border-top: 1px solid #849696;
+  background-color: #232d33;
 }
 
 .saved_vations {
@@ -136,7 +140,7 @@ header {
 }
 
 .container {
-  margin-top: 100px;
+  margin-top: 80px;
   background-color: #f7daa7;
   width: 95%;
 }

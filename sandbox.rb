@@ -1,3 +1,16 @@
+# self
+
+
+
+
+# this code gets me all the keys for this look up. but geocde will not do it's thing until a key is provided, but not sure where the key goes... going to try to make a autocomplete bymself, no damn gem.
+chi = Unirest.get("http://maps.googleapis.com/maps/api/geocode/json?latlng=41.8818,-87.6232").body["results"]
+p chi.class
+chi.each do |key|
+  puts key["place_id"]
+end
+
+
 # => weather app embed
 <iframe id="forecast_embed" class="weather_iframe" type="text/html" frameborder="0" height="60" width="100%" src="http://forecast.io/embed/#lat=<%= @profile.latitude %>&lon=<%= @profile.longitude %>&name=<%= @profile.city %>"> </iframe>
 

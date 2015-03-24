@@ -12,7 +12,21 @@ class VacationsController < ApplicationController
     @places_been  = PlaceBeen.where(:user_id => current_user.id)
     @messages     = Message.all
     @users        = User.all
-   
+
+# to make helper methods make a class then call self.'what_ever_the_method_name' then I can call
+# just the method
+
+
+# chi = Unirest.get("http://maps.googleapis.com/maps/api/geocode/json?latlng=#{@profile.latitude},#{@profile.longitude}").body["results"]
+
+# chi.each do |key|
+#   puts key["place_id"]
+# end
+
+# @chi_place = Unirest.get("https://maps.googleapis.com/maps/api/place/details/json?placeid=ChIJgfAAC6csDogRK6Ew7nIj9ss&key=AIzaSyClgAPyN1ArCGKPPQJQUt8tqBZ5KyDvDdk")
+# p @chi_place
+
+# buz =    Geocoder.search("ChIJhRwB-yFawokR5Phil-QQ3zM", :lookup => :google_places_details)
 
   
     # Below can be put into a helper...

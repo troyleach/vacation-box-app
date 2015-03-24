@@ -17,8 +17,12 @@
           <tr class="message_table_row">
             <td class="message_talbe_col_text" valign="top">
               <%= image_tag current_user.gravatar_url,  :class => "gravatar_image" %>
-              <p class="message_user_name"><%= @profile.username %></p>
-              <p class="message_date"><%= @helper.today %></p>
+              <% if @profile == nil || @profile.username == nil  %>
+                <p>user name</p>
+              <% else %>
+                <p class="message_user_name"><%= @profile.username %></p>
+                <p class="message_date"><%= @helper.today %></p>
+              <% end %>
             </td>
             <td class="message_talbe_col">
               <div class="bubble">
@@ -35,33 +39,35 @@
           <% end %>
         </table>
         
-        
-        <% @message_count = [] %>
-        <% @replies_count = [] %>
-        <% @replies_count_one = [] %>
-        <% @messages.each do |key, value| %>
-          <% @message_count << key.profile_id if key.profile_id == @profile.id %>
-          <% @replies_count << key.replies if key.profile_id == @profile.id %>
-        <% end %>
+        <% if @profile == nil || @profile.id == nil  %>
+          <p>update your profile</p>
+        <% else %>
+          <% @message_count = [] %>
+          <% @replies_count = [] %>
+          <% @replies_count_one = [] %>
+          <% @messages.each do |key, value| %>
+            <% @message_count << key.profile_id if key.profile_id == @profile.id %>
+            <% @replies_count << key.replies if key.profile_id == @profile.id %>
+          <% end %>
 
-        <% @replies_count.each do |replies| %>
-          <% @replies_count_one << replies.size %>
-        <% end %>
+          <% @replies_count.each do |replies| %>
+            <% @replies_count_one << replies.size %>
+          <% end %>
 
-    
+      
 
-        <% if @m_count ==  "null"
-           @m_count = 0
-           @r_count = 0
-         elsif @m_count && @r_count == "null"
+          <% if @m_count ==  "null"
+             @m_count = 0
+             @r_count = 0
+           elsif @m_count && @r_count == "null"
              @m_count = @message_count.size
              @r_count = 0
            else
             @m_count = @message_count.size
             @r_count = @replies_count_one.inject(:+)
-          end
-           %>
-        
+           end
+             %>
+        <% end %>
         <p class="general_text">You have a total of: | <span><%= @m_count %> posts</span> | <span><%= @r_count %> replies</span></p>
 <hr>
 <!-- really.. get rid of the code below.. HACK job -->
@@ -184,6 +190,7 @@
   </div>
 </section>
 
+<%= @profile.inspect %>
 
 <script type="text/javascript">
   handler = Gmaps.build('Google');
@@ -204,16 +211,44 @@
 
 </script>
 
+<% if @profile.latitude == nil %>
+  <script type="text/javascript">
+    var map;  
+    var intiallat = 39.7392;
+    var intiallong = -104.99;
+      
+    var text = "we are here"
 
+    var myLatLong = new google.maps.LatLng(intiallat,intiallong);
+
+    function initialize() {
+      var mapOptions = {
+        zoom: 8,
+        center: myLatLong
+      };
+      text = new google.maps.Map(document.getElementById('map-canvas'),
+          mapOptions);
+
+      var marker = new google.maps.Marker({
+          position: myLatLong,
+          map: map,
+          title:"Hello World!"
+      });
+    }
+    google.maps.event.addDomListener(window, 'load', initialize);
+  
+</script>
+  
+<% else %>
 <script type="text/javascript">
   var map;
-  var intiallat = <%= @profile.latitude %>;
-  var intiallong = <%= @profile.longitude %>;
-    if (intiallat == "") {
+    var intiallat = <%= @profile.latitude %>;
+    var intiallong = <%= @profile.longitude %>;
+    
+    if (intiallat === "") {
       intiallat = 39.7392;
       intiallong = -104.99;
     }
-
   var myLatLong = new google.maps.LatLng(intiallat,intiallong);
 
   function initialize() {
@@ -231,5 +266,6 @@
     });
   }
   google.maps.event.addDomListener(window, 'load', initialize);
-  
 </script>
+
+<% end %>

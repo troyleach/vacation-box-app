@@ -12,6 +12,8 @@ class VacationsController < ApplicationController
     @places_been  = PlaceBeen.where(:user_id => current_user.id)
     @messages     = Message.all
     @users        = User.all
+@helper.line
+p @profile
 
 # to make helper methods make a class then call self.'what_ever_the_method_name' then I can call
 # just the method

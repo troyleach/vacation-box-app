@@ -2,12 +2,14 @@
 <html>
 <head>
   <title>VacationBoxApp</title>
-  <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?libraries=places"></script>
+  
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
   
-      
+  <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?libraries=places"></script>
+  <link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500">
+    
 </head>
 <body>
   <% if user_signed_in? %>
@@ -25,10 +27,10 @@
               </div>
             
               <div class="main_logo col-md-4">
-              <% if @profile == nil || @profile.city == nil  %>
+              <% if @profile == nil || @profile.locality == nil  %>
               <a href="/profiles/<%= current_user.id %>/edit"><p>- Please update your profile -</p></a>
               <% else %>
-              <p>- <%= @profile.city %> -</p>
+              <p>- <%= @profile.locality %> -</p>
               <% end %>
               
               </div>
@@ -84,13 +86,13 @@
             <div class="points_of_interest col-md-4">
               <div class="dropdown">
 <!-- NOTE = need the api of points of interest -->
-                <% if @profile == nil || @profile.city == nil  %>
+                <% if @profile == nil || @profile.locality == nil  %>
                     <span class="caret"></span>
                     'UPDATE PROFILE'
                 <% else %>
                   <nav id="primary_nav_wrap">
                     <ul>
-                      <li><span class="caret"></span> Points of interest in <%= @profile.city %>
+                      <li><span class="caret"></span> Points of interest in <%= @profile.locality %>
                         <ul>
                           <li><a href="#">Sub Menu 1</a></li>
                           <li><a href="#">Sub Menu 2</a></li>

@@ -168,7 +168,7 @@
     </div>
     <div class="weather  col-md-6">
     <h4 class="home_city_title">Local Weather</h4>
-    <% if @profile == nil || @profile.city == nil  %>
+    <% if @profile == nil || @profile.locality == nil  %>
     <p>- Current Weather -</p>
       <a href="/profiles/<%= current_user.id %>/edit"><p class="no_profile">- Please update your profile -</p></a>
     <% else %>

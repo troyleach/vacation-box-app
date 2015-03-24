@@ -1,3 +1,4 @@
+
 <h2>About <%= current_user.email %></h2>
 <h4>Update your profile</h4>
 
@@ -34,42 +35,155 @@
         <%= text_field_tag :username, @profile.username %> 
       </div>
     </div><!-- End of second box users_name -->
-
-    <div class="users_address col-xs-6 col-md-4">
+    
+      <div class="users_address col-xs-6 col-md-4">
+  
     <p>Where do you live. We only need city and state.</p>
       <div>
-        <%= label_tag :address, "Address:" %>
+        <%= label_tag :route, "Address:" %>
       </div>
       <div>
-        <%= text_field_tag :address, @profile.address %> 
+        <%= text_field_tag :route, @profile.route %> 
       </div>
 
       <div>
-        <%= label_tag :city, "City:" %>
+        <%= label_tag :locality, "City:" %>
       </div>
       <div>
-        <%= text_field_tag :city, @profile.city %> 
+        <%= text_field_tag :locality, @profile.locality %> 
       </div>
 
       <div>
-        <%= label_tag :state, "State:" %>
+        <%= label_tag :administrative_area_level_1, "State:" %>
       </div>
       <div>
-        <%= text_field_tag :state, @profile.state %> 
+        <%= text_field_tag :administrative_area_level_1, @profile.administrative_area_level_1 %> 
       </div>
 
       <div>
-        <%= label_tag :zip, "Zip:" %>
+        <%= label_tag :postal_code, "Zip:" %>
       </div>
       <div>
-        <%= text_field_tag :zip, @profile.zip %> 
+        <%= text_field_tag :postal_code, @profile.postal_code %> 
       </div>
+      
 
       <%= hidden_field_tag :user_id, current_user.id %>
 
     </div><!-- End of third box users_address -->
+
+
     <div class="profiles_submit_button"><%= submit_tag "Update me" %></div>
     
     <% end %>
   </div><!-- End of row -->
+
+  <body onload="initialize()">
+    <div id="locationField">
+      <input id="autocomplete" placeholder="Enter your address"
+             onFocus="geolocate()" type="text"></input>
+    </div>
+
+    <table id="address">
+      <tr>
+        <td class="label">Street address</td>
+        <td class="slimField"><input class="field" id="street_number"
+              disabled="true"></input></td>
+        <td class="wideField" colspan="2"><input class="field" id="route"
+              disabled="true"></input></td>
+      </tr>
+      <tr>
+        <td class="label">City</td>
+        <td class="wideField" colspan="3"><input class="field" id="locality"
+              disabled="true"></input></td>
+      </tr>
+      <tr>
+        <td class="label">State</td>
+        <td class="slimField"><input class="field"
+              id="administrative_area_level_1" disabled="true"></input></td>
+        <td class="label">Zip code</td>
+        <td class="wideField"><input class="field" id="postal_code"
+              disabled="true"></input></td>
+      </tr>
+      <tr>
+        <td class="label">Country</td>
+        <td class="wideField" colspan="3"><input class="field"
+              id="country" disabled="true"></input></td>
+      </tr>
+    </table>
+  </body>
+
+
+<script>
+  // This example displays an address form, using the autocomplete feature
+  // of the Google Places API to help users fill in the information.
+
+  var placeSearch, autocomplete;
+  var componentForm = {
+    street_number: 'short_name',
+    route: 'long_name',
+    locality: 'long_name',
+    administrative_area_level_1: 'short_name',
+    country: 'long_name',
+    postal_code: 'short_name'
+  };
+  console.log("this is the frist object")
+  console.log(componentForm)
+  function initialize() {
+    // Create the autocomplete object, restricting the search
+    // to geographical location types.
+    autocomplete = new google.maps.places.Autocomplete(
+        /** @type {HTMLInputElement} */(document.getElementById('autocomplete')),
+        { types: ['geocode'] });
+    // When the user selects an address from the dropdown,
+    // populate the address fields in the form.
+    google.maps.event.addListener(autocomplete, 'place_changed', function() {
+      fillInAddress();
+    });
+  }
+  console.log("this is the second object")
+  console.log(autocomplete)
+  // [START region_fillform]
+  function fillInAddress() {
+    // Get the place details from the autocomplete object.
+    var place = autocomplete.getPlace();
+  console.log("this is the third object")
+  console.log(place)
+    for (var component in componentForm) {
+      document.getElementById(component).value = '';
+      document.getElementById(component).disabled = false;
+    }
+
+    // Get each component of the address from the place details
+    // and fill the corresponding field on the form.
+    for (var i = 0; i < place.address_components.length; i++) {
+      var addressType = place.address_components[i].types[0];
+      if (componentForm[addressType]) {
+        var val = place.address_components[i][componentForm[addressType]];
+        document.getElementById(addressType).value = val;
+      }
+    }
+  }
+  
+  // [END region_fillform]
+
+  // [START region_geolocation]
+  // Bias the autocomplete object to the user's geographical location,
+  // as supplied by the browser's 'navigator.geolocation' object.
+  function geolocate() {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(function(position) {
+        var geolocation = new google.maps.LatLng(
+            position.coords.latitude, position.coords.longitude);
+        var circle = new google.maps.Circle({
+          center: geolocation,
+          radius: position.coords.accuracy
+        });
+        autocomplete.setBounds(circle.getBounds());
+      });
+    }
+  }
+  // [END region_geolocation]
+
+</script>
 

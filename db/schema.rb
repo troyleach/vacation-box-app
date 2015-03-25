@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150314144255) do
+ActiveRecord::Schema.define(version: 20150324195734) do
 
   create_table "accommodations", force: :cascade do |t|
     t.string   "name",        limit: 255
@@ -39,18 +39,21 @@ ActiveRecord::Schema.define(version: 20150314144255) do
   end
 
   create_table "profiles", force: :cascade do |t|
-    t.string   "first_name", limit: 255
-    t.string   "last_name",  limit: 255
-    t.string   "username",   limit: 255
-    t.string   "address",    limit: 255
-    t.string   "city",       limit: 255
-    t.string   "state",      limit: 255
-    t.integer  "zip",        limit: 4
-    t.float    "latitude",   limit: 24
-    t.float    "longitude",  limit: 24
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
-    t.integer  "user_id",    limit: 4
+    t.string   "first_name",                  limit: 255
+    t.string   "last_name",                   limit: 255
+    t.string   "username",                    limit: 255
+    t.string   "route",                       limit: 255
+    t.string   "locality",                    limit: 255
+    t.string   "administrative_area_level_1", limit: 255
+    t.integer  "postal_code",                 limit: 4
+    t.float    "latitude",                    limit: 24
+    t.float    "longitude",                   limit: 24
+    t.datetime "created_at",                              null: false
+    t.datetime "updated_at",                              null: false
+    t.integer  "user_id",                     limit: 4
+    t.string   "place_id",                    limit: 255
+    t.string   "country",                     limit: 255
+    t.string   "street_number",               limit: 255
   end
 
   create_table "users", force: :cascade do |t|

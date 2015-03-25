@@ -17,19 +17,23 @@ class VacationsController < ApplicationController
 # to make helper methods make a class then call self.'what_ever_the_method_name' then I can call
 # just the method
 
+#https://maps.googleapis.com/maps/api/place/photo?maxwidth=200&photoreference=CnRtAAAATLZNl354RwP_9UKbQ_5Psy40texXePv4oAlgP4qNEkdIrkyse7rPXYGd9D_Uj1rVsQdWT4oRz4QrYAJNpFX7rzqqMlZw2h2E2y5IKMUZ7ouD_SlcHxYq1yL4KbKUv3qtWgTK0A6QbGh87GB3sscrHRIQiG2RrmU_jF4tENr9wGS_YxoUSSDrYjWmrNfeEHSGSc3FyhNLlBU&key=AIzaSyClgAPyN1ArCGKPPQJQUt8tqBZ5KyDvDdk
 
-# chi = Unirest.get("http://maps.googleapis.com/maps/api/geocode/json?latlng=#{@profile.latitude},#{@profile.longitude}").body["results"]
+town = Unirest.get("http://maps.googleapis.com/maps/api/geocode/json?latlng=#{@profile.latitude},#{@profile.longitude}").body["results"]
+p town
 
+http://maps.googleapis.com/maps/api/geocode/json?latlng=47.6062,-122.332
 # chi.each do |key|
 #   puts key["place_id"]
 # end
 
-# @chi_place = Unirest.get("https://maps.googleapis.com/maps/api/place/details/json?placeid=ChIJgfAAC6csDogRK6Ew7nIj9ss&key=AIzaSyClgAPyN1ArCGKPPQJQUt8tqBZ5KyDvDdk")
+# @chi_place = Unirest.get("https://maps.googleapis.com/maps/api/place/details/json?placeid=ChIJ7cv00DwsDogRAMDACa2m4K8&key=AIzaSyClgAPyN1ArCGKPPQJQUt8tqBZ5KyDvDdk")
 # p @chi_place
 
-# buz =    Geocoder.search("ChIJhRwB-yFawokR5Phil-QQ3zM", :lookup => :google_places_details)
 
-  
+buz = Geocoder.search("ChIJ2YL9LrFqkFQR5JRZiYwXaIc", :lookup => :google_places_details)
+
+p buz  
     # Below can be put into a helper...
     # if @profile == nil || @profile.city == nil
     #   @current_weather = nil

@@ -18,7 +18,7 @@ class ProfilesController < ApplicationController
   def update
     @profile = Profile.find_by(:user_id => current_user.id)
     
-      @profile.update({:first_name => params[:first_name], :last_name => params[:last_name], :username => params[:username], :route => params[:route], :locality => params[:locality], :administrative_area_level_1 => params[:administrative_area_level_1], :postal_code => params[:postal_code]})
+      @profile.update({:first_name => params[:first_name], :last_name => params[:last_name], :username => params[:username], :street_number => params[:street_number], :route => params[:route], :locality => params[:locality], :administrative_area_level_1 => params[:administrative_area_level_1], :postal_code => params[:postal_code], :country => params[:country], :place_id => params[:place_id]})
 
 
     flash[:success] = "Your profile has been updated!"

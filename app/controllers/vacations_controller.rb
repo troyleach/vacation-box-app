@@ -22,7 +22,7 @@ class VacationsController < ApplicationController
 town = Unirest.get("http://maps.googleapis.com/maps/api/geocode/json?latlng=#{@profile.latitude},#{@profile.longitude}").body["results"]
 p town
 
-http://maps.googleapis.com/maps/api/geocode/json?latlng=47.6062,-122.332
+# http://maps.googleapis.com/maps/api/geocode/json?latlng=47.6062,-122.332
 # chi.each do |key|
 #   puts key["place_id"]
 # end

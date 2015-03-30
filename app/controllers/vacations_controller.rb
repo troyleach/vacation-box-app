@@ -17,9 +17,14 @@ class VacationsController < ApplicationController
 # to make helper methods make a class then call self.'what_ever_the_method_name' then I can call
 # just the method
 
-#https://maps.googleapis.com/maps/api/place/photo?maxwidth=200&photoreference=CnRtAAAATLZNl354RwP_9UKbQ_5Psy40texXePv4oAlgP4qNEkdIrkyse7rPXYGd9D_Uj1rVsQdWT4oRz4QrYAJNpFX7rzqqMlZw2h2E2y5IKMUZ7ouD_SlcHxYq1yL4KbKUv3qtWgTK0A6QbGh87GB3sscrHRIQiG2RrmU_jF4tENr9wGS_YxoUSSDrYjWmrNfeEHSGSc3FyhNLlBU&key=AIzaSyClgAPyN1ArCGKPPQJQUt8tqBZ5KyDvDdk
+#https://maps.googleapis.com/maps/api/place/photo?maxwidth=200&photoreference=CpQBggAAAC96VMxadlDx6-6N4yECVhYxBCvVGeceYtpYT-YaSWpuNsaHtAmo_vLzFbsDU9sjBaZhZycj4ymMZSl3-9tZC271i6fQjWCCMNgXFWOOZDvFG0WIuIEuVIGw9iVAeMERQAOHJIKOWRAm51ar2QHk3CnVlGY4HEDY21zUgUBTI3dcFkYf2Q9NeDqkhsmjgLRPbhIQrUIgSudcu20gtyO5Mvo_xBoUKDxriTWJFQUJfAPpUmrNfUvjC7I&key=AIzaSyClgAPyN1ArCGKPPQJQUt8tqBZ5KyDvDdk
 
-town = Unirest.get("http://maps.googleapis.com/maps/api/geocode/json?latlng=#{@profile.latitude},#{@profile.longitude}").body["results"]
+# https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=38.9072,-77.0369&radius=8100&key=AIzaSyClgAPyN1ArCGKPPQJQUt8tqBZ5KyDvDdk
+
+# below places details requests - should have up to 10 pics
+#https://maps.googleapis.com/maps/api/place/details/json?placeid=ChIJW-T2Wt7Gt4kRKl2I1CJFUsI&key=AIzaSyClgAPyN1ArCGKPPQJQUt8tqBZ5KyDvDdk
+
+town = Unirest.get("http://maps.googleapis.com/maps/api/geocode/json?latlng=#{@profile.latitude},#{@profile.longitude}").body
 p town
 
 # http://maps.googleapis.com/maps/api/geocode/json?latlng=47.6062,-122.332
@@ -31,7 +36,7 @@ p town
 # p @chi_place
 
 
-buz = Geocoder.search("ChIJ2YL9LrFqkFQR5JRZiYwXaIc", :lookup => :google_places_details)
+buz = Geocoder.search("ChIJQWCpdNPJt4kRKEyYsFP8Z60", :lookup => :google_places_details)
 
 p buz  
     # Below can be put into a helper...

@@ -2,195 +2,209 @@
 
 <script src='//google-maps-utility-library-v3.googlecode.com/svn/tags/markerclustererplus/2.0.14/src/markerclusterer_packed.js' type='text/javascript'></script>
 
+
 <!-- I have a shit ton of logic in this view... need to get it outta here!!! -->
+<div ng-app="app">
+  {{ 1 + 1 }}
+<div ng-controller="vacationsCtrl">
+<div id="div-lat-lng" lat="<%= @profile.latitude %>" lng="<%= @profile.longitude %>"></div>
+{{ lat }}
+{{lng}}
 
-<div class="new_vacation_link">
-  <a href='<%= new_vacation_path %>'>- Create a vacation -</a>
-</div>
+    <div class="new_vacation_link">
+      <a href='<%= new_vacation_path %>'>- Create a vacation -</a>
+    </div>
 
-<section class"section_one">
-  <div class="body_one row">
-    <div class="message_center_box col-md-6"><p class="lounge_title">Community Lounge</p>
-      <p>Ask a question:</p>
-        <table border="0" class="message_center_table">
-        <%= form_tag "/messages" do %>
-          <tr class="message_table_row">
-            <td class="message_talbe_col_text" valign="top">
-              <%= image_tag current_user.gravatar_url,  :class => "gravatar_image" %>
-              <% if @profile == nil || @profile.username == nil  %>
-                <p>user name</p>
-              <% else %>
-                <p class="message_user_name"><%= @profile.username %></p>
-                <p class="message_date"><%= @helper.today %></p>
+    <section class"section_one">
+      <div class="body_one row">
+        <div class="message_center_box col-md-6"><p class="lounge_title">Community Lounge</p>
+          <p>Ask a question:</p>
+            <table border="0" class="message_center_table">
+            <%= form_tag "/messages" do %>
+              <tr class="message_table_row">
+                <td class="message_talbe_col_text" valign="top">
+                  <%= image_tag current_user.gravatar_url,  :class => "gravatar_image" %>
+                  <% if @profile == nil || @profile.username == nil  %>
+                    <p>user name</p>
+                  <% else %>
+                    <p class="message_user_name"><%= @profile.username %></p>
+                    <p class="message_date"><%= @helper.today %></p>
+                  <% end %>
+                </td>
+                <td class="message_talbe_col">
+                  <div class="bubble">
+                  <p class="message_title">
+                    <%= text_field_tag :title, "Title" %>
+                  </p>
+                  <p class ="message_post_message">
+                    <%=text_area_tag :message, 'Type message here', :size => "40x3" %>
+                  </p>
+                  <p class ="message_reply"><%= submit_tag "Post", :class => "btn btn-warning"%></p>
+                  </div>
+                </td>
+              </tr>
               <% end %>
-            </td>
-            <td class="message_talbe_col">
-              <div class="bubble">
-              <p class="message_title">
-                <%= text_field_tag :title, "Title" %>
-              </p>
-              <p class ="message_post_message">
-                <%=text_area_tag :message, 'Type message here', :size => "40x3" %>
-              </p>
-              <p class ="message_reply"><%= submit_tag "Post", :class => "btn btn-warning"%></p>
-              </div>
-            </td>
-          </tr>
-          <% end %>
-        </table>
-        
-        <% if @profile == nil || @profile.id == nil  %>
-          <p>update your profile</p>
-        <% else %>
-          <% @message_count = [] %>
-          <% @replies_count = [] %>
-          <% @replies_count_one = [] %>
-          <% @messages.each do |key, value| %>
-            <% @message_count << key.profile_id if key.profile_id == @profile.id %>
-            <% @replies_count << key.replies if key.profile_id == @profile.id %>
-          <% end %>
+            </table>
+            
+            <% if @profile == nil || @profile.id == nil  %>
+              <p>update your profile</p>
+            <% else %>
+              <% @message_count = [] %>
+              <% @replies_count = [] %>
+              <% @replies_count_one = [] %>
+              <% @messages.each do |key, value| %>
+                <% @message_count << key.profile_id if key.profile_id == @profile.id %>
+                <% @replies_count << key.replies if key.profile_id == @profile.id %>
+              <% end %>
 
-          <% @replies_count.each do |replies| %>
-            <% @replies_count_one << replies.size %>
-          <% end %>
+              <% @replies_count.each do |replies| %>
+                <% @replies_count_one << replies.size %>
+              <% end %>
 
-      
+          
 
-          <% if @m_count ==  "null"
-             @m_count = 0
-             @r_count = 0
-           elsif @m_count && @r_count == "null"
-             @m_count = @message_count.size
-             @r_count = 0
-           else
-            @m_count = @message_count.size
-            @r_count = @replies_count_one.inject(:+)
-           end
-             %>
-        <% end %>
-        <p class="general_text">You have a total of: | <span><%= @m_count %> posts</span> | <span><%= @r_count %> replies</span></p>
-<hr>
+              <% if @m_count ==  "null"
+                 @m_count = 0
+                 @r_count = 0
+               elsif @m_count && @r_count == "null"
+                 @m_count = @message_count.size
+                 @r_count = 0
+               else
+                @m_count = @message_count.size
+                @r_count = @replies_count_one.inject(:+)
+               end
+                 %>
+            <% end %>
+            <p class="general_text">You have a total of: | <span><%= @m_count %> posts</span> | <span><%= @r_count %> replies</span></p>
+    <hr>
 <!-- really.. get rid of the code below.. HACK job -->
-      <% link = "a" %>
-      
-      <% @messages = @messages.sort { |a, b| b.created_at <=> a.created_at } %>
-      <% @messages.each do |message| %>
-        <% user = @user_profile.find(message.profile_id) %>
-        <% user_email = @users.find(user.user_id) %>
-        <% replies_count = message.replies.size %>
-        
-        <table border="0" class="message_center_table">
-          <tr class="message_table_row">
-            <td class="message_talbe_col_text" valign="top">
-              <%= image_tag user_email.gravatar_url,  :class => "gravatar_image" %>
-              <p class="message_user_name"><%= user.username %></p>
-              <p class="message_date"><%= @helper.convert_date(message.created_at) %></p>
-            </td>
-            <td class="message_talbe_col">
-              <div class="bubble">
+          <% link = "a" %>
+          
+          <% @messages = @messages.sort { |a, b| b.created_at <=> a.created_at } %>
+          <% @messages.each do |message| %>
+            <% user = @user_profile.find(message.profile_id) %>
+            <% user_email = @users.find(user.user_id) %>
+            <% replies_count = message.replies.size %>
+            
+            <table border="0" class="message_center_table">
+              <tr class="message_table_row">
+                <td class="message_talbe_col_text" valign="top">
+                  <%= image_tag user_email.gravatar_url,  :class => "gravatar_image" %>
+                  <p class="message_user_name"><%= user.username %></p>
+                  <p class="message_date"><%= @helper.convert_date(message.created_at) %></p>
+                </td>
+                <td class="message_talbe_col">
+                  <div class="bubble">
 <!-- replies COUNT -->
-              <p class="message_title"><%= message.title %> <span class="reply_count"><%= replies_count %> replies</span></p>
-              <p class ="message_message"><%= message.message %></p>
+                  <p class="message_title"><%= message.title %> <span class="reply_count"><%= replies_count %> replies</span></p>
+                  <p class ="message_message"><%= message.message %></p>
 
 <!-- the below div tag, message_replies, not sure where the end is for this -->
-                <div class="message_replies">
-                  <span class="reply_button" data-toggle="collapse" data-target="#<%= message.id %>" aria-expanded="false" aria-controls="<%= message.id %>">
-                    <p class ="message_reply"><span class="caret"></span>  See <span class="message_reply_button">replies</span></p>
-                  </span>
-                  <div class="collapse" id="<%= message.id %>">
-                    <div class="well">
-                    <% message.replies.each do |reply| %>
-                    <% reply_user_name = @user_profile.find(reply["profile_id"]) %>
-                        <hr class="reply_hr">
-                        <p class="reply_from">From: <%= reply_user_name.username %></p>
-                        <p class="reply_date"><%= @helper.convert_date(reply["created_at"]) %></p>
-                        <p class="reply_text"><%= reply["reply"] %></p>
-                    <% end %>
-                      </div>
-                    </div>
-                  </div>
-<!-- responded to messages (i think to get this working, each inside a each) -->
-<!-- THIS IS THE POST TO A REPLY BUTTON -->
-                    <span data-toggle="collapse" data-target="#<%= link %>" aria-expanded="false" aria-controls="<%= link %>">
-                      <p class ="message_reply"><span class="caret"></span> Replay to <span class="message_reply_button"><%= user.username %></span></p>
-                    </span>
-                    <div class="collapse" id="<%= link %>">
-                      <div class="post_box">
-                        <%= form_tag "/replies" do %>
-                        <%=text_area_tag :reply, 'Type message here', :size => "40x3" %>
-                        <%= hidden_field_tag :message_id, message.id %>
-                        <p class ="message_reply"><%= submit_tag "Post", :class => "btn btn-warning"%></p>
-                        <% link.next! %>
+                    <div class="message_replies">
+                      <span class="reply_button" data-toggle="collapse" data-target="#<%= message.id %>" aria-expanded="false" aria-controls="<%= message.id %>">
+                        <p class ="message_reply"><span class="caret"></span>  See <span class="message_reply_button">replies</span></p>
+                      </span>
+                      <div class="collapse" id="<%= message.id %>">
+                        <div class="well">
+                        <% message.replies.each do |reply| %>
+                        <% reply_user_name = @user_profile.find(reply["profile_id"]) %>
+                            <hr class="reply_hr">
+                            <p class="reply_from">From: <%= reply_user_name.username %></p>
+                            <p class="reply_date"><%= @helper.convert_date(reply["created_at"]) %></p>
+                            <p class="reply_text"><%= reply["reply"] %></p>
                         <% end %>
+                          </div>
+                        </div>
                       </div>
-                    </div>  
+<!-- THIS IS THE POST TO A REPLY BUTTON -->
+                        <span data-toggle="collapse" data-target="#<%= link %>" aria-expanded="false" aria-controls="<%= link %>">
+                          <p class ="message_reply"><span class="caret"></span> Replay to <span class="message_reply_button"><%= user.username %></span></p>
+                        </span>
+                        <div class="collapse" id="<%= link %>">
+                          <div class="post_box">
+                            <%= form_tag "/replies" do %>
+                            <%=text_area_tag :reply, 'Type message here', :size => "40x3" %>
+                            <%= hidden_field_tag :message_id, message.id %>
+                            <p class ="message_reply"><%= submit_tag "Post", :class => "btn btn-warning"%></p>
+                            <% link.next! %>
+                            <% end %>
+                          </div>
+                        </div>  
 
-              </div>
-            </td>
-          </tr>
-        </table>
-      <% end %>
-    </div>
-
-    
-    <div class="places_been col-md-6">
-      
-      <div>
-      <span>HOME</span> <img src="http://chart.apis.google.com/chart?chst=d_map_xpin_icon_withshadow&chld=pin_sright|home|C9DE55|FCFAE1" alt="">
-      <span>Places Going</span> <img src="http://chart.apis.google.com/chart?chst=d_map_xpin_letter_withshadow&chld=pin_star|G|B9121B|FCFAE1|FCFAE1" alt="Places going pin">
-      <span>Places Been</span> <img src="https://chart.googleapis.com/chart?chst=d_map_pin_letter_withshadow&chld=B|E6E2AF|046380" alt="Places I've been pin">
-      <span>Cluster of pins</span> <img src="http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerclusterer/images/m1.png" alt="Image of cluster">
-        <div id="map" style='width: 100%; height: 300px;'></div>
-      </div>
-      <p>Keep track of the places you have traveled. Simply type in the city and a description and click 'pin it'.</p>
-      <%= form_tag '/place_beens' do %>
-        <div class="places_been_form">
-          <%= text_field_tag :address, 'City, state, address', :class => "been_address", :style => "background: #849696;" %>
-          <%= text_field_tag :description, 'Brief description', :class => "been_description", :style => "background: #849696;" %>
-          <%= text_field_tag :title, 'Title of the vacation', :class => "been_title", :style => "background: #849696;" %>
-          <%= submit_tag "Pin it" %>
+                  </div>
+                </td>
+              </tr>
+            </table>
+          <% end %>
         </div>
-      <% end %>
 
-    </div>
-  </div>
-</section>
+        
+        <div class="places_been col-md-6">
+          
+          <div>
+          <span>HOME</span> <img src="http://chart.apis.google.com/chart?chst=d_map_xpin_icon_withshadow&chld=pin_sright|home|C9DE55|FCFAE1" alt="">
+          <span>Places Going</span> <img src="http://chart.apis.google.com/chart?chst=d_map_xpin_letter_withshadow&chld=pin_star|G|B9121B|FCFAE1|FCFAE1" alt="Places going pin">
+          <span>Places Been</span> <img src="https://chart.googleapis.com/chart?chst=d_map_pin_letter_withshadow&chld=B|E6E2AF|046380" alt="Places I've been pin">
+          <span>Cluster of pins</span> <img src="http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerclusterer/images/m1.png" alt="Image of cluster">
+            <div id="map" style='width: 100%; height: 300px;'></div>
+          </div>
+          <p>Keep track of the places you have traveled. Simply type in the city and a description and click 'pin it'.</p>
+          <%= form_tag '/place_beens' do %>
+            <div class="places_been_form">
+              <%= text_field_tag :address, 'City, state, address', :class => "been_address", :style => "background: #849696;" %>
+              <%= text_field_tag :description, 'Brief description', :class => "been_description", :style => "background: #849696;" %>
+              <%= text_field_tag :title, 'Title of the vacation', :class => "been_title", :style => "background: #849696;" %>
+              <%= submit_tag "Pin it" %>
+            </div>
+          <% end %>
 
-<section class"section_two">
-  <div class="body_two row">
-    <div class="home_city_box col-md-6">
-    <h4 class="home_city_title">Home city</h4>
-      <div class="row">
-        <!-- look a this website. I googled chi town, then clicked on the image and it took me here the bottom code needs to be from google api / image -->
-        <div class="col-md-6"><img src="http://wwp.greenwichmeantime.com/time-zone/usa/illinois/images/chicago-illinois.jpg" alt="Chicago image" width="250"></div>
-          <div id="map-canvas" class="col-md-6"></div>
-      </div>      
-    </div>
-    <div class="weather  col-md-6">
-    <h4 class="home_city_title">Local Weather</h4>
-    <% if @profile == nil || @profile.locality == nil  %>
-    <p>- Current Weather -</p>
-      <a href="/profiles/<%= current_user.id %>/edit"><p class="no_profile">- Please update your profile -</p></a>
-    <% else %>
-      Weather bug goes here
-      <% end %>
-    </div>
-  </div>
-</section>
-  
-<h4>Saved Vacation</h4>
-<%= @chi_place %>
+        </div>
+      </div>
+    </section>
 
-<section class"section_three">
-  <div class="body_three row">
-    <div class="chat_box col-md-3"><h1>Saved vacation</h1></div>
-    <div class="places_been col-md-3"><h1>Saved vacation</h1></div>
-    <div class="places_been col-md-3"><h1>Saved vacation</h1></div>
-    <div class="places_been col-md-3"><h1>Saved vacation</h1></div>
-  </div>
-</section>
+    <section class"section_two">
+      <div class="body_two row">
+        <div class="home_city_box col-md-6">
+        <h4 class="home_city_title">Home city</h4>
+          <div class="row">
+            <!-- look a this website. I googled chi town, then clicked on the image and it took me here the bottom code needs to be from google api / image -->
+            <div class="col-md-6">
+<!-- PICTURE -->
+              <div id="wapiblock"></div>
+              
+<!--#{@profile.longitude}]  -->
+            </div>
+              <div id="map-canvas" class="col-md-6"></div>
+          </div>      
+        </div>
+        <div class="weather  col-md-6">
+        <h4 class="home_city_title">Local Weather</h4>
+        <% if @profile == nil || @profile.locality == nil  %>
+        <p>- Current Weather -</p>
+          <a href="/profiles/<%= current_user.id %>/edit"><p class="no_profile">- Please update your profile -</p></a>
+        <% else %>
+          Weather bug goes here
+          <% end %>
+        </div>
+      </div>
+    </section>
+      
+    <h4>Saved Vacation</h4>
+    
 
-<%= @profile.inspect %>
+    <section class"section_three">
+      <div class="body_three row">
+        <div class="chat_box col-md-3"><h1>Saved vacation</h1></div>
+        <div class="places_been col-md-3"><h1>Saved vacation</h1></div>
+        <div class="places_been col-md-3"><h1>Saved vacation</h1></div>
+        <div class="places_been col-md-3"><h1>Saved vacation</h1></div>
+      </div>
+    </section>
+
+  </div><!-- End of ng-app -->
+</div><!-- End of ng-controller -->
+
+
 
 <script type="text/javascript">
   handler = Gmaps.build('Google');
@@ -209,8 +223,12 @@
     // handler.fitMapToBounds();
   });
 
+
+
 </script>
 
+
+<!-- this is the map for the city location, need to take away the zoom function -->
 <% if @profile.latitude == nil %>
   <script type="text/javascript">
     var map;  
@@ -269,3 +287,7 @@
 </script>
 
 <% end %>
+
+<script type="text/javascript">
+  
+</script>

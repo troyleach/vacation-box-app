@@ -12,7 +12,7 @@ end
 
 
 # => weather app embed
-<iframe id="forecast_embed" class="weather_iframe" type="text/html" frameborder="0" height="60" width="100%" src="http://forecast.io/embed/#lat=<%= @profile.latitude %>&lon=<%= @profile.longitude %>&name=<%= @profile.city %>"> </iframe>
+<iframe id="forecast_embed" class="weather_iframe" type="text/html" frameborder="0" height="60" width="100%" src="http://forecast.io/embed/#lat=<%= @profile.latitude %>&lon=<%= @profile.longitude %>&name=<%= @profile.locality %>"> </iframe>
 
 
 def dayOfWeek

@@ -29,6 +29,9 @@ gem 'geocoder'
 # Google-Maps-for-Rails-2.0
 gem 'gmaps4rails'
 
+#
+gem 'dotenv-rails'
+
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'

@@ -4,11 +4,11 @@
 
 // this needs to move
 #map-canvas {
-  height: 200px;
+  height: 250px;
   width: 250px;
-  margin: 0px;
-  padding: 0px
 }
+
+
 // ********  ***********
 
 section {
@@ -20,8 +20,15 @@ section {
   text-align: center;
   font-weight: 900;
   font-size: 1.8em;
+  padding: 15px;
+}
+
+.new_vacation_link a {
+  color: #232d33;
+}
+
+.new_vacation_link a:hover {
   color: #ff972c;
-  padding: 5px;
 }
 
 .lounge_title {
@@ -31,12 +38,9 @@ section {
   padding-top: 5px;
 }
 
-.new_vacation_link a {
-  color: #232d33;
-}
 
 .body_one {
-  border: 1px solid blue;
+  border: none;
   height: 450px;
 }
 
@@ -70,6 +74,25 @@ section {
 // look in my google_maps branch and see how big I made the box, it seems that it just fit the box provided
 #map-canvas {
   border: 1px solid black;
+}
+
+.been_address {
+  width: 150px;
+}
+
+#address {
+  width: 200px;
+  border: 1px solid #000090;
+}
+
+#description {
+  width: 150px;
+  border: 1px solid #000090;
+}
+
+.been_title {
+  width: 150px;
+  border: 1px solid #000090;
 }
 
 
@@ -174,4 +197,10 @@ p.message_date {
 
 .home_city_title {
   border-bottom: 1px solid black;
+}
+
+.section_three {
+  border: none;
+  padding-top: 5px;
+  padding-bottom: 5px;
 }

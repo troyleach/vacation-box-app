@@ -30,7 +30,7 @@ var photoOptions = {
 var wapiblock = document.getElementById('wapiblock');
 var widget = new panoramio.PhotoWidget(wapiblock, myRequest, photoOptions);
 widget.setPosition(0);
-console.log(widget);
+
 }
 
 window.addEventListener('load', setup, false);

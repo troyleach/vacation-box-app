@@ -97,13 +97,14 @@
     <% end %>
   </div><!-- End of row -->
 
+  
   <body onload="initialize()">
-    <div id="locationField">
-      <input id="autocomplete" placeholder="Enter your address"
+    <div id="profileLocationField">
+      <input id="autocompleteT" placeholder="Enter your address"
              onFocus="geolocate()" type="text"></input>
     </div>
-
-    <table id="address">
+  </body>
+    <!-- <table id="address">
       <tr>
         <td class="label">Street address</td>
         <td class="slimField"><input class="field" id="street_number"
@@ -126,23 +127,23 @@
       </tr>
       <tr>
         <td class="label">Country</td>
-        <td class="wideField" colspan="3"><input class="field"
-              id="country" disabled="true"></input></td>
+        <td class="wideField" colspan="3"><input class="tfield"
+              id="profileCountry" disabled="true"></input></td>
       </tr>
       <tr>
         <td class="label">Place ID</td>
         <td class="wideField" colspan="3"><input class="field"
               id="place_id"></input></td>
       </tr>
-    </table>
-  </body>
+    </table> -->
+  
 
 
 <script>
   // This example displays an address form, using the autocomplete feature
   // of the Google Places API to help users fill in the information.
 
-  var placeSearch, autocomplete;
+  var placeSearch, autocompleteT;
   var componentForm = {
     street_number: 'short_name',
     route: 'long_name',
@@ -157,21 +158,21 @@
   function initialize() {
     // Create the autocomplete object, restricting the search
     // to geographical location types.
-    autocomplete = new google.maps.places.Autocomplete(
-        /** @type {HTMLInputElement} */(document.getElementById('autocomplete')),
+    autocompleteT = new google.maps.places.Autocomplete(
+        /** @type {HTMLInputElement} */(document.getElementById('autocompleteT')),
         { types: ['geocode'] });
     // When the user selects an address from the dropdown,
     // populate the address fields in the form.
-    google.maps.event.addListener(autocomplete, 'place_changed', function() {
+    google.maps.event.addListener(autocompleteT, 'place_changed', function() {
       fillInAddress();
     });
   }
   console.log("this is the second object")
-  console.log(autocomplete)
+  console.log(autocompleteT)
   // [START region_fillform]
   function fillInAddress() {
     // Get the place details from the autocomplete object.
-    var place = autocomplete.getPlace();
+    var place = autocompleteT.getPlace();
 
 
 console.log("this is the third object")
@@ -210,11 +211,11 @@ console.log(place)
           center: geolocation,
           radius: position.coords.accuracy
         });
-        autocomplete.setBounds(circle.getBounds());
+        autocompleteT.setBounds(circle.getBounds());
       });
     }
   }
   // [END region_geolocation]
-
+  
 </script>
 

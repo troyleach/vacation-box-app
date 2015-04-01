@@ -1,18 +1,18 @@
 
 
 <script src='//google-maps-utility-library-v3.googlecode.com/svn/tags/markerclustererplus/2.0.14/src/markerclusterer_packed.js' type='text/javascript'></script>
+<script src="/assets/sitewide/points_of_interest.js" type="text/javascript"></script>
 
 
 <!-- I have a shit ton of logic in this view... need to get it outta here!!! -->
 <div ng-app="app">
-  {{ 1 + 1 }}
+  
 <div ng-controller="vacationsCtrl">
 <div id="div-lat-lng" lat="<%= @profile.latitude %>" lng="<%= @profile.longitude %>"></div>
-{{ lat }}
-{{lng}}
+
 
     <div class="new_vacation_link">
-      <a href='<%= new_vacation_path %>'>- Create a vacation -</a>
+      <a href='<%= new_vacation_path %>'>- Create a new vacation -</a>
     </div>
 
     <section class"section_one">
@@ -118,7 +118,7 @@
                       </div>
 <!-- THIS IS THE POST TO A REPLY BUTTON -->
                         <span data-toggle="collapse" data-target="#<%= link %>" aria-expanded="false" aria-controls="<%= link %>">
-                          <p class ="message_reply"><span class="caret"></span> Replay to <span class="message_reply_button"><%= user.username %></span></p>
+                          <p class ="message_reply"><span class="caret"></span>Reply to <span class="message_reply_button"><%= user.username %></span></p>
                         </span>
                         <div class="collapse" id="<%= link %>">
                           <div class="post_box">
@@ -151,9 +151,9 @@
           <p>Keep track of the places you have traveled. Simply type in the city and a description and click 'pin it'.</p>
           <%= form_tag '/place_beens' do %>
             <div class="places_been_form">
-              <%= text_field_tag :address, 'City, state, address', :class => "been_address", :style => "background: #849696;" %>
-              <%= text_field_tag :description, 'Brief description', :class => "been_description", :style => "background: #849696;" %>
-              <%= text_field_tag :title, 'Title of the vacation', :class => "been_title", :style => "background: #849696;" %>
+              <%= text_field_tag :address, nil, :placeholder => 'City or Address', :class => "been_address", :style => "background: #849696;, width: 100px;" %>
+              <%= text_field_tag :description, nil, :placeholder => 'Brief description', :class => "been_description", :style => "background: #849696;" %>
+              <%= text_field_tag :title, nil, :placeholder => 'Title of the vacation', :class => "been_title", :style => "background: #849696;" %>
               <%= submit_tag "Pin it" %>
             </div>
           <% end %>
@@ -172,7 +172,7 @@
 <!-- PICTURE -->
               <div id="wapiblock"></div>
               
-<!--#{@profile.longitude}]  -->
+<!--  -->
             </div>
               <div id="map-canvas" class="col-md-6"></div>
           </div>      
@@ -183,22 +183,90 @@
         <p>- Current Weather -</p>
           <a href="/profiles/<%= current_user.id %>/edit"><p class="no_profile">- Please update your profile -</p></a>
         <% else %>
-          Weather bug goes here
-          <% end %>
+          
+        <% end %>
         </div>
       </div>
     </section>
-      
-    <h4>Saved Vacation</h4>
-    
 
-    <section class"section_three">
-      <div class="body_three row">
-        <div class="chat_box col-md-3"><h1>Saved vacation</h1></div>
-        <div class="places_been col-md-3"><h1>Saved vacation</h1></div>
-        <div class="places_been col-md-3"><h1>Saved vacation</h1></div>
-        <div class="places_been col-md-3"><h1>Saved vacation</h1></div>
-      </div>
+<!-- POINT OF INTERESTS  -->
+    <h4>Points of Interest</h4>
+    <section>
+    
+      <div class="row section_three">
+        <div class="col-md-4">
+          <div id="findhotels">
+            Interests:
+          </div>
+          
+          <div id="locationField">
+            <input id="autocomplete" placeholder="Enter a city" type="text" />
+          </div>
+
+          <div id="controls">
+            <select id="country">
+              <option value="all">All</option>
+              <option value="au">Australia</option>
+              <option value="br">Brazil</option>
+              <option value="ca">Canada</option>
+              <option value="fr">France</option>
+              <option value="de">Germany</option>
+              <option value="mx">Mexico</option>
+              <option value="nz">New Zealand</option>
+              <option value="it">Italy</option>
+              <option value="za">South Africa</option>
+              <option value="es">Spain</option>
+              <option value="pt">Portugal</option>
+              <option value="us" selected>U.S.A.</option>
+              <option value="uk">United Kingdom</option>
+            </select>
+
+            <!-- <select id="placeType">
+              <option value="all">All</option>
+              <option value="restaurant">Restaurant</option>
+              <option value="lodging">Lodging</option>
+            </select> -->
+          </div>
+
+          <div id="map-canvas-interests"></div>
+
+        </div><!-- END OF FIRST BOX  -->
+
+        <div class="point_interest_box_two col-md-4">  
+          <div id="listing">
+            <table id="resultsTable">
+              <tbody id="results"></tbody>
+            </table>
+          </div>
+
+          <div id="info-content">
+            <table>
+              <tr id="iw-url-row" class="iw_table_row">
+                <td id="iw-icon" class="iw_table_icon"></td>
+                <td id="iw-url"></td>
+              </tr>
+              <tr id="iw-address-row" class="iw_table_row">
+                <td class="iw_attribute_name">Address:</td>
+                <td id="iw-address"></td>
+              </tr>
+              <tr id="iw-phone-row" class="iw_table_row">
+                <td class="iw_attribute_name">Telephone:</td>
+                <td id="iw-phone"></td>
+              </tr>
+              <tr id="iw-rating-row" class="iw_table_row">
+                <td class="iw_attribute_name">Rating:</td>
+                <td id="iw-rating"></td>
+              </tr>
+              <tr id="iw-website-row" class="iw_table_row">
+                <td class="iw_attribute_name">Website:</td>
+                <td id="iw-website"></td>
+              </tr>
+            </table>
+          </div>
+        </div><!-- END OF SECOND BOX  -->
+          
+        <div class="col-md-4"><!-- nothing in this box --></div>
+      </div><!-- end of the row div -->
     </section>
 
   </div><!-- End of ng-app -->
@@ -258,36 +326,38 @@
 </script>
   
 <% else %>
-<script type="text/javascript">
-  var map;
-    var intiallat = <%= @profile.latitude %>;
-    var intiallong = <%= @profile.longitude %>;
-    
-    if (intiallat === "") {
-      intiallat = 39.7392;
-      intiallong = -104.99;
+  <script type="text/javascript">
+    var map;
+      var intiallat = <%= @profile.latitude %>;
+      var intiallong = <%= @profile.longitude %>;
+      
+      if (intiallat === "") {
+        intiallat = 39.7392;
+        intiallong = -104.99;
+      }
+    var myLatLong = new google.maps.LatLng(intiallat,intiallong);
+
+    function initialize() {
+      var mapOptions = {
+        zoom: 9,
+        center: myLatLong,
+        disableDefaultUI: true
+      };
+      map = new google.maps.Map(document.getElementById('map-canvas'),
+          mapOptions);
+
+      var marker = new google.maps.Marker({
+          position: myLatLong,
+          map: map,
+          title:"Hello World!"
+      });
     }
-  var myLatLong = new google.maps.LatLng(intiallat,intiallong);
-
-  function initialize() {
-    var mapOptions = {
-      zoom: 8,
-      center: myLatLong
-    };
-    map = new google.maps.Map(document.getElementById('map-canvas'),
-        mapOptions);
-
-    var marker = new google.maps.Marker({
-        position: myLatLong,
-        map: map,
-        title:"Hello World!"
-    });
-  }
-  google.maps.event.addDomListener(window, 'load', initialize);
-</script>
+    google.maps.event.addDomListener(window, 'load', initialize);
+  </script>
 
 <% end %>
 
+<!-- Points of interest -->
 <script type="text/javascript">
   
 </script>

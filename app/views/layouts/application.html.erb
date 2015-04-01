@@ -2,15 +2,16 @@
 <html>
 <head>
   <title>VacationBoxApp</title>
+  <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?libraries=places&sensor=true_or_false"></script>
   
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
   
-  <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?libraries=places&sensor=true_or_false"></script>
   <link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500">
   <link rel="shortcut icon" type="image/x-icon" href="/img/favicon.ico" />
   <script type="text/javascript" src="http://www.panoramio.com/wapi/wapi.js?v=1"></script>
+  
 </head>
 <body>
   <% if user_signed_in? %>
@@ -23,15 +24,16 @@
               <div class="first_menu col-md-4">
                 <ul>
                   <li><a href="/">Home Dashboard |</a></li>
-                  <li>Local time:</li>
+                  <li class="date_time">Local time: <%= @helper.time_date %></li>
                 </ul>
               </div>
             
               <div class="main_logo col-md-4">
+             
               <% if @profile == nil || @profile.locality == nil  %>
               <a href="/profiles/<%= current_user.id %>/edit"><p>- Please update your profile -</p></a>
               <% else %>
-              <p>- <%= @profile.locality %> -</p>
+              <p>- <%= @page_title %> -</p>
               <% end %>
               
               </div>
@@ -69,8 +71,12 @@
                 <ul>
                   <li>Saved Vacations <span class="caret"></span>
                     <ul>
-                      <% @vacations.each do |vacation_name| %>
-                      <li><a href="/vacations/<%= vacation_name.id %>"><%= vacation_name.vacation_name %></a></li>
+                      <% if @vacations != [] %>
+                        <% @vacations.each do |vacation_name| %>
+                            <li><a href="/vacations/<%= vacation_name.id %>"><%= vacation_name.vacation_name %></a></li>
+                        <% end %>
+                      <% else %>
+                        <li><a href='<%= new_vacation_path %>'>- Create a vacation -</a></li>
                       <% end %>
                     </ul>
                   </li>
@@ -82,7 +88,12 @@
               </div>
 
             <div class="app_alerts col-md-4">
-              put my alerts here....
+              <% flash.each do |name, message| %>
+                <div class="alert alert-<%= name %>" role="alert">
+                  <button type="button" class="close" data-dismiss="alert"></button>
+                  <%= message %>
+                </div>
+              <% end %>
             </div>
             <div class="points_of_interest col-md-4">
               <div class="dropdown">
@@ -112,16 +123,17 @@
   <% end %>
   <div class="container">
 
-  <% flash.each do |name, message| %>
-    <div class="alert alert-<%= name %> alert-dismissible" role="alert">
-      <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-      <%= message %>
-    </div>
-  <% end %>
+  
 
   <%= yield %>
 
+
+
 </div><!-- End of container -->
+
+<footer>
+  <p>Copyright <%= Time.now.year %></p>
+</footer>
 
 </body>
 </html>

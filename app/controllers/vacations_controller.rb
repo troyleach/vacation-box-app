@@ -1,10 +1,6 @@
 class VacationsController < ApplicationController
-#  # Unirest.get("https://api.forecast.io/forecast/43b5d766e91f96d89c060b58e2c71a01/38.8899,-77.009") DC
-#  # ForecastIO.api_key = '43b5d766e91f96d89c060b58e2c71a01'
 
   def index
-#    #@profile = current_profile.first_name
-#    ForecastIO.api_key = '43b5d766e91f96d89c060b58e2c71a01'
     @helper       = Vacation.new
     @vacations    = Vacation.where({:user_id => current_user.id})
     @user_profile = Profile.all 
@@ -12,44 +8,43 @@ class VacationsController < ApplicationController
     @places_been  = PlaceBeen.where(:user_id => current_user.id)
     @messages     = Message.all
     @users        = User.all
+    @page_title   = @profile.locality
 
 
 # to make helper methods make a class then call self.'what_ever_the_method_name' then I can call
 # just the method
 
-#https://maps.googleapis.com/maps/api/place/photo?maxwidth=200&photoreference=CpQBggAAAC96VMxadlDx6-6N4yECVhYxBCvVGeceYtpYT-YaSWpuNsaHtAmo_vLzFbsDU9sjBaZhZycj4ymMZSl3-9tZC271i6fQjWCCMNgXFWOOZDvFG0WIuIEuVIGw9iVAeMERQAOHJIKOWRAm51ar2QHk3CnVlGY4HEDY21zUgUBTI3dcFkYf2Q9NeDqkhsmjgLRPbhIQrUIgSudcu20gtyO5Mvo_xBoUKDxriTWJFQUJfAPpUmrNfUvjC7I&key=AIzaSyClgAPyN1ArCGKPPQJQUt8tqBZ5KyDvDdk
+#https://maps.googleapis.com/maps/api/place/photo?maxwidth=200&photoreference=CpQBggAAAC96VMxadlDx6-6N4yECVhYxBCvVGeceYtpYT-YaSWpuNsaHtAmo_vLzFbsDU9sjBaZhZycj4ymMZSl3-9tZC271i6fQjWCCMNgXFWOOZDvFG0WIuIEuVIGw9iVAeMERQAOHJIKOWRAm51ar2QHk3CnVlGY4HEDY21zUgUBTI3dcFkYf2Q9NeDqkhsmjgLRPbhIQrUIgSudcu20gtyO5Mvo_xBoUKDxriTWJFQUJfAPpUmrNfUvjC7I&key=KEY
 
-# https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=38.9072,-77.0369&radius=8100&key=AIzaSyClgAPyN1ArCGKPPQJQUt8tqBZ5KyDvDdk
+# https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=38.9072,-77.0369&radius=8100&key=#{ENV['GOOGLE_API_KEY']
 
 # below places details requests - should have up to 10 pics
-#https://maps.googleapis.com/maps/api/place/details/json?placeid=ChIJW-T2Wt7Gt4kRKl2I1CJFUsI&key=AIzaSyClgAPyN1ArCGKPPQJQUt8tqBZ5KyDvDdk
+#https://maps.googleapis.com/maps/api/place/details/json?placeid=ChIJW-T2Wt7Gt4kRKl2I1CJFUsI&key=#{ENV['GOOGLE_API_KEY']}
 
-town = Unirest.get("http://maps.googleapis.com/maps/api/geocode/json?latlng=#{@profile.latitude},#{@profile.longitude}").body
-p town
+# town = Unirest.get("#{ENV['GOOGLE_GEOCODE_URL']}?latlng=#{@profile.latitude},#{@profile.longitude}").body
+# p town
 
 # http://maps.googleapis.com/maps/api/geocode/json?latlng=47.6062,-122.332
 # chi.each do |key|
 #   puts key["place_id"]
 # end
 
-# @chi_place = Unirest.get("https://maps.googleapis.com/maps/api/place/details/json?placeid=ChIJ7cv00DwsDogRAMDACa2m4K8&key=AIzaSyClgAPyN1ArCGKPPQJQUt8tqBZ5KyDvDdk")
+# @chi_place = Unirest.get("https://maps.googleapis.com/maps/api/place/details/json?placeid=ChIJ7cv00DwsDogRAMDACa2m4K8&key=#{ENV['GOOGLE_API_KEY']}")
 # p @chi_place
 
 
-buz = Geocoder.search("ChIJQWCpdNPJt4kRKEyYsFP8Z60", :lookup => :google_places_details)
+# buz = Geocoder.search("ChIJQWCpdNPJt4kRKEyYsFP8Z60", :lookup => :google_places_details)
 
-p buz  
+# p buz  
     # Below can be put into a helper...
-    # if @profile == nil || @profile.city == nil
-    #   @current_weather = nil
-    # else
-    #   @current_weather = Unirest.get("https://api.forecast.io/forecast/43b5d766e91f96d89c060b58e2c71a01/#{@profile.latitude},#{@profile.longitude}").body["currently"]
-    # end
-
-#    # current_weather = ForecastIO.forecast(@profile.latitude, @profile.longitude)
-#    # @current_weather = current_weather["currently"]
-
-    
+#     if @profile == nil || @profile.locality == nil
+#       @current_weather = nil
+#     else
+#       @current_weather = Unirest.get("#{ENV['WEATHER_API_URL']}/#{ENV['WEATHER_API_KEY']}/#{@profile.latitude},#{@profile.longitude}").body["currently"]
+#     end
+# @helper.line
+# p @current_weather
+   
     @hash = Gmaps4rails.build_markers(@vacations) do |vacation, marker|
       marker.lat vacation.latitude
       marker.lng vacation.longitude
@@ -87,10 +82,13 @@ p buz
 
   def new
     @vacations  = Vacation.where({:user_id => current_user.id})
-    @profile = Profile.find_by(:user_id => current_user.id)
+    @profile    = Profile.find_by(:user_id => current_user.id)
+    @helper     = Vacation.new
+    @page_title = @profile.locality
   end
 
   def create
+    @page_title   = "Create a New Vacation!"
     @vacation = Vacation.create ({:vacation_name => params[:vacation_name], :city => params[:city], :state => params[:state], :note => params[:note], :transpertation => params[:transpertation], :arrive_by => params[:arrive_by], :user_id => current_user.id})
     
     @hotel    = Accommodation.create({:name => params[:name], :address => params[:address], :city => params[:city], :zip => params[:zip], :vacation_id => @vacation.id})
@@ -102,10 +100,12 @@ p buz
   def show
     @vacations = Vacation.where({:user_id => current_user.id}) #these should be helpers, i have this code  all over.
 
-    @spots     = VacationSpot.where({:vacation_id => params[:id]})
-    @profile   = Profile.find_by(:user_id => current_user.id)
-    @vacation  = Vacation.find_by({:user_id => current_user.id, :id => params[:id]})
-    @hotel     = Accommodation.find_by(:vacation_id => @vacation.id)
+    @spots      = VacationSpot.where({:vacation_id => params[:id]})
+    @profile    = Profile.find_by(:user_id => current_user.id)
+    @vacation   = Vacation.find_by({:user_id => current_user.id, :id => params[:id]})
+    @hotel      = Accommodation.find_by(:vacation_id => @vacation.id)
+    @helper     = Vacation.new
+    @page_title = @vacation.vacation_name
   end
 
 end

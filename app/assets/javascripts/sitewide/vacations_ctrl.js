@@ -3,7 +3,7 @@
 
   angular.module("app").controller("vacationsCtrl", function($scope) {
 
-    $scope.pointsOfInterest = [];
+    
 
   
   

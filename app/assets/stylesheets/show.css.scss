@@ -1,11 +1,9 @@
+/************************************
+  SHOW PAGE FOR THE VACATION
+************************************/
+
 .show_page_wrapper {
   border: 1px solid blue;
-}
-
-.vacation_title {
-  font-size: 2em;
-  color: #ff0000;
-  font-weight: 900;
 }
 
 .outter_box_row {
@@ -37,14 +35,10 @@ iframe {
 }
 
 .save_spot {
-  border: 1px solid black;
+  border: none;
 }
 
 .logo {
-  border: 1px solid black;
-}
-
-.city_image {
   border: 1px solid black;
 }
 
@@ -61,12 +55,8 @@ iframe {
   padding-left: 1px;
   padding-right: 0;
   width: 250px;
-  
 }
 
-table {
-
-}
 
 .table_header {
   border-bottom: 1px solid #000000;
@@ -82,3 +72,125 @@ table {
   padding-left: 5px;
   border: none;
 }
+
+
+#spot_table {
+  border-right: 1px solid red;
+  padding-left: 5px;
+}
+
+input#placeTitle {
+  border: 0;
+  width: 100%;
+}
+
+.table_header {
+  font-size: 1.5em;
+  padding: 5px;
+}
+
+.table_col_description {
+  font-size: 1.3em;
+  font-weight: 500;
+  padding: 3px;
+}
+
+.table_col {
+  font-size: 1.3em;
+  font-weight: 200;
+  padding: 3px;
+}
+.place_data {
+  border-left: 1px solid black;
+  display: inline-block;
+}
+.place_name {
+  font-weight: bold;
+  font-size: 1.5em;
+}
+
+.place_price {
+  width: 100%;
+}
+
+.wideField {
+  border: 0;
+  width: 200px;
+}
+
+.number_wideField {
+  width: 30px;
+  text-align: right;
+}
+
+.number_field {
+  width: 100%;
+  text-align: center;
+}
+
+.user_input_text {
+  margin-left: 10px;
+  font-weight: 200;
+}
+
+#user_input {
+  width: 600px;
+  margin-left: 10px;
+}
+
+#vacation_spot {
+  width: 400px;
+}
+
+.vacation_label {
+  font-size: 1.3em;
+  font-weight: 500;
+  padding: 3px;
+  width: 50px;
+}
+
+
+.place_rating {
+  font-size: 1.3em;
+  font-weight: 200;
+  
+}
+
+.field {
+  border: 1px;
+  background-color: #ffffff;
+}
+
+// PHOTOS
+
+.place_photos {
+  border: none;
+  display: inline-block;
+  text-align: center;
+}
+
+#placeRate {
+  border: 0;
+}
+
+#placeOpen {
+  border: 0;
+}
+
+#placePhone {
+  border: 0;
+}
+
+#placePrice {
+  border: 0;
+}
+
+#placeMenu {
+  border: 0;
+}
+
+#street_number {
+  border: 0;
+}
+
+

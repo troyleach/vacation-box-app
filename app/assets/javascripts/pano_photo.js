@@ -117,7 +117,5 @@ function getBoundingBox(centerPoint, distance) {
     }  
   };
   return boxObject;
-  
-
 };
 

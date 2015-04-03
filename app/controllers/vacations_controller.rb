@@ -84,11 +84,11 @@ class VacationsController < ApplicationController
     @vacations  = Vacation.where({:user_id => current_user.id})
     @profile    = Profile.find_by(:user_id => current_user.id)
     @helper     = Vacation.new
-    @page_title = @profile.locality
+    @page_title   = "Create a New Vacation!"
   end
 
   def create
-    @page_title   = "Create a New Vacation!"
+    
     @vacation = Vacation.create ({:vacation_name => params[:vacation_name], :city => params[:city], :state => params[:state], :note => params[:note], :transpertation => params[:transpertation], :arrive_by => params[:arrive_by], :user_id => current_user.id})
     
     @hotel    = Accommodation.create({:name => params[:name], :address => params[:address], :city => params[:city], :zip => params[:zip], :vacation_id => @vacation.id})

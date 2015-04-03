@@ -17,6 +17,14 @@ Rails.application.routes.draw do
      end
    end
 
+   namespace :api do
+     namespace :v1 do
+       get '/spots' => 'spots#index'
+       get '/spots/:id' => 'spots#show', :as => :spot
+       post '/spots' => 'spots#create'
+     end
+   end
+
 
    # get 'vacation_spots/:id' => 'vacation_spots#show', :as => :vacation_spot
 

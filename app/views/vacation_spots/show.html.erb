@@ -18,7 +18,7 @@
       <th></th>
         <tr class="table_row">
           <td class="table_col_des">Address:</td>
-          <td class="table_col"><%= @spot.address %>, <%= @spot.city %> <%= @spot.state %>, <%= @spot.zip %></td>
+          <td class="table_col"><%= @full_address %>, <%= @spot.city %> <%= @spot.state %>, <%= @spot.zip %></td>
         </tr>
         <tr class="table_row">
           <td class="table_col_des">Phone:</td>
@@ -26,7 +26,7 @@
         </tr>
         <tr class="table_row">
           <td class="table_col_des">Hours:</td>
-          <td class="table_col"><%= @spot.hours %></td>
+          <td class="table_col"><%= @spot.open %></td>
         </tr>
         <tr class="table_row">
           <td class="table_col_des">reservation:</td>

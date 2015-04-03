@@ -1,18 +1,20 @@
 class Api::V1::VacationSpotsApiController < ApplicationController
 
   def index
-    @lumber = Lumber.all
+    @spots = VacationSpot.all
   end
 
   def show
-    @lumber = Lumber.find(params[:id])
+    @spot = VacationSpot.find(params[:id])
   end
+# this might have to be update, need to look how it creates the damn entry
+# Also I have not created any validations
 
   def create
-    @lumber = Lumber.create({:dimensions => params[:dimensions], :species => params[:species], :sizes => params[:sizes], :use => params[:use]})
-    if @lumber.save
+    @spot = VacationSpot.new({:lat => params[:lat], :lng => params[:lng], :image => params[:image], :spot_name => params[:spot_name], :description => params[:description], :street_number => params[:street_number], :route => params[:route], :city => params[:city], :state => params[:state], :zip => params[:zip], :phone => params[:phone], :open => params[:open], :website => params[:website], :note => params[:note]})
+    if @spot.save
     else
-      render json: { errors: @lumber.errors.full_messages }, status: 422
+      render json: { errors: @spot.errors.full_messages }, status: 422
     end
   end
 

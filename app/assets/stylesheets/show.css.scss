@@ -193,4 +193,19 @@ input#placeTitle {
   border: 0;
 }
 
+.add_spot_button {
+  display: block;
+  border: none;
+  text-align: right;
+  padding-top: 6px;
+}
+
+// **************************
+// list of saved spots
+// **************************
+
+.spot_name {
+  border: 1px solid blue;
+}
+
 

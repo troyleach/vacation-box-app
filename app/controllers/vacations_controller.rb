@@ -33,8 +33,8 @@ class VacationsController < ApplicationController
 # p @chi_place
 
 
-# buz = Geocoder.search("ChIJQWCpdNPJt4kRKEyYsFP8Z60", :lookup => :google_places_details)
-
+# buz = Geocoder.search("ChIJJVTnmL63t4kR8N_Fwo64AHA", :lookup => :google_places_details)
+# @helper.line
 # p buz  
     # Below can be put into a helper...
 #     if @profile == nil || @profile.locality == nil

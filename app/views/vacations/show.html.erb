@@ -9,126 +9,130 @@
 </section>
 
 
+<div ng-app="app">
+  <div ng-controller="vacationSpotCtrl" ng-init="fetchData()">
 
-<section class="vacation_section_two">
-  <div class="save_spot row">
-    <div class="save_spot col-md-6  ">
-      <p class="user_input_text">Type the name or the address of the place you wish to visit:</p>
-      <input type="text" id="user_input" placeholder="Type Name or Address">
-      <hr>
-      <div class="row">
-        <div class="stats_weather col-sm-6">
-          <div id="spot_table">
-            <table class="current_stats">
-              <th class="table_header" colspan="2">Current stats:</th>
-              <tr class="table_row">
-                <td class="table_col_description">Local time:</td>
-                <td class="table_col"><%= @vacation.time_date %></td>
+    <section class="vacation_section_two">
+      <div class="save_spot row">
+        <div class="save_spot col-md-6  ">
+          <p class="user_input_text">Type the name or the address of the place you wish to visit:</p>
+          <input type="text" id="user_input" placeholder="Type Name or Address">
+          <hr>
+          <div class="row">
+            <div class="stats_weather col-sm-6">
+              <div id="spot_table">
+                <table class="current_stats">
+                  <th class="table_header" colspan="2">Current stats:</th>
+                  <tr class="table_row">
+                    <td class="table_col_description">Local time:</td>
+                    <td class="table_col"><%= @vacation.time_date %></td>
+                  </tr>
+                  <tr class="table_row">
+                    <td class="table_col_description">Living Quarters:</td>
+                    <td class="table_col"><%= @hotel.name %></td>
+                  </tr>
+                  <tr class="table_row">
+                    <td class="table_col_description">Transpertation:</td>
+                    <td class="table_col"><%= @vacation.transpertation %></td>
+                  </tr>
+                </table>
+              </div><!--END OF TABLE  -->
+            </div><!--END OF SPOT AND WEATHER  -->
+            <div class="col-sm-6">
+              weather goes here
+            </div>
+          </div><!--ROW  -->
+        </div><!--END OF SAVE SPOT  -->
+
+        
+    <!-- THE FORM -->
+        <div class="city_image col-md-6">
+          
+          <div class="row">
+            <input class="place_name" id="placeTitle" disabled="true"></input><br>
+          <div class="place_data col-sm-8">
+            <table id="vacation_spot" border="0">
+              <tr>
+                <td class="vacation_label">Rating:</td>
+                <td class="wideField" colspan="2"><input class="place_rating" id="placeRate" disabled="true"></input></td>
               </tr>
-              <tr class="table_row">
-                <td class="table_col_description">Living Quarters:</td>
-                <td class="table_col"><%= @hotel.name %></td>
+              <tr>
+                <td class="vacation_label">Open:</td>
+                <td class="wideField" colspan="2"><input class="place_rating" id="placeOpen" disabled="true"></input></td>
               </tr>
-              <tr class="table_row">
-                <td class="table_col_description">Transpertation:</td>
-                <td class="table_col"><%= @vacation.transpertation %></td>
+              <tr>
+                <td class="vacation_label">Phone:</td>
+                <td class="wideField" colspan="2"><input class="place_phone" id="placePhone" disabled="true"></input></td>
+              </tr>
+              <tr>
+                <td class="vacation_label">Price level:</td>
+                <td class="wideField" colspan="2"><input class="place_price" id="placePrice" disabled="true"></input></td>
+              </tr>
+              <tr>
+                <td class="vacation_label">Menu:</td>
+                <td class="wideField" colspan="2"><input class="place_price" id="placeMenu" disabled="true"></input></td>
+              </tr>
+              <tr>
+                <td class="vacation_label">Address:</td>
+                <td class="number_wideField"><input class="number_field" id="street_number" disabled="true"></input></td>
+                <td class="wideField"><input class="field" id="route" disabled="true"></input></td>
+              </tr>
+            
+              <tr>
+                <td class="vacation_label">City:</td>
+                <td class="wideField" colspan="2"><input class="field" id="locality"
+                      disabled="true"></input></td>
+              </tr>
+              <tr>
+                <td class="vacation_label">State:</td>
+                <td class="slimField" colspan="2"><input class="field"
+                      id="administrative_area_level_1" disabled="true"></input></td>
+              </tr>
+              <tr>
+                <td class="vacation_label">Zip code:</td>
+                <td class="wideField" colspan="2"><input class="field" id="postal_code"
+                      disabled="true"></input></td>
+              </tr>
+              <tr>
+                <td class="vacation_label">Country:</td>
+                <td class="wideField" colspan="2"><input class="field"
+                      id="country" disabled="true"></input></td>
               </tr>
             </table>
-          </div><!--END OF TABLE  -->
-        </div><!--END OF SPOT AND WEATHER  -->
-        <div class="col-sm-6">
-          weather goes here
+
+          </div><!-- END OF PLACE_DATA -->
+          <div class="place_photos col-sm-4">
+            <img src="" id="placePhoto" alt="">
+          </div>
+        </div><!-- END OF row for data and picture -->
+          <div class="add_spot_button">
+          <button ng-click="addTask(newTask)">Add spot</button>
+          </div> 
+        </div><!-- END OF city_image col-md-6 -->
+      </div><!-- END OF save_spot row -->
+    </section>
+
+    <section class="vacation_section_three">
+      <div class="outter_box_row row">
+        <div class="col-sm-8">
+          
+          <div class="inner_box_row row">
+            <% @spots.each do |spot| %>
+             <div class="spot_name col-xs-8 col-sm-6"><a href='/vacation_spots/<%= spot.id %>'> <img src="<%= spot.image %>" alt=""> <%= spot.spot_name %></a></div>
+            <% end %>
+          </div>
+
         </div>
-      </div><!--ROW  -->
-    </div><!--END OF SAVE SPOT  -->
-
-    
-<!-- THE FORM -->
-    <div class="city_image col-md-6">
-      
-      <div class="row">
-        <input class="place_name" id="placeTitle" disabled="true"></input><br>
-      <div class="place_data col-sm-8">
-        <table id="vacation_spot" border="0">
-          <tr>
-            <td class="vacation_label">Rating:</td>
-            <td class="wideField" colspan="2"><input class="place_rating" id="placeRate" disabled="true"></input></td>
-          </tr>
-          <tr>
-            <td class="vacation_label">Open:</td>
-            <td class="wideField" colspan="2"><input class="place_rating" id="placeOpen" disabled="true"></input></td>
-          </tr>
-          <tr>
-            <td class="vacation_label">Phone:</td>
-            <td class="wideField" colspan="2"><input class="place_phone" id="placePhone" disabled="true"></input></td>
-          </tr>
-          <tr>
-            <td class="vacation_label">Price level:</td>
-            <td class="wideField" colspan="2"><input class="place_price" id="placePrice" disabled="true"></input></td>
-          </tr>
-          <tr>
-            <td class="vacation_label">Menu:</td>
-            <td class="wideField" colspan="2"><input class="place_price" id="placeMenu" disabled="true"></input></td>
-          </tr>
-          <tr>
-            <td class="vacation_label">Address:</td>
-            <td class="number_wideField"><input class="number_field" id="street_number" disabled="true"></input></td>
-            <td class="wideField"><input class="field" id="route" disabled="true"></input></td>
-          </tr>
-        
-          <tr>
-            <td class="vacation_label">City:</td>
-            <td class="wideField" colspan="2"><input class="field" id="locality"
-                  disabled="true"></input></td>
-          </tr>
-          <tr>
-            <td class="vacation_label">State:</td>
-            <td class="slimField" colspan="2"><input class="field"
-                  id="administrative_area_level_1" disabled="true"></input></td>
-          </tr>
-          <tr>
-            <td class="vacation_label">Zip code:</td>
-            <td class="wideField" colspan="2"><input class="field" id="postal_code"
-                  disabled="true"></input></td>
-          </tr>
-          <tr>
-            <td class="vacation_label">Country:</td>
-            <td class="wideField" colspan="2"><input class="field"
-                  id="country" disabled="true"></input></td>
-          </tr>
-        </table>
-
-      </div><!-- END OF PLACE_DATA -->
-      <div class="place_photos col-sm-4">
-        <img src="" id="placePhoto" alt="">
-      </div>
-      <button ng-click="addTask(newTask)">Add spot</button>
-    </div><!-- END OF row for data and picture -->
-    </div><!-- END OF city_image col-md-6 -->
-  </div><!-- END OF save_spot row -->
-</section>
-
-<section class="vacation_section_three">
-  <div class="outter_box_row row">
-    <div class="col-sm-8">
-      
-      <div class="inner_box_row row">
-        <% @spots.each do |spot| %>
-         <div class="col-xs-8 col-sm-6"><a href='/vacation_spots/<%= spot.id %>'><%= spot.spot_name %></a></div>
-        <% end %>
-      </div>
-    </div>
-      <div class="second_box col-sm-4">
-          <div class="current_stats col-md-3">
-            
-            <hr>
-            <p>something goes here</p>
+          <div class="second_box col-sm-4">
+            <div class="current_stats col-md-3">
+              <p>something goes here</p>
+            </div>
           </div>
       </div>
-      </div>
-  </di  v>
-</section>
+    </section>
 
+  </div><!-- END OF NG-CONTROLLER -->
+</div><!-- END OF NG-APP-->
 <!-- <section class="vacation_section_four">
   <div class="save_spot row">
     <div class="save_spot col-md-3">
@@ -183,8 +187,10 @@ console.log(place);
     
     document.getElementById('placeTitle').value = name;
     document.getElementById('placeRate').value = rate;
-    if (place.opening_hours.open_now) {
-      document.getElementById('placeOpen').value = 'We are open!'; 
+    if (place.opening_hours === undefined) {
+      document.getElementById('placeOpen').value = ''; 
+    } else if (place.opening_hours.open) {
+      document.getElementById('placeOpen').value = 'We are open!';
     } else {
       document.getElementById('placeOpen').value = 'Sorry, we are closed'; 
     }

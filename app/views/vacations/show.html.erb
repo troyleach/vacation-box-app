@@ -10,7 +10,7 @@
 
 
 <div ng-app="app">
-  <div ng-controller="vacationSpotCtrl" ng-init="fetchData()">
+  <div ng-controller="vacationSpotCtrl" ng-init="fetchData(<%= @vacation.id %>)">
 
     <section class="vacation_section_two">
       <div class="save_spot row">
@@ -49,12 +49,12 @@
         <div class="city_image col-md-6">
           
           <div class="row">
-            <input class="place_name" id="placeTitle" disabled="true"></input><br>
+            <!-- <input type="text" ng-value="placeTitle" class="place_name" id="placeTitle"></input><br> -->
           <div class="place_data col-sm-8">
             <table id="vacation_spot" border="0">
               <tr>
                 <td class="vacation_label">Rating:</td>
-                <td class="wideField" colspan="2"><input class="place_rating" id="placeRate" disabled="true"></input></td>
+                <td class="wideField" colspan="2"><input class="place_rating" id="placeRate" disabled="true" ng-model="rating"></input></td>
               </tr>
               <tr>
                 <td class="vacation_label">Open:</td>
@@ -62,14 +62,15 @@
               </tr>
               <tr>
                 <td class="vacation_label">Phone:</td>
-                <td class="wideField" colspan="2"><input class="place_phone" id="placePhone" disabled="true"></input></td>
+                <td class="wideField" colspan="2"><input class="place_phone" id="placePhone" ng-model="placePhone"></input></td>
               </tr>
               <tr>
                 <td class="vacation_label">Price level:</td>
                 <td class="wideField" colspan="2"><input class="place_price" id="placePrice" disabled="true"></input></td>
               </tr>
+<!-- thing to do, if restaurant | bar set to menu, else website -->
               <tr>
-                <td class="vacation_label">Menu:</td>
+                <td class="vacation_label">Website:</td>
                 <td class="wideField" colspan="2"><input class="place_price" id="placeMenu" disabled="true"></input></td>
               </tr>
               <tr>
@@ -99,6 +100,11 @@
                       id="country" disabled="true"></input></td>
               </tr>
             </table>
+            <input ng-model="placePhone" type="text">
+            <input type="text" id="placeTitle" ng-model="placeTitle">
+            below here
+            <p>{{spotName}}</p>
+            <button ng-click="test()">Test</button>
 
           </div><!-- END OF PLACE_DATA -->
           <div class="place_photos col-sm-4">
@@ -106,7 +112,7 @@
           </div>
         </div><!-- END OF row for data and picture -->
           <div class="add_spot_button">
-          <button ng-click="addTask(newTask)">Add spot</button>
+          <button ng-click="addNewSpot(newLat, newLng, newImage, placeTitle, newDescription, newRout, placePhone, newOpen, newReservation, newWebsite, newCity, newState, newZip, newStreetNumber)">Add spot</button>
           </div> 
         </div><!-- END OF city_image col-md-6 -->
       </div><!-- END OF save_spot row -->
@@ -114,18 +120,33 @@
 
     <section class="vacation_section_three">
       <div class="outter_box_row row">
-        <div class="col-sm-8">
+        <div class="col-sm-6">
           
+          
+
           <div class="inner_box_row row">
-            <% @spots.each do |spot| %>
-             <div class="spot_name col-xs-8 col-sm-6"><a href='/vacation_spots/<%= spot.id %>'> <img src="<%= spot.image %>" alt=""> <%= spot.spot_name %></a></div>
-            <% end %>
+            
+             <div ng-repeat="vacation_spot in vacations.vacation_spots" class="spot_name col-xs-8 col-sm-6">
+              <img src="{{vacation_spot.image}}" alt="Image of spot to be visited" class="spot_list_image"><span class="spot_list_name"><a href="/vacation_spots/{{vacation_spot.id}}">{{vacation_spot.spot_name}}</a></span>
+             </div>
+            
           </div>
 
+          <!-- <div>
+          <table>
+            <tr ng-repeat="spot in spots">
+            <div class="spot_name col-xs-8 col-sm-6">
+              <td class="col"><img src="{{spot.image}}" alt="Picture of the spot"></td>
+              <td class="col">{{spot.spot_name}}</td>
+            </tr>
+          </table>
+          </div>
+ -->
+
         </div>
-          <div class="second_box col-sm-4">
+          <div class="second_box col-sm-6">
             <div class="current_stats col-md-3">
-              <p>something goes here</p>
+              <p>points of interest will go here once it works</p>
             </div>
           </div>
       </div>
@@ -183,7 +204,8 @@ console.log(place);
     var phone = place.international_phone_number;
     var price = place.price_level;
     var website = place.website;
-    var picture = place.photos[0].getUrl({ 'maxWidth': 180, 'maxHeight': 300 });
+    var picture = place.photos[0].getUrl({ 'maxWidth': 250, 'maxHeight': 250 });
+    var reviews = place.review
     
     document.getElementById('placeTitle').value = name;
     document.getElementById('placeRate').value = rate;
@@ -199,10 +221,7 @@ console.log(place);
     document.getElementById('placeMenu').value = website;
     document.getElementById('placePhoto').src = picture;
 
-    // function setImage() {
-    //   return pic;
-    // }
-    // console.log(setImage());
+    
     
 
 

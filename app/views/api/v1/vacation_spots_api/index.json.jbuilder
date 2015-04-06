@@ -12,11 +12,12 @@ json.vacationSpot @spots do |spot|
   json.reservation spot.reservation
   json.website spot.website
   json.note spot.note
+  json.vacation_id spot.vacation_id
   json.created_at spot.created_at
   json.updated_at spot.updated_at
   json.city spot.city
   json.state spot.state
   json.zip spot.zip
-  json.street_number spot street_number
+  json.street_number spot.street_number
 
 end

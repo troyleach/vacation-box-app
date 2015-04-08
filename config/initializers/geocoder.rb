@@ -5,7 +5,7 @@ Geocoder.configure(
   # :language     => :en,         # ISO-639 language code
   # :http_proxy   => nil,         # HTTP proxy server (user:pass@host:port)
   # :https_proxy  => nil,         # HTTPS proxy server (user:pass@host:port)
-    :api_key      => "AIzaSyClgAPyN1ArCGKPPQJQUt8tqBZ5KyDvDdk",        # API key for geocoding service
+    :api_key      => ENV['GOOGLE_API_KEY'],        # API key for geocoding service
     :use_https    => true,       # use HTTPS for lookup requests? (if supported)
   # :cache        => nil,         # cache object (must respond to #[], #[]=, and #keys)
   # :cache_prefix => "geocoder:", # prefix (string) to use for all cache keys
@@ -18,6 +18,6 @@ Geocoder.configure(
   # calculation options
     # :units     => :mi       # :km for kilometers or :mi for miles
   # :distances => :linear    # :spherical or :linear
-  #:api_key => ENV['GEOCODER_API_KEY'], NEED TO SET UP ASAP
+  #:api_key => ENV['GEOCODER_API_KEY'], NEED TO SET UP ASAP (DONE SEE ABOVE)
   
 )

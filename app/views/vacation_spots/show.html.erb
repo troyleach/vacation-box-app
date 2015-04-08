@@ -1,61 +1,112 @@
-<h1><%= @spot.spot_name.capitalize %></h1>
-<div class="vacation_spot_wrapper">
-<p>Back to vacation</p>
-  <div class="map row">
-    <div class="col-md-12">MAP</div>
-  </div>
 
+<div class="page_title"><span class="spot_title"><%= @spot.spot_name.capitalize %></span><span class="a_tag"><a href="/vacations/<%= @spot.vacation_id %>">Back to <%= @current_vacation.vacation_name %></a></span></div>
 
-  <div class="vacation_vitals row">
-    <div class="directions col-md-6">DIRECTIONS</div>
-    <div class="about col-md-6"><h4>Things to know about <%= @spot.spot_name.capitalize %></h4>
-    <hr>
-      <div class="vacation_spot_image">Image goes here</div>
-      <div class="description_text">Description:</div>
-      <div class="vacation_spot_description"><%= @spot.description.capitalize %></div>
-      <hr>
-      <table>
-      <th></th>
-        <tr class="table_row">
-          <td class="table_col_des">Address:</td>
-          <td class="table_col"><%= @spot.address %>, <%= @spot.city %> <%= @spot.state %>, <%= @spot.zip %></td>
-        </tr>
-        <tr class="table_row">
-          <td class="table_col_des">Phone:</td>
-          <td class="table_col"><%= @spot.phone %></td>
-        </tr>
-        <tr class="table_row">
-          <td class="table_col_des">Hours:</td>
-          <td class="table_col"><%= @spot.hours %></td>
-        </tr>
-        <tr class="table_row">
-          <td class="table_col_des">reservation:</td>
-          <td class="table_col"><%= @spot.reservation %></td>
-        </tr>
-        <tr class="table_row">
-          <td class="table_col_des">website:</td>
-          <td class="table_col"><%= @spot.website %></td>
-        </tr>
-        <tr class="table_row">
-          <td class="table_col_des"></td>
-          <td class="table_col"></td>
-        </tr>
-        <tr class="table_row">
-          <td class="table_col_des"></td>
-          <td class="table_col"></td>
-        </tr>
-      </table>
-      
-    </div>
-  </div>
+<div ng-app="app">
+  <div ng-controller="vacationSpotCtrl" ng-init="fetchData(<%= @spot.id %>)">
+    <div class="vacation_spot_wrapper">
 
-  <div class="note row">
-    <%= form_tag "/vacation_spots/#{@spot.id}", :method => :patch do %>
-    <p>Vacation Notes <%= submit_tag "Update" %></p>
-      <div>
-        <%=text_area_tag :note, @spot.note, :size => "60x8" %>
+      <div class="map row">
+        <div class="col-md-12">
+          <div id="map-canvas-directions"></div>
+        </div>
       </div>
-    <% end %>
-  </div>
+      
 
-</div>
+      <div class="vacation_vitals row">
+        <div class="directions col-md-6">
+          <div id="directions-panel"></div>
+        </div>
+        <div class="about col-md-6"><h4>Things to know about <%= @spot.spot_name.capitalize %></h4>
+        <hr>
+          <div class="vacation_spot_image">
+            <img src="<%= @spot.image %>" alt="The image of the spot" width="200">
+          </div>
+          <div class="description_text">Description:</div>
+          <div class="vacation_spot_description"><%= @spot.description %></div>
+          <hr>
+          <table>
+          <th></th>
+            <tr class="table_row">
+              <td class="table_col_des">Address:</td>
+              <td class="table_col"><%= @full_address %>, <%= @spot.city %> <%= @spot.state %>, <%= @spot.zip %></td>
+            </tr>
+            <tr class="table_row">
+              <td class="table_col_des">Phone:</td>
+              <td class="table_col"><%= @spot.phone %></td>
+            </tr>
+            <tr class="table_row">
+              <td class="table_col_des">Hours:</td>
+              <td class="table_col"><%= @spot.open %></td>
+            </tr>
+            <tr class="table_row">
+              <td class="table_col_des">reservation:</td>
+              <% if @spot.reservation ==  nil %>
+              <td class="table_col">No reservation</td>
+              <% else %>
+              <td class="table_col"><%= @spot.reservation %></td>
+              <% end %>
+            </tr>
+            <tr class="table_row">
+              <td class="table_col_des">website:</td>
+              <td class="table_col"><a href="">Website</a></td>
+            </tr>
+          </table>
+          
+          <hr>
+
+          <div class="description_text">Notes:</div>
+          <div class="vacation_spot_description"><%= @spot.note %></div>
+          
+        </div>
+      </div>
+
+      <div class="note row">
+        <%= form_tag "/vacation_spots/#{@spot.id}", :method => :patch do %>
+        <p>Make some notes about this spot <%= submit_tag "Update" %></p>
+          <div>
+            <%=text_area_tag :note, @spot.note, :size => "60x8" %>
+          </div>
+        <% end %>
+      </div>
+
+    </div>
+  </div><!-- END OF NG-CONTROLLER -->
+</div><!-- END OF NG-APP-->
+
+
+<script>
+
+var directionsDisplay;
+var directionsService = new google.maps.DirectionsService();
+var map;
+
+
+
+window.onload = function() {
+  directionsDisplay = new google.maps.DirectionsRenderer();
+  var center_point = new google.maps.LatLng(<%= @hotel.lat %>,<%= @hotel.long %>);
+  var mapOptions = {
+    zoom:7,
+    center: center_point
+  };
+  map = new google.maps.Map(document.getElementById('map-canvas-directions'), mapOptions);
+  directionsDisplay.setMap(map);
+  directionsDisplay.setPanel(document.getElementById('directions-panel'));
+
+
+
+  var start = new google.maps.LatLng(<%= @hotel.lat %>,<%= @hotel.long %>);
+  var end = new google.maps.LatLng(<%= @spot.lat %>,<%= @spot.lng %>);
+  var request = {
+      origin:start,
+      destination:end,
+      travelMode: google.maps.TravelMode["<%= @current_vacation.transpertation.upcase %>"]
+  };
+  directionsService.route(request, function(response, status) {
+    if (status == google.maps.DirectionsStatus.OK) {
+      directionsDisplay.setDirections(response);
+    }
+  });
+}
+
+</script>

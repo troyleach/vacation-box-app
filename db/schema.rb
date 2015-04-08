@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150324195734) do
+ActiveRecord::Schema.define(version: 20150403133131) do
 
   create_table "accommodations", force: :cascade do |t|
     t.string   "name",        limit: 255
@@ -82,23 +82,24 @@ ActiveRecord::Schema.define(version: 20150324195734) do
   end
 
   create_table "vacation_spots", force: :cascade do |t|
-    t.float    "lat",         limit: 24
-    t.float    "long",        limit: 24
-    t.string   "image",       limit: 255
-    t.string   "spot_name",   limit: 255
-    t.text     "description", limit: 65535
-    t.string   "address",     limit: 255
-    t.string   "phone",       limit: 255
-    t.string   "hours",       limit: 255
+    t.float    "lat",           limit: 24
+    t.float    "lng",           limit: 24
+    t.string   "image",         limit: 255
+    t.string   "spot_name",     limit: 255
+    t.text     "description",   limit: 65535
+    t.string   "route",         limit: 255
+    t.string   "phone",         limit: 255
+    t.string   "open",          limit: 255
     t.datetime "reservation"
-    t.string   "website",     limit: 255
-    t.text     "note",        limit: 65535
-    t.integer  "vacation_id", limit: 4
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
-    t.string   "city",        limit: 255
-    t.string   "state",       limit: 255
-    t.string   "zip",         limit: 255
+    t.string   "website",       limit: 255
+    t.text     "note",          limit: 65535
+    t.integer  "vacation_id",   limit: 4
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+    t.string   "city",          limit: 255
+    t.string   "state",         limit: 255
+    t.string   "zip",           limit: 255
+    t.string   "street_number", limit: 255
   end
 
   create_table "vacations", force: :cascade do |t|

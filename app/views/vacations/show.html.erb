@@ -9,126 +9,175 @@
 </section>
 
 
+<div ng-app="app">
+  <div ng-controller="vacationSpotCtrl" ng-init="fetchData(<%= @vacation.id %>)">
 
-<section class="vacation_section_two">
-  <div class="save_spot row">
-    <div class="save_spot col-md-6  ">
-      <p class="user_input_text">Type the name or the address of the place you wish to visit:</p>
-      <input type="text" id="user_input" placeholder="Type Name or Address">
-      <hr>
-      <div class="row">
-        <div class="stats_weather col-sm-6">
-          <div id="spot_table">
-            <table class="current_stats">
-              <th class="table_header" colspan="2">Current stats:</th>
-              <tr class="table_row">
-                <td class="table_col_description">Local time:</td>
-                <td class="table_col"><%= @vacation.time_date %></td>
+    <section class="vacation_section_two">
+      <div class="save_spot row">
+        <div class="save_spot col-md-6  ">
+          <p class="user_input_text">Type the name or the address of the place you wish to visit:</p>
+          <input type="text" id="user_input" placeholder="Type Name or Address">
+          <hr>
+          <div class="row">
+            <div class="stats_weather col-sm-6">
+              <div id="spot_table">
+                <table class="current_stats" border="0">
+                  <th class="table_header" colspan="2">Current stats:</th>
+                  <tr class="table_row">
+                    <td class="table_col_description">Local time:</td>
+                    <td class="vacation_table_col"><%= @vacation.time_date %></td>
+                  </tr>
+                  <tr class="table_row">
+                    <td class="table_col_description">Living Quarters:</td>
+                    <td class="vacation_table_col"><%= @hotel.name %></td>
+                  </tr>
+                  <tr class="table_row">
+                    <td class="table_col_description">Transpertation:</td>
+                    <td class="vacation_table_col"><%= @vacation.transpertation %></td>
+                  </tr>
+                </table>
+              </div><!--END OF TABLE  -->
+            </div><!--END OF SPOT AND WEATHER  -->
+            <div class="col-sm-6">
+              weather goes here
+            </div>
+          </div><!--ROW  -->
+        </div><!--END OF SAVE SPOT  -->
+
+        
+    <!-- THE FORM -->
+        <div class="city_image col-md-6">
+          
+          <div class="row">
+          <div class="place_name">{{place.name}}</div>
+          <div class="place_data col-sm-6">
+            <table id="vacation_spot" border="0">
+              <tr>
+                <td class="vacation_label">Rating:</td>
+                <td class="wideField" colspan="2">{{ place.rating }}</td>
               </tr>
-              <tr class="table_row">
-                <td class="table_col_description">Living Quarters:</td>
-                <td class="table_col"><%= @hotel.name %></td>
+              <tr>
+                <td class="vacation_label">Open:</td>
+                <td class="wideField" colspan="2" ng-if="!place.opening_hours"></td>
+                <td class="wideField" colspan="2" ng-if="place.opening_hours">We are open!</td>
+                <td class="wideField" colspan="2" ng-if="place.opening_hours === false">Sorry, we are closed!</td>
               </tr>
-              <tr class="table_row">
-                <td class="table_col_description">Transpertation:</td>
-                <td class="table_col"><%= @vacation.transpertation %></td>
+              <tr>
+                <td class="vacation_label">Hours:</td>
+                <td class="wideField">
+                <div ng-if="place.opening_hours.weekday_text">
+                  <div ng-click="show=!show">
+                    Click to see hours:
+                  </div>
+                  <div ng-hide="!show">
+                    <ul>
+                      <li class="hours_open">{{ place.opening_hours.weekday_text[0]}}</li>
+                      <li class="hours_open">{{ place.opening_hours.weekday_text[1]}}</li>
+                      <li class="hours_open">{{ place.opening_hours.weekday_text[2]}}</li>
+                      <li class="hours_open">{{ place.opening_hours.weekday_text[3]}}</li>
+                      <li class="hours_open">{{ place.opening_hours.weekday_text[4]}}</li>
+                      <li class="hours_open">{{ place.opening_hours.weekday_text[5]}}</li>
+                      <li class="hours_open">{{ place.opening_hours.weekday_text[6]}}</li>
+                    </ul>
+                  </div>
+                  </div>
+                </td>
+              </tr>
+              
+              <tr>
+                <td class="vacation_label">Phone:</td>
+                <td class="wideField" colspan="2">{{ place.international_phone_number }}</td>
+              </tr>
+              <tr>
+                <td class="vacation_label">Price level:</td>
+                <td class="wideField" colspan="2">{{ place.price_level }}</td>
+              </tr>
+<!-- thing to do, if restaurant | bar set to menu, else website -->
+              <tr>
+                <td class="vacation_label">Website:</td>
+                <td class="wideField" colspan="2" ng-if="place.website"><a href="{{ place.website }}" target="_blank">website</a></td>
+                <td class="wideField" colspan="2" ng-if="!place.website"></td>
+              </tr>
+              <tr>
+                <td class="vacation_label">Address:</td>
+                <td class="wideField">{{ place.address_components[0].long_name }} {{ place.address_components[1].long_name }}</td>
+              </tr>
+            
+              <tr>
+                <td class="vacation_label">City:</td>
+                <td class="wideField" colspan="2">{{ place.address_components[2].long_name }}</td>
+              </tr>
+              <tr>
+                <td class="vacation_label">State:</td>
+                <td class="wideField" colspan="2">{{ place.address_components[3].long_name }}</td>
+              </tr>
+              <tr>
+                <td class="vacation_label">Zip:</td>
+                <td class="wideField" colspan="2">{{ place.address_components[5].long_name }}</td>
+              </tr>
+              <tr>
+                <td class="vacation_label">Country:</td>
+                <td class="wideField" colspan="2">{{ place.address_components[4].long_name }}</td>
+              </tr>
+              <tr>
+                <td class="vacation_label">Reservations:</td>
+                <td class="wideField" colspan="2"><a href=""></a></td>
               </tr>
             </table>
-          </div><!--END OF TABLE  -->
-        </div><!--END OF SPOT AND WEATHER  -->
-        <div class="col-sm-6">
-          weather goes here
-        </div>
-      </div><!--ROW  -->
-    </div><!--END OF SAVE SPOT  -->
+          
 
-    
-<!-- THE FORM -->
-    <div class="city_image col-md-6">
-      
-      <div class="row">
-        <input class="place_name" id="placeTitle" disabled="true"></input><br>
-      <div class="place_data col-sm-8">
-        <table id="vacation_spot" border="0">
-          <tr>
-            <td class="vacation_label">Rating:</td>
-            <td class="wideField" colspan="2"><input class="place_rating" id="placeRate" disabled="true"></input></td>
-          </tr>
-          <tr>
-            <td class="vacation_label">Open:</td>
-            <td class="wideField" colspan="2"><input class="place_rating" id="placeOpen" disabled="true"></input></td>
-          </tr>
-          <tr>
-            <td class="vacation_label">Phone:</td>
-            <td class="wideField" colspan="2"><input class="place_phone" id="placePhone" disabled="true"></input></td>
-          </tr>
-          <tr>
-            <td class="vacation_label">Price level:</td>
-            <td class="wideField" colspan="2"><input class="place_price" id="placePrice" disabled="true"></input></td>
-          </tr>
-          <tr>
-            <td class="vacation_label">Menu:</td>
-            <td class="wideField" colspan="2"><input class="place_price" id="placeMenu" disabled="true"></input></td>
-          </tr>
-          <tr>
-            <td class="vacation_label">Address:</td>
-            <td class="number_wideField"><input class="number_field" id="street_number" disabled="true"></input></td>
-            <td class="wideField"><input class="field" id="route" disabled="true"></input></td>
-          </tr>
-        
-          <tr>
-            <td class="vacation_label">City:</td>
-            <td class="wideField" colspan="2"><input class="field" id="locality"
-                  disabled="true"></input></td>
-          </tr>
-          <tr>
-            <td class="vacation_label">State:</td>
-            <td class="slimField" colspan="2"><input class="field"
-                  id="administrative_area_level_1" disabled="true"></input></td>
-          </tr>
-          <tr>
-            <td class="vacation_label">Zip code:</td>
-            <td class="wideField" colspan="2"><input class="field" id="postal_code"
-                  disabled="true"></input></td>
-          </tr>
-          <tr>
-            <td class="vacation_label">Country:</td>
-            <td class="wideField" colspan="2"><input class="field"
-                  id="country" disabled="true"></input></td>
-          </tr>
-        </table>
-
-      </div><!-- END OF PLACE_DATA -->
-      <div class="place_photos col-sm-4">
-        <img src="" id="placePhoto" alt="">
-      </div>
-      <button ng-click="addTask(newTask)">Add spot</button>
-    </div><!-- END OF row for data and picture -->
-    </div><!-- END OF city_image col-md-6 -->
-  </div><!-- END OF save_spot row -->
-</section>
-
-<section class="vacation_section_three">
-  <div class="outter_box_row row">
-    <div class="col-sm-8">
-      
-      <div class="inner_box_row row">
-        <% @spots.each do |spot| %>
-         <div class="col-xs-8 col-sm-6"><a href='/vacation_spots/<%= spot.id %>'><%= spot.spot_name %></a></div>
-        <% end %>
-      </div>
-    </div>
-      <div class="second_box col-sm-4">
-          <div class="current_stats col-md-3">
+          </div><!-- END OF PLACE_DATA -->
+         
+          <div class="place_photos col-sm-6">
             
-            <hr>
-            <p>something goes here</p>
+            <img src="{{ place.photos[0].getUrl({ 'maxWidth': 250, 'maxHeight': 250 }) }}" alt="Picture of spot" ng-if="place.photos" class="vacation_spot_photo">
+          
+            
+          </div>
+        </div><!-- END OF row for data and picture -->
+          <div class="add_spot_button">
+          <button ng-click="addNewSpot(spotNote)">Add spot</button>
+          </div> 
+        </div><!-- END OF city_image col-md-6 -->
+      </div><!-- END OF save_spot row -->
+    </section>
+
+    <section class="vacation_section_three">
+      <div class="outter_box_row row">
+        <div class="col-sm-6">
+          
+          
+
+          <div class="inner_box_row row">
+            
+             <div ng-repeat="vacation_spot in vacations.vacation_spots" class="spot_name col-xs-8 col-sm-6">
+              <img src="{{vacation_spot.image}}" alt="Image of spot to be visited" class="spot_list_image"><span class="spot_list_name"><a href="/vacation_spots/{{vacation_spot.id}}">{{ vacation_spot.spot_name }}</a></span>
+             </div>
+            
+          </div>
+
+          <!-- <div>
+          <table>
+            <tr ng-repeat="spot in spots">
+            <div class="spot_name col-xs-8 col-sm-6">
+              <td class="col"><img src="{{spot.image}}" alt="Picture of the spot"></td>
+              <td class="col">{{spot.spot_name}}</td>
+            </tr>
+          </table>
+          </div>
+ -->
+
+        </div>
+          <div class="second_box col-sm-6">
+            <div class="current_stats col-md-3">
+            <textarea ng-model="spotNote" rows="4" cols="75"></textarea>
+            </div>
           </div>
       </div>
-      </div>
-  </di  v>
-</section>
+    </section>
 
+  </div><!-- END OF NG-CONTROLLER -->
+</div><!-- END OF NG-APP-->
 <!-- <section class="vacation_section_four">
   <div class="save_spot row">
     <div class="save_spot col-md-3">
@@ -141,81 +190,3 @@
 </section> -->
 
 </div><!-- End of page wrapper -->
-
-<script>
- 
-  var vacationBounds = new google.maps.LatLngBounds(
-    new google.maps.LatLng(39.8055204953369,-75.88245927974606),
-    new google.maps.LatLng(38.00887950466311,-78.19134072025393)
-    );
-
-  var input = document.getElementById('user_input');
-  var options = {
-    bounds: vacationBounds
-  };
-
-  var componentForm = {
-    street_number: 'short_name',
-    route: 'long_name',
-    locality: 'long_name',
-    administrative_area_level_1: 'short_name',
-    country: 'long_name',
-    postal_code: 'short_name'
-  };
-
-  autocomplete = new google.maps.places.Autocomplete(input, options);
-  
-    google.maps.event.addListener(autocomplete, 'place_changed', function() {
-      fillInAddress();
-    });
-
-  function fillInAddress() {
-    // Get the place details from the autocomplete object.
-    var place = autocomplete.getPlace();
-console.log(place);
-    // Display misc items on in view (i need to change this bc of XSS)
-    var name = place.name;
-    var rate = place.rating;
-    var phone = place.international_phone_number;
-    var price = place.price_level;
-    var website = place.website;
-    var picture = place.photos[0].getUrl({ 'maxWidth': 180, 'maxHeight': 300 });
-    
-    document.getElementById('placeTitle').value = name;
-    document.getElementById('placeRate').value = rate;
-    if (place.opening_hours.open_now) {
-      document.getElementById('placeOpen').value = 'We are open!'; 
-    } else {
-      document.getElementById('placeOpen').value = 'Sorry, we are closed'; 
-    }
-    document.getElementById('placePhone').value = phone;
-    document.getElementById('placePrice').value = price;
-    document.getElementById('placeMenu').value = website;
-    document.getElementById('placePhoto').src = picture;
-
-    // function setImage() {
-    //   return pic;
-    // }
-    // console.log(setImage());
-    
-
-
-    for (var component in componentForm) {
-      document.getElementById(component).value = '';
-      document.getElementById(component).disabled = false;
-    }
-    
-    // Get each component of the address from the place details
-    // and fill the corresponding field on the form.
-    for (var i = 0; i < place.address_components.length; i++) {
-      var addressType = place.address_components[i].types[0];
-      
-      if (componentForm[addressType]) {
-        var val = place.address_components[i][componentForm[addressType]];
-        document.getElementById(addressType).value = val;
-      }
-    }
-
-  }
- 
-</script>

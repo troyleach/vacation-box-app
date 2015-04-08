@@ -7,6 +7,23 @@
   margin-bottom: 25px;
 }
 
+.page_title {
+  border: none;
+  margin-top: 50px;
+}
+
+.spot_title {
+  border: none;
+  font-size: 3em;
+  font-weight: 900;
+}
+
+.a_tag {
+  border: none;
+  text-align: right;
+  display: block;
+}
+
 .map {
   border: 1px solid red;
   margin-left: 0;
@@ -19,12 +36,27 @@
   margin-right: 0;
 }
 
+.vacation_spot_image {
+  padding: 5px 0 5px 10px;
+}
+
 .description_text {
   font-weight: bold;
+  padding: 5px 0 5px 10px;
+}
+
+.vacation_spot_description {
+  padding-left: 20px;
+}
+
+.table_col {
+  width: 100%;
+  padding: 5px 0 5px 10px;
 }
 
 .table_col_des {
   font-weight: bold;
+  padding-left: 10px;
 }
 
 .directions {
@@ -35,14 +67,32 @@
   border: 1px solid blue;
 }
 
+.about h4 {
+  font-size: 1.7em;
+  padding-left: 10px;
+}
+
 .note {
  border: 1px solid red;
  margin-left: 0;
  margin-right: 0; 
 }
 
+.note p {
+
+}
+
 .vacation_notes {
   // word-wrap: none;
   // width: 450px;
   // height: 150px;
+}
+
+// *********************
+// the spot itself
+// *********************
+
+#map-canvas-directions {
+  width: 400px;
+  height: 400px;
 }

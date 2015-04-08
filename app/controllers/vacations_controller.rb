@@ -29,12 +29,12 @@ class VacationsController < ApplicationController
 #   puts key["place_id"]
 # end
 
-# @chi_place = Unirest.get("https://maps.googleapis.com/maps/api/place/details/json?placeid=ChIJ7cv00DwsDogRAMDACa2m4K8&key=#{ENV['GOOGLE_API_KEY']}")
+# @chi_place = Unirest.get("https://maps.googleapis.com/maps/api/place/details/json?placeid=ChIJJVTnmL63t4kR8N_Fwo64AHA&key=#{ENV['GOOGLE_API_KEY']}")
 # p @chi_place
 
 
-# buz = Geocoder.search("ChIJQWCpdNPJt4kRKEyYsFP8Z60", :lookup => :google_places_details)
-
+# buz = Geocoder.search("ChIJJVTnmL63t4kR8N_Fwo64AHA", :lookup => :google_places_details)
+# @helper.line
 # p buz  
     # Below can be put into a helper...
 #     if @profile == nil || @profile.locality == nil
@@ -106,6 +106,10 @@ class VacationsController < ApplicationController
     @hotel      = Accommodation.find_by(:vacation_id => @vacation.id)
     @helper     = Vacation.new
     @page_title = @vacation.vacation_name
+    
+    @helper.line
+        p @spot 
+    
   end
 
 end

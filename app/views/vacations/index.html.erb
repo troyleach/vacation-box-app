@@ -174,7 +174,7 @@
               
 <!--  -->
             </div>
-              <div id="map-canvas" class="col-md-6"></div>
+              <div id="map-canvas-home" class="col-md-6"></div>
           </div>      
         </div>
         <div class="weather  col-md-6">
@@ -312,7 +312,7 @@
         zoom: 8,
         center: myLatLong
       };
-      text = new google.maps.Map(document.getElementById('map-canvas'),
+      text = new google.maps.Map(document.getElementById('map-canvas-home'),
           mapOptions);
 
       var marker = new google.maps.Marker({
@@ -331,10 +331,7 @@
       var intiallat = <%= @profile.latitude %>;
       var intiallong = <%= @profile.longitude %>;
       
-      if (intiallat === "") {
-        intiallat = 39.7392;
-        intiallong = -104.99;
-      }
+      
     var myLatLong = new google.maps.LatLng(intiallat,intiallong);
 
     function initialize() {
@@ -343,7 +340,7 @@
         center: myLatLong,
         disableDefaultUI: true
       };
-      map = new google.maps.Map(document.getElementById('map-canvas'),
+      map = new google.maps.Map(document.getElementById('map-canvas-home'),
           mapOptions);
 
       var marker = new google.maps.Marker({

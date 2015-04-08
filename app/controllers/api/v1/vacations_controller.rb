@@ -1,4 +1,4 @@
-class Api::V1::VacationsApiController < ApplicationController
+class Api::V1::VacationsController < ApplicationController
   
   def show
     @vacation = Vacation.find(params[:id])

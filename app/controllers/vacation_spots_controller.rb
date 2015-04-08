@@ -9,12 +9,21 @@ class VacationSpotsController < ApplicationController
     @page_title       = @spot.spot_name
     @full_address     = "#{@spot.street_number} #{@spot.route}"
     @current_vacation = Vacation.find_by({:id => @spot.vacation_id})
-    @key              = "#{ENV['GOOGLE_API_KEY']}" 
-     
+    @key              = "#{ENV['GOOGLE_API_KEY']}"
+    @hotel            = Accommodation.find_by(:vacation_id => @current_vacation.id)
 
-   @directions        = Unirest.get("https://maps.googleapis.com/maps/api/directions/json?origin=38.914638,-77.040386&destination=38.911466,-77.443074&key=#{ENV['GOOGLE_API_KEY']}").body["routes"]
-@helper.line
-    p @directions
+    @helper.line
+    p @current_vacation.transpertation.upcase
+
+    @transite = Unirest.get("https://maps.googleapis.com/maps/api/directions/json?origin=Brooklyn&destination=Queens&mode=transit&key=AIzaSyCGrehijmS0whBx20TDfi4lZTH4pCuIjn4").body["routes"]
+
+    @walking = Unirest.get("https://maps.googleapis.com/maps/api/directions/json?origin=Toronto&destination=Montreal&avoid=highways&mode=walking&key=AIzaSyCGrehijmS0whBx20TDfi4lZTH4pCuIjn4").body["routes"]
+
+    @bicycling = Unirest.get("https://maps.googleapis.com/maps/api/directions/json?origin=Toronto&destination=Montreal&avoid=highways&mode=bicycling&key=AIzaSyCGrehijmS0whBx20TDfi4lZTH4pCuIjn4").body["routes"]
+        
+         
+    @car = Unirest.get("https://maps.googleapis.com/maps/api/directions/json?origin=38.914638,-77.040386&destination=38.9017,-77.0375&key=AIzaSyCGrehijmS0whBx20TDfi4lZTH4pCuIjn4").body["routes"]
+    
   end
 
   def update

@@ -1,3 +1,4 @@
+
 <div class="page_title"><span class="spot_title"><%= @spot.spot_name.capitalize %></span><span class="a_tag"><a href="/vacations/<%= @spot.vacation_id %>">Back to <%= @current_vacation.vacation_name %></a></span></div>
 
 <div ng-app="app">
@@ -6,25 +7,15 @@
 
       <div class="map row">
         <div class="col-md-12">
-          <iframe
-              width="400"
-              height="350"
-              frameborder="0" style="border:0"
-              src="https://www.google.com/maps/embed/v1/place?key=<%= @key %>
-                &q=Butchart+Gardens+Victoria+BC
-                &attribution_source=Google+Maps+Embed+API
-                &attribution_web_url=http://www.butchartgardens.com/
-                &attribution_ios_deep_link_id=comgooglemaps://?daddr=Butchart+Gardens+Victoria+BC">
-            </iframe>
-            
-
-
+          <div id="map-canvas-directions"></div>
         </div>
       </div>
-      <!-- AIzaSyCGrehijmS0whBx20TDfi4lZTH4pCuIjn4 -->
+      
 
       <div class="vacation_vitals row">
-        <div class="directions col-md-6">DIRECTIONS</div>
+        <div class="directions col-md-6">
+          <div id="directions-panel"></div>
+        </div>
         <div class="about col-md-6"><h4>Things to know about <%= @spot.spot_name.capitalize %></h4>
         <hr>
           <div class="vacation_spot_image">
@@ -81,3 +72,41 @@
     </div>
   </div><!-- END OF NG-CONTROLLER -->
 </div><!-- END OF NG-APP-->
+
+
+<script>
+
+var directionsDisplay;
+var directionsService = new google.maps.DirectionsService();
+var map;
+
+
+
+window.onload = function() {
+  directionsDisplay = new google.maps.DirectionsRenderer();
+  var center_point = new google.maps.LatLng(<%= @hotel.lat %>,<%= @hotel.long %>);
+  var mapOptions = {
+    zoom:7,
+    center: center_point
+  };
+  map = new google.maps.Map(document.getElementById('map-canvas-directions'), mapOptions);
+  directionsDisplay.setMap(map);
+  directionsDisplay.setPanel(document.getElementById('directions-panel'));
+
+
+
+  var start = new google.maps.LatLng(<%= @hotel.lat %>,<%= @hotel.long %>);
+  var end = new google.maps.LatLng(<%= @spot.lat %>,<%= @spot.lng %>);
+  var request = {
+      origin:start,
+      destination:end,
+      travelMode: google.maps.TravelMode["<%= @current_vacation.transpertation.upcase %>"]
+  };
+  directionsService.route(request, function(response, status) {
+    if (status == google.maps.DirectionsStatus.OK) {
+      directionsDisplay.setDirections(response);
+    }
+  });
+}
+
+</script>

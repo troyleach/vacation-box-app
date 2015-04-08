@@ -9,7 +9,7 @@
 
 .page_title {
   border: none;
-  margin-top: 20px;
+  margin-top: 50px;
 }
 
 .spot_title {
@@ -86,4 +86,13 @@
   // word-wrap: none;
   // width: 450px;
   // height: 150px;
+}
+
+// *********************
+// the spot itself
+// *********************
+
+#map-canvas-directions {
+  width: 400px;
+  height: 400px;
 }

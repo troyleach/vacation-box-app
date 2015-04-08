@@ -19,17 +19,14 @@ Rails.application.routes.draw do
 
    namespace :api do
      namespace :v1 do
-       get '/spots/:id' => 'vacation_spots_api#show', :as => :vacation_spot
-       post '/spots' => 'vacation_spots_api#create'
+       get '/vacation_spots/:id' => 'vacation_spots#show', :as => :vacation_spot
+       post '/vacation_spots' => 'vacation_spots#create'
+       get '/vacations/:id' => 'vacations#show', :as => :vacation
+       post '/vacations' => 'vacations#create'
      end
    end
 
-   namespace :api do
-     namespace :v1 do
-       get '/vacations/:id' => 'vacations_api#show', :as => :vacation
-       post '/vacations' => 'vacations_api#create'
-     end
-   end
+
    # namespace :api do
    #     namespace :v1 do
    #       resources :people, only: [:index, :create]

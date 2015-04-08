@@ -1,4 +1,4 @@
-class Api::V1::VacationSpotsApiController < ApplicationController
+class Api::V1::VacationSpotsController < ApplicationController
 
   def index
     @spots = VacationSpot.all

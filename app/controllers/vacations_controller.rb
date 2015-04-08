@@ -10,6 +10,9 @@ class VacationsController < ApplicationController
     @users        = User.all
     @page_title   = @profile.locality
 
+    @helper.line
+    p @profile
+
 
 # to make helper methods make a class then call self.'what_ever_the_method_name' then I can call
 # just the method
@@ -33,9 +36,9 @@ class VacationsController < ApplicationController
 # p @chi_place
 
 
-# buz = Geocoder.search("ChIJJVTnmL63t4kR8N_Fwo64AHA", :lookup => :google_places_details)
-# @helper.line
-# p buz  
+@buz = Geocoder.search("ChIJ7cv00DwsDogRAMDACa2m4K8", :lookup => :google_places_details)
+@helper.line
+p @buz  
     # Below can be put into a helper...
 #     if @profile == nil || @profile.locality == nil
 #       @current_weather = nil

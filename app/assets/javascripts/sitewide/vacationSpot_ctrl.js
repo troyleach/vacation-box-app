@@ -113,8 +113,7 @@
             };
 
         $http.post('/api/v1/vacation_spots.json', newSpot).then(function(response) {
-                $scope.vacations.vacation_spots.push(newSpot);
-                // console.log(response.data.id); 
+                $scope.vacations.vacation_spots.push(newSpot); 
                 newSpot.id = response.data.id;
               }, function (error) {
                 $scope.error = error.statusText;

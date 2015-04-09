@@ -10,22 +10,25 @@ table {
         // z-index: 1;
       }
       #map-canvas-interests {
-        width: 440px;
+        width: 405px;
         height: 440px;
-        margin-top: 25px;
-        // z-index: 1;
+        margin-top: 5px;
+        z-index: 1;
       }
-      // #info-content {
-      //   margin-left: -100px;
-      //   margin-top: 50px;
-      // }
+
+      #info-content {
+        margin-left: 0;
+        margin-top: 5px;
+      }
+
       #listing {
         border: none;
         position: absolute;
-        width: 250px;
-        height: 470px;
+        width: 240px;
+        height: 440px;
         overflow: auto;
-        margin-left: 5px;
+        margin-left: 70px;
+        margin-top: 5px;
         // left: 442px;
         // top: 0px;
         cursor: pointer;

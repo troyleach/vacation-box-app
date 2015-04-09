@@ -6,9 +6,8 @@
 
 <!-- I have a shit ton of logic in this view... need to get it outta here!!! -->
 <div ng-app="app">
-  
 <div ng-controller="vacationsCtrl">
-<div id="div-lat-lng" lat="<%= @profile.latitude %>" lng="<%= @profile.longitude %>"></div>
+  <div id="div-lat-lng" lat="<%= @profile.latitude %>" lng="<%= @profile.longitude %>"></div>
 
 
     <div class="new_vacation_link">
@@ -17,130 +16,55 @@
 
     <section class"section_one">
       <div class="body_one row">
-        <div class="message_center_box col-md-6"><p class="lounge_title">Community Lounge</p>
-          <p>Ask a question:</p>
-            <table border="0" class="message_center_table">
-            <%= form_tag "/messages" do %>
-              <tr class="message_table_row">
-                <td class="message_talbe_col_text" valign="top">
-                  <%= image_tag current_user.gravatar_url,  :class => "gravatar_image" %>
-                  <% if @profile == nil || @profile.username == nil  %>
-                    <p>user name</p>
-                  <% else %>
-                    <p class="message_user_name"><%= @profile.username %></p>
-                    <p class="message_date"><%= @helper.today %></p>
-                  <% end %>
-                </td>
-                <td class="message_talbe_col">
-                  <div class="bubble">
-                  <p class="message_title">
-                    <%= text_field_tag :title, "Title" %>
-                  </p>
-                  <p class ="message_post_message">
-                    <%=text_area_tag :message, 'Type message here', :size => "40x3" %>
-                  </p>
-                  <p class ="message_reply"><%= submit_tag "Post", :class => "btn btn-warning"%></p>
-                  </div>
-                </td>
-              </tr>
-              <% end %>
-            </table>
-            
-            <% if @profile == nil || @profile.id == nil  %>
-              <p>update your profile</p>
-            <% else %>
-              <% @message_count = [] %>
-              <% @replies_count = [] %>
-              <% @replies_count_one = [] %>
-              <% @messages.each do |key, value| %>
-                <% @message_count << key.profile_id if key.profile_id == @profile.id %>
-                <% @replies_count << key.replies if key.profile_id == @profile.id %>
-              <% end %>
+        <div class="points_of_interest_box shoadows col-md-6">
+        <h4 class="vacation_lounge_title">Things to do in <%= @profile.locality %></h4>
 
-              <% @replies_count.each do |replies| %>
-                <% @replies_count_one << replies.size %>
-              <% end %>
 
+        <div class="row">
+          <div class="col-md-6">
+           <div id="map-canvas-interests"></div>
+          </div>
+
+          <div class="point_interest_box_two col-md-6">  
+            <div id="listing">
+              <table id="resultsTable">
+                <tbody id="results"></tbody>
+              </table>
+            </div>
+
+            <div id="info-content">
+              <table>
+                <tr id="iw-url-row" class="iw_table_row">
+                  <td id="iw-icon" class="iw_table_icon"></td>
+                  <td id="iw-url"></td>
+                </tr>
+                <tr id="iw-address-row" class="iw_table_row">
+                  <td class="iw_attribute_name">Address:</td>
+                  <td id="iw-address"></td>
+                </tr>
+                <tr id="iw-phone-row" class="iw_table_row">
+                  <td class="iw_attribute_name">Telephone:</td>
+                  <td id="iw-phone"></td>
+                </tr>
+                <tr id="iw-rating-row" class="iw_table_row">
+                  <td class="iw_attribute_name">Rating:</td>
+                  <td id="iw-rating"></td>
+                </tr>
+                <tr id="iw-website-row" class="iw_table_row">
+                  <td class="iw_attribute_name">Website:</td>
+                  <td id="iw-website"></td>
+                </tr>
+              </table>
+            </div>
+          </div><!-- END OF SECOND BOX  -->
+          </div><!-- END OF points row for the map and table  -->
+        </div><!-- END OF points of interest BOX  -->
           
-
-              <% if @m_count ==  "null"
-                 @m_count = 0
-                 @r_count = 0
-               elsif @m_count && @r_count == "null"
-                 @m_count = @message_count.size
-                 @r_count = 0
-               else
-                @m_count = @message_count.size
-                @r_count = @replies_count_one.inject(:+)
-               end
-                 %>
-            <% end %>
-            <p class="general_text">You have a total of: | <span><%= @m_count %> posts</span> | <span><%= @r_count %> replies</span></p>
-    <hr>
-<!-- really.. get rid of the code below.. HACK job -->
-          <% link = "a" %>
-          
-          <% @messages = @messages.sort { |a, b| b.created_at <=> a.created_at } %>
-          <% @messages.each do |message| %>
-            <% user = @user_profile.find(message.profile_id) %>
-            <% user_email = @users.find(user.user_id) %>
-            <% replies_count = message.replies.size %>
-            
-            <table border="0" class="message_center_table">
-              <tr class="message_table_row">
-                <td class="message_talbe_col_text" valign="top">
-                  <%= image_tag user_email.gravatar_url,  :class => "gravatar_image" %>
-                  <p class="message_user_name"><%= user.username %></p>
-                  <p class="message_date"><%= @helper.convert_date(message.created_at) %></p>
-                </td>
-                <td class="message_talbe_col">
-                  <div class="bubble">
-<!-- replies COUNT -->
-                  <p class="message_title"><%= message.title %> <span class="reply_count"><%= replies_count %> replies</span></p>
-                  <p class ="message_message"><%= message.message %></p>
-
-<!-- the below div tag, message_replies, not sure where the end is for this -->
-                    <div class="message_replies">
-                      <span class="reply_button" data-toggle="collapse" data-target="#<%= message.id %>" aria-expanded="false" aria-controls="<%= message.id %>">
-                        <p class ="message_reply"><span class="caret"></span>  See <span class="message_reply_button">replies</span></p>
-                      </span>
-                      <div class="collapse" id="<%= message.id %>">
-                        <div class="well">
-                        <% message.replies.each do |reply| %>
-                        <% reply_user_name = @user_profile.find(reply["profile_id"]) %>
-                            <hr class="reply_hr">
-                            <p class="reply_from">From: <%= reply_user_name.username %></p>
-                            <p class="reply_date"><%= @helper.convert_date(reply["created_at"]) %></p>
-                            <p class="reply_text"><%= reply["reply"] %></p>
-                        <% end %>
-                          </div>
-                        </div>
-                      </div>
-<!-- THIS IS THE POST TO A REPLY BUTTON -->
-                        <span data-toggle="collapse" data-target="#<%= link %>" aria-expanded="false" aria-controls="<%= link %>">
-                          <p class ="message_reply"><span class="caret"></span>Reply to <span class="message_reply_button"><%= user.username %></span></p>
-                        </span>
-                        <div class="collapse" id="<%= link %>">
-                          <div class="post_box">
-                            <%= form_tag "/replies" do %>
-                            <%=text_area_tag :reply, 'Type message here', :size => "40x3" %>
-                            <%= hidden_field_tag :message_id, message.id %>
-                            <p class ="message_reply"><%= submit_tag "Post", :class => "btn btn-warning"%></p>
-                            <% link.next! %>
-                            <% end %>
-                          </div>
-                        </div>  
-
-                  </div>
-                </td>
-              </tr>
-            </table>
-          <% end %>
-        </div>
+        
 
         
-        <div class="places_been col-md-6">
-          
+        <div class="places_been shoadows col-md-6">
+          <h4 class="vacation_lounge_title">Places I have been</h4>
           <div>
           <span>HOME</span> <img src="http://chart.apis.google.com/chart?chst=d_map_xpin_icon_withshadow&chld=pin_sright|home|C9DE55|FCFAE1" alt="">
           <span>Places Going</span> <img src="http://chart.apis.google.com/chart?chst=d_map_xpin_letter_withshadow&chld=pin_star|G|B9121B|FCFAE1|FCFAE1" alt="Places going pin">
@@ -159,115 +83,164 @@
           <% end %>
 
         </div>
-      </div>
+      </div><!-- END OF body_one row  -->
     </section>
 
-    <section class"section_two">
-      <div class="body_two row">
-        <div class="home_city_box col-md-6">
-        <h4 class="home_city_title">Home city</h4>
+    <section>
+      <div class="section_two row">
+        <div class="home_city_box shoadows col-md-6">
+         <h4 class="home_city_title">Home city</h4>
           <div class="row">
             <!-- look a this website. I googled chi town, then clicked on the image and it took me here the bottom code needs to be from google api / image -->
             <div class="col-md-6">
 <!-- PICTURE -->
               <div id="wapiblock"></div>
               
-<!--  -->
             </div>
-              <div id="map-canvas" class="col-md-6"></div>
+              <div id="map-canvas-home" class="col-md-6"></div>
           </div>      
         </div>
-        <div class="weather  col-md-6">
+        <div class="weather shoadows col-md-6">
         <h4 class="home_city_title">Local Weather</h4>
         <% if @profile == nil || @profile.locality == nil  %>
         <p>- Current Weather -</p>
           <a href="/profiles/<%= current_user.id %>/edit"><p class="no_profile">- Please update your profile -</p></a>
         <% else %>
-          
+          <iframe id="forecast_embed" class="weather_iframe" type="text/html" frameborder="0" height="60" width="100%" src="http://forecast.io/embed/#lat=<%= @profile.latitude %>&lon=<%= @profile.longitude %>&name=<%= @profile.locality %>"> </iframe>
         <% end %>
         </div>
       </div>
     </section>
 
-<!-- POINT OF INTERESTS  -->
+<!-- VACATION LOUNGE...  -->
     
-    <section>
-    <h4 class="home_city_title">Point of interests</h4>
-      <div class="row section_three">
-        <div class="col-md-4">
-          <div id="findhotels">
-            Interests:
-          </div>
-          
-          <div id="locationField">
-            <input id="autocomplete" placeholder="Enter a city" type="text" />
-          </div>
+  <section id="center">
+    <div class="row section_three message_center_box"> 
+      <div class="vacation_lounge shoadows col-md-12">
+        <h4 class="vacation_lounge_title">Vacation Lounge...</h4>
+                    <p class="ask_question">Ask a question:</p>
+                      <table border="0" class="message_center_table">
+                      <%= form_tag "/messages" do %>
+                        <tr class="message_table_row">
+                          <td class="message_talbe_col_text" valign="top">
+                            <%= image_tag current_user.gravatar_url,  :class => "gravatar_image" %>
+                            <% if @profile == nil || @profile.username == nil  %>
+                              <p>user name</p>
+                            <% else %>
+                              <p class="message_user_name"><%= @profile.username %></p>
+                              <p class="message_date"><%= @helper.today %></p>
+                            <% end %>
+                          </td>
+                          <td class="message_talbe_col">
+                            <div class="bubble">
+                            <p class="message_title">
+                              <%= text_field_tag :title, "Title" %>
+                            </p>
+                            <p class ="message_post_message">
+                              <%=text_area_tag :message, 'Type message here', :size => "40x3" %>
+                            </p>
+                            <p class ="message_reply"><%= submit_tag "Post", :class => "btn btn-warning"%></p>
+                            </div>
+                          </td>
+                        </tr>
+                        <% end %>
+                      </table>
+                      
+                      <% if @profile == nil || @profile.id == nil  %>
+                        <p>update your profile</p>
+                      <% else %>
+                        <% @message_count = [] %>
+                        <% @replies_count = [] %>
+                        <% @replies_count_one = [] %>
+                        <% @messages.each do |key, value| %>
+                          <% @message_count << key.profile_id if key.profile_id == @profile.id %>
+                          <% @replies_count << key.replies if key.profile_id == @profile.id %>
+                        <% end %>
 
-          <div id="controls">
-            <select id="country">
-              <option value="all">All</option>
-              <option value="au">Australia</option>
-              <option value="br">Brazil</option>
-              <option value="ca">Canada</option>
-              <option value="fr">France</option>
-              <option value="de">Germany</option>
-              <option value="mx">Mexico</option>
-              <option value="nz">New Zealand</option>
-              <option value="it">Italy</option>
-              <option value="za">South Africa</option>
-              <option value="es">Spain</option>
-              <option value="pt">Portugal</option>
-              <option value="us" selected>U.S.A.</option>
-              <option value="uk">United Kingdom</option>
-            </select>
+                        <% @replies_count.each do |replies| %>
+                          <% @replies_count_one << replies.size %>
+                        <% end %>
 
-            <!-- <select id="placeType">
-              <option value="all">All</option>
-              <option value="restaurant">Restaurant</option>
-              <option value="lodging">Lodging</option>
-            </select> -->
-          </div>
+                    
 
-          <div id="map-canvas-interests"></div>
+                        <% if @m_count ==  "null"
+                           @m_count = 0
+                           @r_count = 0
+                         elsif @m_count && @r_count == "null"
+                           @m_count = @message_count.size
+                           @r_count = 0
+                         else
+                          @m_count = @message_count.size
+                          @r_count = @replies_count_one.inject(:+)
+                         end
+                           %>
+                      <% end %>
+                      <p class="general_text">You have a total of: | <span><%= @m_count %> posts</span> | <span><%= @r_count %> replies</span></p>
+              <hr>
+              <div class="message_box">
+          <!-- really.. get rid of the code below.. HACK job -->
+                    <% link = "a" %>
+                    
+                    <% @messages = @messages.sort { |a, b| b.created_at <=> a.created_at } %>
+                    <% @messages.each do |message| %>
+                      <% user = @user_profile.find(message.profile_id) %>
+                      <% user_email = @users.find(user.user_id) %>
+                      <% replies_count = message.replies.size %>
+                      
+                      <table border="0" class="message_center_table">
+                        <tr class="message_table_row">
+                          <td class="message_talbe_col_text" valign="top">
+                            <%= image_tag user_email.gravatar_url,  :class => "gravatar_image" %>
+                            <p class="message_user_name"><%= user.username %></p>
+                            <p class="message_date"><%= @helper.convert_date(message.created_at) %></p>
+                          </td>
+                          <td class="message_talbe_col">
+                            <div class="bubble">
+          <!-- replies COUNT -->
+                            <p class="message_title"><%= message.title %> <span class="reply_count"><%= replies_count %> replies</span></p>
+                            <p class ="message_message"><%= message.message %></p>
 
-        </div><!-- END OF FIRST BOX  -->
+          <!-- the below div tag, message_replies, not sure where the end is for this -->
+                              <div class="message_replies">
+                                <span class="reply_button" data-toggle="collapse" data-target="#<%= message.id %>" aria-expanded="false" aria-controls="<%= message.id %>">
+                                  <p class ="message_reply"><span class="caret"></span>  See <span class="message_reply_button">replies</span></p>
+                                </span>
+                                <div class="collapse" id="<%= message.id %>">
+                                  <div class="well">
+                                  <% message.replies.each do |reply| %>
+                                  <% reply_user_name = @user_profile.find(reply["profile_id"]) %>
+                                      <hr class="reply_hr">
+                                      <p class="reply_from">From: <%= reply_user_name.username %></p>
+                                      <p class="reply_date"><%= @helper.convert_date(reply["created_at"]) %></p>
+                                      <p class="reply_text"><%= reply["reply"] %></p>
+                                  <% end %>
+                                    </div>
+                                  </div>
+                                </div>
+          <!-- THIS IS THE POST TO A REPLY BUTTON -->
+                                  <span data-toggle="collapse" data-target="#<%= link %>" aria-expanded="false" aria-controls="<%= link %>">
+                                    <p class ="message_reply"><span class="caret"></span>Reply to <span class="message_reply_button"><%= user.username %></span></p>
+                                  </span>
+                                  <div class="collapse" id="<%= link %>">
+                                    <div class="post_box">
+                                      <%= form_tag "/replies" do %>
+                                      <%=text_area_tag :reply, 'Type message here', :size => "40x3" %>
+                                      <%= hidden_field_tag :message_id, message.id %>
+                                      <p class ="message_reply"><%= submit_tag "Post", :class => "btn btn-warning"%></p>
+                                      <% link.next! %>
+                                      <% end %>
+                                    </div>
+                                  </div>  
 
-        <div class="point_interest_box_two col-md-4">  
-          <div id="listing">
-            <table id="resultsTable">
-              <tbody id="results"></tbody>
-            </table>
-          </div>
-
-          <div id="info-content">
-            <table>
-              <tr id="iw-url-row" class="iw_table_row">
-                <td id="iw-icon" class="iw_table_icon"></td>
-                <td id="iw-url"></td>
-              </tr>
-              <tr id="iw-address-row" class="iw_table_row">
-                <td class="iw_attribute_name">Address:</td>
-                <td id="iw-address"></td>
-              </tr>
-              <tr id="iw-phone-row" class="iw_table_row">
-                <td class="iw_attribute_name">Telephone:</td>
-                <td id="iw-phone"></td>
-              </tr>
-              <tr id="iw-rating-row" class="iw_table_row">
-                <td class="iw_attribute_name">Rating:</td>
-                <td id="iw-rating"></td>
-              </tr>
-              <tr id="iw-website-row" class="iw_table_row">
-                <td class="iw_attribute_name">Website:</td>
-                <td id="iw-website"></td>
-              </tr>
-            </table>
-          </div>
-        </div><!-- END OF SECOND BOX  -->
-          
-        <div class="col-md-4"><!-- nothing in this box --></div>
-      </div><!-- end of the row div -->
-    </section>
+                            </div>
+                          </td>
+                        </tr>
+                      </table>
+                    <% end %>
+                    </div><!-- this is the end of the message_box for scrolling -->
+      </div>
+    </div><!-- end of the row div section 3 -->
+  </section>
 
   </div><!-- End of ng-app -->
 </div><!-- End of ng-controller -->
@@ -312,7 +285,7 @@
         zoom: 8,
         center: myLatLong
       };
-      text = new google.maps.Map(document.getElementById('map-canvas'),
+      text = new google.maps.Map(document.getElementById('map-canvas-home'),
           mapOptions);
 
       var marker = new google.maps.Marker({
@@ -331,10 +304,7 @@
       var intiallat = <%= @profile.latitude %>;
       var intiallong = <%= @profile.longitude %>;
       
-      if (intiallat === "") {
-        intiallat = 39.7392;
-        intiallong = -104.99;
-      }
+      
     var myLatLong = new google.maps.LatLng(intiallat,intiallong);
 
     function initialize() {
@@ -343,7 +313,7 @@
         center: myLatLong,
         disableDefaultUI: true
       };
-      map = new google.maps.Map(document.getElementById('map-canvas'),
+      map = new google.maps.Map(document.getElementById('map-canvas-home'),
           mapOptions);
 
       var marker = new google.maps.Marker({
@@ -359,5 +329,310 @@
 
 <!-- Points of interest -->
 <script type="text/javascript">
+
+
+
+// This example uses the autocomplete feature of the Google Places API.
+// It allows the user to find all hotels in a given place, within a given
+// country. It then displays markers for all the hotels returned,
+// with on-click details for each hotel.
+
+var interestMap, places, infoWindow;
+var markers = [];
+var autocomplete;
+var countryRestrict = { 'country': 'us' };
+var MARKER_PATH = 'https://maps.gstatic.com/intl/en_us/mapfiles/marker_green';
+var hostnameRegexp = new RegExp('^https?://.+?/');
+
+// var placeType = {
+//   'types': ['lodging']
+// }
+
+var countries = {
+  'au': {
+    center: new google.maps.LatLng(-25.3, 133.8),
+    zoom: 4
+  },
+  'br': {
+    center: new google.maps.LatLng(-14.2, -51.9),
+    zoom: 3
+  },
+  'ca': {
+    center: new google.maps.LatLng(62, -110.0),
+    zoom: 3
+  },
+  'fr': {
+    center: new google.maps.LatLng(46.2, 2.2),
+    zoom: 5
+  },
+  'de': {
+    center: new google.maps.LatLng(51.2, 10.4),
+    zoom: 5
+  },
+  'mx': {
+    center: new google.maps.LatLng(23.6, -102.5),
+    zoom: 4
+  },
+  'nz': {
+    center: new google.maps.LatLng(-40.9, 174.9),
+    zoom: 5
+  },
+  'it': {
+    center: new google.maps.LatLng(41.9, 12.6),
+    zoom: 5
+  },
+  'za': {
+    center: new google.maps.LatLng(-30.6, 22.9),
+    zoom: 5
+  },
+  'es': {
+    center: new google.maps.LatLng(40.5, -3.7),
+    zoom: 5
+  },
+  'pt': {
+    center: new google.maps.LatLng(39.4, -8.2),
+    zoom: 6
+  },
+  'us': {
+    center: new google.maps.LatLng(37.1, -95.7),
+    zoom: 3
+  },
+  'uk': {
+    center: new google.maps.LatLng(54.8, -4.6),
+    zoom: 5
+  },
+  'homeState': {
+    center: new google.maps.LatLng(<%= @profile.latitude %>, <%= @profile.longitude %>),
+    zoom: 13
+  },
+};
+
+
+// will need to do a if/else based on homeState or new user, new user will be centered on country
+
+function initialize() {
+  var myOptions = {
+    zoom: countries['homeState'].zoom,
+    center: countries['homeState'].center,
+    mapTypeControl: false,
+    panControl: false,
+    zoomControl: false,
+    streetViewControl: false
+  };
+
+  interestMap = new google.maps.Map(document.getElementById('map-canvas-interests'), myOptions);
+
+  infoWindow = new google.maps.InfoWindow({
+      content: document.getElementById('info-content')
+      });
+
+  // Create the autocomplete object and associate it with the UI input control.
+  // Restrict the search to the default country, and to place type "cities".
+
+  // autocomplete = new google.maps.places.Autocomplete(
+  //     /** @type {HTMLInputElement} */(document.getElementById('autocomplete')),
+  //     {
+  //       types: ['(cities)'],
+  //       componentRestrictions: countryRestrict
+  //     });
+  places = new google.maps.places.PlacesService(interestMap);
+  search();
+
+  // google.maps.event.addListener(autocomplete, 'place_changed', onPlaceChanged);
+
+  // Add a DOM event listener to react when the user selects a country.
+  // google.maps.event.addDomListener(document.getElementById('country'), 'change',
+  //     setAutocompleteCountry);
+}
+
+// When the user selects a city, get the place details for the city and
+// zoom the map in on the city.
+// I think the only thing this function is doing is moving the map to the location, then it
+// calls the search function
+// function onPlaceChanged() {
+//   var place = autocomplete.getPlace();
+//   if (place.geometry) {
+//     interestMap.panTo(place.geometry.location);
+//     interestMap.setZoom(14);
+//     search();
+//   } else {
+//     document.getElementById('autocomplete').placeholder = 'Enter a city';
+//   }
+// }
+
+// Search for hotels(OR WHATEVER LIKE SHOWN BELOW BAR) in the selected city, within the viewport of the map.
+function search() {
+  var museum = {
+    bounds: interestMap.getBounds(),
+    types: ['museum']
+  };
+
+  var search = {
+    bounds: interestMap.getBounds(),
+    types: ['bar', 'museum', 'aquarium', 'restaurant']
+  };
+
+  places.nearbySearch(search, function(results, status) {
+    if (status == google.maps.places.PlacesServiceStatus.OK) {
+      clearResults();
+      clearMarkers();
+      // Create a marker for each hotel found, and
+      // assign a letter of the alphabetic to each marker icon.
+      for (var i = 0; i < results.length; i++) {
+        var markerLetter = String.fromCharCode('A'.charCodeAt(0) + i);
+        var markerIcon = MARKER_PATH + markerLetter + '.png';
+        // Use marker animation to drop the icons incrementally on the map.
+        markers[i] = new google.maps.Marker({
+          position: results[i].geometry.location,
+          animation: google.maps.Animation.DROP,
+          icon: markerIcon
+        });
+        // If the user clicks a hotel marker, show the details of that hotel
+        // in an info window.
+        markers[i].placeResult = results[i];
+        google.maps.event.addListener(markers[i], 'click', showInfoWindow);
+        setTimeout(dropMarker(i), i * 100);
+        addResult(results[i], i);
+      }
+    }
+  });
+}
+
+function clearMarkers() {
+  for (var i = 0; i < markers.length; i++) {
+    if (markers[i]) {
+      markers[i].setMap(null);
+    }
+  }
+  markers = [];
+}
+
+// [START region_setcountry]
+// Set the country restriction based on user input.
+// Also center and zoom the map on the given country.
+// function setAutocompleteCountry() {
+//   var country = document.getElementById('country').value;
+//   if (country == 'all') {
+//     autocomplete.setComponentRestrictions([]);
+//     interestMap.setCenter(new google.maps.LatLng(15, 0));
+//     interestMap.setZoom(2);
+//   } else {
+//     autocomplete.setComponentRestrictions({ 'country': country });
+//     interestMap.setCenter(countries[country].center);
+//     interestMap.setZoom(countries[country].zoom);
+//   }
+//   clearResults();
+//   clearMarkers();
+// }
+// [END region_setcountry]
+
+function dropMarker(i) {
+  return function() {
+    markers[i].setMap(interestMap);
+  };
+}
+
+// THE BELOW CODE IS FOR THE TABLE NEXT TO THE MAP THAT HOUSES ALL PLACES
+function addResult(result, i) {
+  var results = document.getElementById('results');
+  var markerLetter = String.fromCharCode('A'.charCodeAt(0) + i);
+  var markerIcon = MARKER_PATH + markerLetter + '.png';
+
+  var tr = document.createElement('tr');
+  tr.style.backgroundColor = (i % 2 == 0 ? '#d8d8d8' : '#FFFFFF');
+  tr.onclick = function() {
+    google.maps.event.trigger(markers[i], 'click');
+  };
+
+  var iconTd = document.createElement('td');
+  var nameTd = document.createElement('td');
+  var icon = document.createElement('img');
+  icon.src = markerIcon;
+  icon.setAttribute('class', 'placeIcon');
+  icon.setAttribute('className', 'placeIcon');
+  var name = document.createTextNode(result.name);
+  iconTd.appendChild(icon);
+  nameTd.appendChild(name);
+  tr.appendChild(iconTd);
+  tr.appendChild(nameTd);
+  results.appendChild(tr);
+}
+
+function clearResults() {
+  var results = document.getElementById('results');
+  while (results.childNodes[0]) {
+    results.removeChild(results.childNodes[0]);
+  }
+}
+
+// Get the place details for a hotel. Show the information in an info window,
+// anchored on the marker for the hotel that the user selected.
+function showInfoWindow() {
+  var marker = this;
+  places.getDetails({placeId: marker.placeResult.place_id},
+      function(place, status) {
+        if (status != google.maps.places.PlacesServiceStatus.OK) {
+          return;
+        }
+        infoWindow.open(interestMap, marker);
+        buildIWContent(place);
+      });
+}
+
+// Load the place information into the HTML elements used by the info window.
+function buildIWContent(place) {
+  document.getElementById('iw-icon').innerHTML = '<img class="hotelIcon" ' +
+      'src="' + place.icon + '"/>';
+  document.getElementById('iw-url').innerHTML = '<b><a href="' + place.url +
+      '">' + place.name + '</a></b>';
+  document.getElementById('iw-address').textContent = place.vicinity;
+
+  if (place.formatted_phone_number) {
+    document.getElementById('iw-phone-row').style.display = '';
+    document.getElementById('iw-phone').textContent =
+        place.formatted_phone_number;
+  } else {
+    document.getElementById('iw-phone-row').style.display = 'none';
+  }
+
+  // Assign a five-star rating to the hotel, using a black star ('&#10029;')
+  // to indicate the rating the hotel has earned, and a white star ('&#10025;')
+  // for the rating points not achieved.
+  if (place.rating) {
+    var ratingHtml = '';
+    for (var i = 0; i < 5; i++) {
+      if (place.rating < (i + 0.5)) {
+        ratingHtml += '&#10025;';
+      } else {
+        ratingHtml += '&#10029;';
+      }
+    document.getElementById('iw-rating-row').style.display = '';
+    document.getElementById('iw-rating').innerHTML = ratingHtml;
+    }
+  } else {
+    document.getElementById('iw-rating-row').style.display = 'none';
+  }
+
+  // The regexp isolates the first part of the URL (domain plus subdomain)
+  // to give a short URL for displaying in the info window.
+  if (place.website) {
+    var fullUrl = place.website;
+    var website = hostnameRegexp.exec(place.website);
+    if (website == null) {
+      website = 'http://' + place.website + '/';
+      fullUrl = website;
+    }
+    document.getElementById('iw-website-row').style.display = '';
+    document.getElementById('iw-website').textContent = website;
+  } else {
+    document.getElementById('iw-website-row').style.display = 'none';
+  }
+}
+
+google.maps.event.addDomListener(window, 'load', initialize);
+
   
 </script>
+
+
+

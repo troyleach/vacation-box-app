@@ -3,13 +3,22 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 // this needs to move
-#map-canvas {
+#map-canvas-home {
   height: 250px;
   width: 250px;
+  margin-bottom: 10px;
 }
 
-
 // ********  ***********
+
+.shoadows {
+  -webkit-box-shadow: 3px 6px 16px -4px rgba(0,0,0,0.48);
+  -moz-box-shadow: 3px 6px 16px -4px rgba(0,0,0,0.48);
+  box-shadow: 3px 6px 16px -4px rgba(0,0,0,0.48);
+  // -webkit-box-shadow: 0 8px 6px -6px black;
+  // -moz-box-shadow: 0 8px 6px -6px black;
+  // box-shadow: 0 8px 6px -6px black;
+}
 
 section {
   border: none;
@@ -20,7 +29,7 @@ section {
   text-align: center;
   font-weight: 900;
   font-size: 1.8em;
-  padding: 15px;
+  padding: 10px;
 }
 
 .new_vacation_link a {
@@ -41,7 +50,21 @@ section {
 
 .body_one {
   border: none;
-  height: 450px;
+  height: 500px;
+}
+
+.section_one {
+  border: none;
+  padding-top: 5px;
+  padding-bottom: 20px;
+}
+
+.points_of_interest_box {
+  border-radius: 10px;
+  // border: 1px solid #849696;
+  background-color: #EDEFF1;
+  height: 100%;
+  width: 49.5%;
 }
 
 .chat_box {
@@ -55,11 +78,12 @@ section {
 }
 
 .places_been {
-  border: 1px solid #849696;
-  background-color: #fefffb;
-  height: 100%;
+  border-radius: 10px;
+  // border: 1px solid #849696;
+  background-color: #EDEFF1;
   float: right;
-  // margin-left: 140px;
+  width: 49.5%;
+  height: 100%;
 }
 
 .places_been img {
@@ -123,23 +147,72 @@ vacations make up page
   height: 235px;
 }
 
+.weather {
+  border-radius: 10px;
+  background-color: #EDEFF1;
+  float: right;
+  width: 49.5%;
+  height: 100%;
+}
+
+.home_city_box {
+  border-radius: 10px;
+  background-color: #EDEFF1;
+  width: 49.5%;
+}
+
+.section_two {
+  border: none;
+  padding-top: 20px;
+  padding-bottom: 5px;
+}
+
+.section_three {
+  border: none;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
 /************************************
 message box
 ************************************/
 
+.vacation_lounge_title {
+  text-align: left;
+  // border-bottom: 1px solid #849696;
+}
+
+.ask_question {
+  text-align: left;
+}
+
+.vacation_lounge {
+  border-radius: 10px;
+  background-color: #EDEFF1;
+  width: 49.5%;
+  padding-bottom: 20px;
+  margin-bottom: 30px;
+}
+
+
 .message_center_box {
-  border: 2px solid #849696;
-  background-color: #fefffb;
-  width: 520px;
-  height: 100%;
-  overflow: scroll;
-  margin-left: 60px;
+  // border: 2px solid #849696;
+  // background-color: #fefffb;
+  // width: 520px;
+  height: 400px;
+  text-align: center;
 }
 
 .message_box {
-  border: 1px solid red;
-  width: 350px;
-  height: 80px;
+  // border: 1px solid #849696;
+  width: 550px;
+  height: 300px;
+  overflow: scroll;
+  margin-bottom: 10px;
+  margin-top: 10px;
+  padding-left: 45px;
+  margin: auto;
+  background-color: #ffffff
 }
 
 .message_center_table {
@@ -195,13 +268,4 @@ p.message_date {
   color: #FF972C; 
 }
 
-.home_city_title {
-  border-bottom: 1px solid black;
-}
-
-.section_three {
-  border: none;
-  padding-top: 5px;
-  padding-bottom: 5px;
-}
 

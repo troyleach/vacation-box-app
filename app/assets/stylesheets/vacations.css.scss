@@ -105,18 +105,21 @@ section {
 }
 
 #address {
-  width: 200px;
+  width: 240px;
   border: 1px solid #000090;
 }
 
 #description {
-  width: 150px;
   border: 1px solid #000090;
 }
 
 .been_title {
-  width: 150px;
+  width: 180px;
   border: 1px solid #000090;
+}
+
+.place_description_box {
+  text-align: center;
 }
 
 
@@ -147,24 +150,28 @@ vacations make up page
   height: 235px;
 }
 
-.weather {
+.home {
   border-radius: 10px;
   background-color: #EDEFF1;
   float: right;
   width: 49.5%;
+  padding-bottom: 20px;
+  margin-bottom: 30px;
   height: 100%;
-}
 
-.home_city_box {
-  border-radius: 10px;
-  background-color: #EDEFF1;
-  width: 49.5%;
+  // border-radius: 10px;
+  // background-color: #EDEFF1;
+  // 
+  // width: 49.5%;
+  // 
 }
 
 .section_two {
   border: none;
-  padding-top: 20px;
-  padding-bottom: 5px;
+  padding-top: 5px;
+  padding-bottom: 20px;
+  height: 100%;
+  margin: 15px 0 20px 0;
 }
 
 .section_three {
@@ -176,6 +183,14 @@ vacations make up page
 /************************************
 message box
 ************************************/
+.vacation_lounge {
+  border-radius: 10px;
+  background-color: #EDEFF1;
+  width: 49.5%;
+  padding-bottom: 20px;
+  margin-bottom: 30px;
+  height: 100%;
+}
 
 .vacation_lounge_title {
   text-align: left;
@@ -186,21 +201,12 @@ message box
   text-align: left;
 }
 
-.vacation_lounge {
-  border-radius: 10px;
-  background-color: #EDEFF1;
-  width: 49.5%;
-  padding-bottom: 20px;
-  margin-bottom: 30px;
-}
-
-
 .message_center_box {
   // border: 2px solid #849696;
   // background-color: #fefffb;
   // width: 520px;
   height: 400px;
-  text-align: center;
+  // text-align: center;
 }
 
 .message_box {
@@ -209,14 +215,15 @@ message box
   height: 300px;
   overflow: scroll;
   margin-bottom: 10px;
-  margin-top: 10px;
+  margin-top: 15px;
   padding-left: 45px;
-  margin: auto;
-  background-color: #ffffff
+  // margin: auto;
+  background-color: #EDEFF1;
 }
 
 .message_center_table {
-  margin-bottom: 5px;
+  margin-bottom: 15px;
+  margin-top: 15px;
 }
 
 .message_table_row {
@@ -244,14 +251,14 @@ p.message_date {
 }
 
 .message_title {
-  color: #FF972C;
+  color: #85DB18;
   font-size: 1.2em;
   font-weight: 900;
   border-bottom: 1px solid #849696;
 }
 
 .message_message {
-  color: #FEFFFB;
+  color: #000000;
 }
 
 .message_post_message {
@@ -259,13 +266,13 @@ p.message_date {
 }
 
 .message_reply {
-  color: #FEFFFB;
+  color: #000000;
   text-align: left;
   padding-left: 15px;
 }
 
 .message_reply_button {
-  color: #FF972C; 
+  color: #000000; 
 }
 
 /************************************
@@ -307,5 +314,10 @@ WEATHER FEATURE
 .data_provided_by {
   margin-bottom: 20px;
   color: #849696;
+}
+
+// pictures
+.panoramio-wapi-tos {
+  background-color: red;
 }
 

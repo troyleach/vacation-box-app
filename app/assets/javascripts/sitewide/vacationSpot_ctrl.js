@@ -10,16 +10,25 @@
         $scope.vacations = response.data;
       });
 
+      var floor = Math.floor;
+      var div = document.getElementById('div-lat-lng');
+      var lat = div.getAttribute("lat");
+      var lng = div.getAttribute("lng");
+
+      var latlng = [parseFloat(lat), parseFloat(lng)];
+
+      console.log(latlng);
 
 
-        var vacationBounds = new google.maps.LatLngBounds(
-          new google.maps.LatLng(39.8055204953369,-75.88245927974606),
-          new google.maps.LatLng(38.00887950466311,-78.19134072025393)
-          );
+        // var vacationBounds = new google.maps.LatLngBounds(
+        //   new google.maps.LatLng(39.8055204953369,-75.88245927974606),
+        //   new google.maps.LatLng(38.00887950466311,-78.19134072025393)
+        //   );
 
         var input = document.getElementById('user_input');
         var options = {
-          bounds: vacationBounds
+          bounds: getBoundingBox(latlng, 9)
+          // bounds: vacationBounds
         };
 
         var componentForm = {

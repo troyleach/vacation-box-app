@@ -1,13 +1,14 @@
 
-<div class="page_title"><span class="spot_title"><%= @spot.spot_name.capitalize %></span><span class="a_tag"><a href="/vacations/<%= @spot.vacation_id %>">Back to <%= @current_vacation.vacation_name %></a></span></div>
+
 
 <div ng-app="app">
   <div ng-controller="vacationSpotCtrl" ng-init="fetchData(<%= @spot.id %>)">
+  <div id="div-lat-lng" lat="<%= @profile.latitude %>" lng="<%= @profile.longitude %>"></div>
     <div class="vacation_spot_wrapper">
 
       <div class="map row">
         <div class="col-md-12">
-          <div id="map-canvas-directions"></div>
+          <div class="page_title"><span class="spot_title"><%= @spot.spot_name.capitalize %></span><span class="a_tag"><a href="/vacations/<%= @spot.vacation_id %>">Back to <%= @current_vacation.vacation_name %></a></span></div>
         </div>
       </div>
       
@@ -61,15 +62,23 @@
       </div>
 
       <div class="note row">
+      <div class="col-md-6 box_one">
         <%= form_tag "/vacation_spots/#{@spot.id}", :method => :patch do %>
         <p>Make some notes about this spot <%= submit_tag "Update" %></p>
           <div>
             <%=text_area_tag :note, @spot.note, :size => "60x8" %>
           </div>
         <% end %>
-      </div>
+        </div><!-- END OF BOX_ONE -->
+        <div class="col-md-6">
+          <div>
+            <div id="map-canvas-directions"></div>
+          </div>
+        </div><!-- END OF BOX_TWO -->
 
-    </div>
+
+      </div><!-- END OF NOTE ROW -->
+    </div><!-- END OF VACATION WRAPPER -->
   </div><!-- END OF NG-CONTROLLER -->
 </div><!-- END OF NG-APP-->
 
@@ -84,7 +93,7 @@ var map;
 
 window.onload = function() {
   directionsDisplay = new google.maps.DirectionsRenderer();
-  var center_point = new google.maps.LatLng(<%= @hotel.lat %>,<%= @hotel.long %>);
+  var center_point = new google.maps.LatLng(<%= @hotel.latitude %>,<%= @hotel.longitude %>);
   var mapOptions = {
     zoom:7,
     center: center_point
@@ -95,7 +104,7 @@ window.onload = function() {
 
 
 
-  var start = new google.maps.LatLng(<%= @hotel.lat %>,<%= @hotel.long %>);
+  var start = new google.maps.LatLng(<%= @hotel.latitude %>,<%= @hotel.longitude %>);
   var end = new google.maps.LatLng(<%= @spot.lat %>,<%= @spot.lng %>);
   var request = {
       origin:start,

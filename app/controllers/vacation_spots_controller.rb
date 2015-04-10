@@ -13,7 +13,7 @@ class VacationSpotsController < ApplicationController
     @hotel            = Accommodation.find_by(:vacation_id => @current_vacation.id)
 
     @helper.line
-    p @current_vacation.transpertation.upcase
+    p @current_vacation
 
     @transite = Unirest.get("https://maps.googleapis.com/maps/api/directions/json?origin=Brooklyn&destination=Queens&mode=transit&key=AIzaSyCGrehijmS0whBx20TDfi4lZTH4pCuIjn4").body["routes"]
 

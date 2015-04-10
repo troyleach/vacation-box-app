@@ -10,8 +10,15 @@ class VacationsController < ApplicationController
     @users        = User.all
     @page_title   = @profile.locality
 
-    @helper.line
-    p @profile
+    @current_weather = DarkSkyWeather::CurrentWeather.currently(ENV['WEATHER_API_KEY'], @profile.latitude, @profile.longitude)
+    @week_of_weather = DarkSkyWeather::CurrentWeather.daily(ENV['WEATHER_API_KEY'], @profile.latitude, @profile.longitude)
+    
+    @week_of_weather.each do |day|
+      if day.abbreviated_week_day == @current_weather.abbreviated_week_day
+        @week_of_weather.delete(day)
+      end
+    end
+
 
 
 # to make helper methods make a class then call self.'what_ever_the_method_name' then I can call
@@ -36,17 +43,18 @@ class VacationsController < ApplicationController
 # p @chi_place
 
 
-@buz = Geocoder.search("ChIJ7cv00DwsDogRAMDACa2m4K8", :lookup => :google_places_details)
-@helper.line
-p @buz  
-    # Below can be put into a helper...
+# @buz = Geocoder.search("ChIJ7cv00DwsDogRAMDACa2m4K8", :lookup => :google_places_details)
+# @helper.line
+# p @buz
+
+#     # Below can be put into a helper...
 #     if @profile == nil || @profile.locality == nil
 #       @current_weather = nil
 #     else
-#       @current_weather = Unirest.get("#{ENV['WEATHER_API_URL']}/#{ENV['WEATHER_API_KEY']}/#{@profile.latitude},#{@profile.longitude}").body["currently"]
+#       @current_weather = Unirest.get("#{ENV['WEATHER_API_URL']}/#{ENV['WEATHER_API_KEY']}/#{@profile.latitude},#{@profile.longitude}").body["daily"]["data"]
 #     end
 # @helper.line
-# p @current_weather
+# p @current_weather.size
    
     @hash = Gmaps4rails.build_markers(@vacations) do |vacation, marker|
       marker.lat vacation.latitude
@@ -91,9 +99,8 @@ p @buz
   end
 
   def create
-    
     @vacation = Vacation.create ({:vacation_name => params[:vacation_name], :city => params[:city], :state => params[:state], :note => params[:note], :transpertation => params[:transpertation], :arrive_by => params[:arrive_by], :user_id => current_user.id})
-    
+        
     @hotel    = Accommodation.create({:name => params[:name], :address => params[:address], :city => params[:city], :zip => params[:zip], :vacation_id => @vacation.id})
 
     flash[:success] = "A new vacation has been added!"
@@ -110,15 +117,6 @@ p @buz
     @helper     = Vacation.new
     @page_title = @vacation.vacation_name
     
-    @helper.line
-        p @spot 
-    
   end
 
 end
-
-
-# @vacation = Vacation.find_by(:user_id => current_user.id)
-# if !@vacation
-#   Vacation.create({:user_id => current_user.id})
-# end

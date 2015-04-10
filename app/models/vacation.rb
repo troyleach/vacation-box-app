@@ -1,5 +1,5 @@
 class Vacation < ActiveRecord::Base
-  geocoded_by :address
+  geocoded_by :city
   after_validation :geocode
 
   enum arrive_by:       {:air => 0, :car => 1, :train => 2}

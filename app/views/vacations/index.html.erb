@@ -101,14 +101,45 @@
           </div>      
         </div>
         <div class="weather shoadows col-md-6">
-        <h4 class="home_city_title">Local Weather</h4>
+<!-- WEATHER -->
+        <h4 class="home_city_title">Weather</h4>
         <% if @profile == nil || @profile.locality == nil  %>
         <p>- Current Weather -</p>
           <a href="/profiles/<%= current_user.id %>/edit"><p class="no_profile">- Please update your profile -</p></a>
         <% else %>
-          <iframe id="forecast_embed" class="weather_iframe" type="text/html" frameborder="0" height="60" width="100%" src="http://forecast.io/embed/#lat=<%= @profile.latitude %>&lon=<%= @profile.longitude %>&name=<%= @profile.locality %>"> </iframe>
+          <P><%= @current_weather.to_date %> | &degF</P>
+          <table class="weather_table" border="0">
+            <tr>
+            
+              <td class="current_summary"><%= @current_weather.summary %></td>
+              <% @week_of_weather.each do |day| %>
+                <td class="week_day"><%= day.temperatureMax.round %>&deg</td>
+              <% end %>
+            </tr>
+            <tr>
+              <td class="current_temp">
+                <%= @current_weather.temperature.round %>&deg
+                <canvas class="<%= @current_weather.icon %> skycon_icon" width="84" height="84"></canvas>
+              </td>
+              <% @week_of_weather.each do |day| %>
+                <td class="week_day">
+                  <canvas class="<%= day.icon %>" width="32" height="32"></canvas>
+                  <div><%= day.abbreviated_week_day %></div>
+                </td>
+              <% end %>
+            </tr>
+            <tr>
+              <td class="current_change_precip">Chance of precip: <%= @current_weather.precip %></td>
+                <% @week_of_weather.each do |day| %>
+                  <td class="week_day"><%= day.temperatureMin.round %>&deg</td>
+                <% end %>
+            </tr>
+          </table>
+          <p class="data_provided_by">Data provided by <a href="<%= @current_weather.data_provided_by %>" target="_blank"><%= @current_weather.forecast %></a></p>
         <% end %>
         </div>
+      </div>
+      <div>
       </div>
     </section>
 
@@ -632,6 +663,36 @@ function buildIWContent(place) {
 google.maps.event.addDomListener(window, 'load', initialize);
 
   
+</script>
+
+<script>
+  var icons = new Skycons({"color":"brown"}),
+
+
+      list = [
+        "clear-day",
+        "clear-night",
+        "partly-cloudy-day",
+        "partly-cloudy-night",
+        "cloudy",
+        "rain",
+        "sleet",
+        "snow",
+        "wind",
+        "fog"
+       ],
+      i;
+
+  for(i = list.length; i--; ) {
+      var weatherType = list[i],
+          elements = document.getElementsByClassName( weatherType );
+      for (e = elements.length; e--;){
+          icons.set( elements[e], weatherType );
+      }
+  }
+
+
+  icons.play();
 </script>
 
 

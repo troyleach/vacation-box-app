@@ -28,6 +28,7 @@ def convertToDay(the_object)
   the_object.strftime("%A")
 end
 
+
 puts convertSeconds(1426737600) 
 
 # theDay = Time.at(t)

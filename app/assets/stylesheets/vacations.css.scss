@@ -268,4 +268,44 @@ p.message_date {
   color: #FF972C; 
 }
 
+/************************************
+WEATHER FEATURE
+************************************/
+.weather_table {
+  
+}
+
+.current_temp {
+  border-right: 1px solid #849696;
+  font-size: 4em;
+  font-weight: 900;
+  display: -webkit-box;
+  display: -webkit-inline-box;
+  padding-left: 10px;
+}
+
+.skycon_icon {
+  padding: 5px 20px 10px 10px;
+  vertical-align: middle;
+}
+
+.current_summary {
+  font-size: 1.2em;
+  text-align: center;
+}
+
+.week_day {
+  font-size: 1.2em;
+  padding: 0 4px 0 4px;
+  text-align: center;
+}
+
+.current_change_precip {
+  text-align: center;
+}
+
+.data_provided_by {
+  margin-bottom: 20px;
+  color: #849696;
+}
 

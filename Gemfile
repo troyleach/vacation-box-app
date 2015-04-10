@@ -3,6 +3,9 @@ source 'https://rubygems.org'
 # Added by the Author
 gem 'bootstrap-sass'
 
+# THE AUTHORS PERSONAL GEM!!
+gem 'dark_sky_weather'
+
 # RSpec
 group :development, :test do
   gem 'rspec-rails', '~> 3.0.0'

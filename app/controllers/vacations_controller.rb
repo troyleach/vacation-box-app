@@ -8,7 +8,7 @@ class VacationsController < ApplicationController
     @places_been  = PlaceBeen.where(:user_id => current_user.id)
     @messages     = Message.all
     @users        = User.all
-    @page_title   = @profile.locality
+    @page_title   = "LOGO"
 
     @current_weather = DarkSkyWeather::CurrentWeather.currently(ENV['WEATHER_API_KEY'], @profile.latitude, @profile.longitude)
     @week_of_weather = DarkSkyWeather::CurrentWeather.daily(ENV['WEATHER_API_KEY'], @profile.latitude, @profile.longitude)

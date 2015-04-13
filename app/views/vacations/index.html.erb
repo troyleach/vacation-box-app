@@ -3,96 +3,132 @@
 <script src='//google-maps-utility-library-v3.googlecode.com/svn/tags/markerclustererplus/2.0.14/src/markerclusterer_packed.js' type='text/javascript'></script>
 <script src="/assets/sitewide/points_of_interest.js" type="text/javascript"></script>
 
-
-<!-- I have a shit ton of logic in this view... need to get it outta here!!! -->
-<div ng-app="app">
-<div ng-controller="vacationsCtrl">
-  <div id="div-lat-lng" lat="<%= @profile.latitude %>" lng="<%= @profile.longitude %>"></div>
-
-
-    <div class="new_vacation_link">
-      <button><a href='<%= new_vacation_path %>'>- Create a new vacation -</a></button>
-    </div>
+<div id="div-lat-lng" lat="<%= @profile.latitude %>" lng="<%= @profile.longitude %>"></div>
 
     <section class"section_one">
-      <div class="body_one row">
-        <div class="points_of_interest_box shoadows col-md-6">
-        <h4 class="vacation_lounge_title">Things to do in <%= @profile.locality %></h4>
+      <div class="body_one shoadows row">
 
 
-        <div class="row">
-          <div class="col-md-6">
-           <div id="map-canvas-interests"></div>
+        <div class="home col-md-6">
+          <div class="new_vacation_link">
+            <div class="home_city_title">Home city of <%= @profile.locality %></div>
+            <div class="destination_button"><button><a href='<%= new_vacation_path %>'>- Create a new destination -</a></button></div>
           </div>
 
-          <div class="point_interest_box_two col-md-6">  
-            <div id="listing">
-              <table id="resultsTable">
-                <tbody id="results"></tbody>
-              </table>
-            </div>
+            <div class="row">
+              <div class="col-md-6">
+        <!-- HOME PICTURE -->
+                <div id="wapiblock"></div>
+        <!-- HOOME MAP -->              
+              </div>
+                <div id="map-canvas-home" class="col-md-6"></div>
+        <!-- WEATHER -->
+                    <div id="weather_div_row" class="row">
+                    <div id="weather_div" class="col-md-12">
+                      <h4 class="home_city_title">Weather</h4>
+                      <% if @profile == nil || @profile.locality == nil  %>
+                      <p>- Current Weather -</p>
+                        <a href="/profiles/<%= current_user.id %>/edit"><p class="no_profile">- Please update your profile -</p></a>
+                      <% else %>
 
-            <div id="info-content">
-              <table>
-                <tr id="iw-url-row" class="iw_table_row">
-                  <td id="iw-icon" class="iw_table_icon"></td>
-                  <td id="iw-url"></td>
-                </tr>
-                <tr id="iw-address-row" class="iw_table_row">
-                  <td class="iw_attribute_name">Address:</td>
-                  <td id="iw-address"></td>
-                </tr>
-                <tr id="iw-phone-row" class="iw_table_row">
-                  <td class="iw_attribute_name">Telephone:</td>
-                  <td id="iw-phone"></td>
-                </tr>
-                <tr id="iw-rating-row" class="iw_table_row">
-                  <td class="iw_attribute_name">Rating:</td>
-                  <td id="iw-rating"></td>
-                </tr>
-                <tr id="iw-website-row" class="iw_table_row">
-                  <td class="iw_attribute_name">Website:</td>
-                  <td id="iw-website"></td>
-                </tr>
-              </table>
-            </div>
-          </div><!-- END OF SECOND BOX  -->
-          </div><!-- END OF points row for the map and table  -->
+                      <!-- <div class="date">
+                        <span class="day"><%= @current_weather.day %></span> 
+                        <span class="month"><%= @current_weather.month %></span> 
+                        <span class="year"><%= @current_weather.year %></span>
+                      </div> -->
+
+                        <P><%= @current_weather.to_date %> | &degF</P>
+                        <table class="weather_table" border="0">
+                          <tr>
+                            <td class="current_summary"><%= @current_weather.summary %></td>
+                            <% @week_of_weather.each do |day| %>
+                              <td class="week_day"><%= day.temperatureMax.round %>&deg</td>
+                            <% end %>
+                          </tr>
+                          <tr>
+                            <td class="current_temp">
+                              <%= @current_weather.temperature.round %>&deg
+                              <canvas class="<%= @current_weather.icon %> skycon_icon" width="84" height="84"></canvas>
+                            </td>
+                            <% @week_of_weather.each do |day| %>
+                              <td class="week_day">
+                                <canvas class="<%= day.icon %>" width="32" height="32"></canvas>
+                                <div><%= day.abbreviated_week_day %></div>
+                              </td>
+                            <% end %>
+                          </tr>
+                          <tr>
+                            <td class="current_change_precip">Chance of precip: <%= @current_weather.precip %></td>
+                              <% @week_of_weather.each do |day| %>
+                                <td class="week_day"><%= day.temperatureMin.round %>&deg</td>
+                              <% end %>
+                          </tr>
+                        </table>
+                        <p class="data_provided_by">Data provided by <a href="<%= @current_weather.data_provided_by %>" target="_blank"><%= @current_weather.forecast %></a></p>
+                      <% end %>
+                    </div><!-- END OF WEATHER DIV -->
+                    </div><!-- END OF WEATHER DIV ROW TAG -->
+            </div><!-- END OF ROW  GOOD -->
+        </div><!-- home shoadows col-md-6  GOOD --> 
+
+
+<!-- begin checking here RED GOOD-->
+        <div class="points_of_interest_box col-md-6">
+                <h4 class="vacation_lounge_title">Things to do in <%= @profile.locality %></h4>
+
+                <div class="row">
+                  <div class="col-md-6">
+                   <div id="map-canvas-interests"></div>
+                  </div>
+
+                  <div class="point_interest_box_two col-md-6">  
+                    <div id="listing">
+                      <table id="resultsTable">
+                        <tbody id="results"></tbody>
+                      </table>
+                    </div>
+
+                    <div id="info-content">
+                      <table>
+                        <tr id="iw-url-row" class="iw_table_row">
+                          <td id="iw-icon" class="iw_table_icon"></td>
+                          <td id="iw-url"></td>
+                        </tr>
+                        <tr id="iw-address-row" class="iw_table_row">
+                          <td class="iw_attribute_name">Address:</td>
+                          <td id="iw-address"></td>
+                        </tr>
+                        <tr id="iw-phone-row" class="iw_table_row">
+                          <td class="iw_attribute_name">Telephone:</td>
+                          <td id="iw-phone"></td>
+                        </tr>
+                        <tr id="iw-rating-row" class="iw_table_row">
+                          <td class="iw_attribute_name">Rating:</td>
+                          <td id="iw-rating"></td>
+                        </tr>
+                        <tr id="iw-website-row" class="iw_table_row">
+                          <td class="iw_attribute_name">Website:</td>
+                          <td id="iw-website"></td>
+                        </tr>
+                      </table>
+                    </div>
+                  </div><!-- END OF SECOND BOX  -->
+                </div><!-- END OF points row for the map and table  -->
         </div><!-- END OF points of interest BOX  -->
-          
-        
 
         
-        <div class="places_been shoadows col-md-6">
-          <h4 class="vacation_lounge_title">Places I have been</h4>
-          <div>
-          <span>HOME</span> <img src="http://chart.apis.google.com/chart?chst=d_map_xpin_icon_withshadow&chld=pin_sright|home|C9DE55|FCFAE1" alt="">
-          <span>Places Going</span> <img src="http://chart.apis.google.com/chart?chst=d_map_xpin_letter_withshadow&chld=pin_star|G|B9121B|FCFAE1|FCFAE1" alt="Places going pin">
-          <span>Places Been</span> <img src="https://chart.googleapis.com/chart?chst=d_map_pin_letter_withshadow&chld=B|E6E2AF|046380" alt="Places I've been pin">
-          <span>Cluster of pins</span> <img src="http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerclusterer/images/m1.png" alt="Image of cluster">
-            <div id="map" style='width: 100%; height: 300px;'></div>
-          </div>
-          <p>Keep track of the places you have traveled. Simply type in the city and a description and click 'pin it'.</p>
-          <%= form_tag '/place_beens' do %>
-            <div class="places_been_form">
-              <%= text_field_tag :address, nil, :placeholder => 'City or Address', :class => "been_address", :style => "background: #849696;, width: 100px;" %>
-              <%= text_field_tag :title, nil, :placeholder => 'Title of the vacation', :class => "been_title", :style => "background: #849696;" %>
-              <%= submit_tag "Pin it" %>
-            </div>
-            <div class="place_description_box">
-              <%= text_field_tag :description, nil, :placeholder => 'Brief description', :size => "60x20",  :class => "place_description", :style => "background: #849696;" %>            
-            </div>
-          <% end %>
-          
-        </div>
+
       </div><!-- END OF body_one row  -->
-    </section>
-<!-- BODY ONE TOP TWO BOXES                    -->
-   <!-- VACATION LOUNGE...  -->
-      <div class="section_two row">
-        <div class="vacation_lounge shoadows col-md-6">
+    </section><!-- GOOD -->
+<!-- END OF BODY ONE TOP TWO BOXES -->
+
+<!-- THIS IS THE START OF THE SECOND SECTION OF THE PAGE -->
+
+    <section class="section_two">
+      <div class="body_two row">
+        <div class="vacation_lounge col-md-6">
           <h4 class="vacation_lounge_title">Vacation Lounge...</h4>
-                      <p class="ask_question">Ask a question:</p>
+                      <p class="ask_question">Question?</p>
                         <table border="0" class="message_center_table">
                         <%= form_tag "/messages" do %>
                           <tr class="message_table_row">
@@ -213,84 +249,38 @@
                       <% end %>
                       </div><!-- this is the end of the message_box for scrolling -->
         </div><!-- END OF vacation_lounge ROW THIS IS -->
-        
-              <div class="home shoadows col-md-6">
-                 <h4 class="home_city_title">Home city</h4>
-                  <div class="row">
-                    <div class="col-md-6">
-          <!-- HOME PICTURE -->
-                      <div id="wapiblock"></div>
-          <!-- HOOME MAP -->              
-                    </div>
-                      <div id="map-canvas-home" class="col-md-6"></div>
-          <!-- WEATHER -->
-                      <div class="col-md-12">
-                        <h4 class="home_city_title">Weather</h4>
-                        <% if @profile == nil || @profile.locality == nil  %>
-                        <p>- Current Weather -</p>
-                          <a href="/profiles/<%= current_user.id %>/edit"><p class="no_profile">- Please update your profile -</p></a>
-                        <% else %>
 
-                        <div class="date">
-                          <span class="day">31</span> 
-                          <span class="month">July</span> 
-                          <span class="year">2009</span>
-                        </div>
-
-                          <P><%= @current_weather.to_date %> | &degF</P>
-                          <table class="weather_table" border="0">
-                            <tr>
-                            
-                              <td class="current_summary"><%= @current_weather.summary %></td>
-                              <% @week_of_weather.each do |day| %>
-                                <td class="week_day"><%= day.temperatureMax.round %>&deg</td>
-                              <% end %>
-                            </tr>
-                            <tr>
-                              <td class="current_temp">
-                                <%= @current_weather.temperature.round %>&deg
-                                <canvas class="<%= @current_weather.icon %> skycon_icon" width="84" height="84"></canvas>
-                              </td>
-                              <% @week_of_weather.each do |day| %>
-                                <td class="week_day">
-                                  <canvas class="<%= day.icon %>" width="32" height="32"></canvas>
-                                  <div><%= day.abbreviated_week_day %></div>
-                                </td>
-                              <% end %>
-                            </tr>
-                            <tr>
-                              <td class="current_change_precip">Chance of precip: <%= @current_weather.precip %></td>
-                                <% @week_of_weather.each do |day| %>
-                                  <td class="week_day"><%= day.temperatureMin.round %>&deg</td>
-                                <% end %>
-                            </tr>
-                          </table>
-                          <p class="data_provided_by">Data provided by <a href="<%= @current_weather.data_provided_by %>" target="_blank"><%= @current_weather.forecast %></a></p>
-                        <% end %>
-                      </div><!-- END OF WEATHER DIV -->
-
-              </div><!-- END OF WEATHER  -->
-          </div><!-- END OF SECTION TWO ROW  -->
-
-        </div><!-- END OF ROW  --> 
-</div><!-- End of ng-controller (use to be app)-->
-</div><!-- End of ng-app -->    
-      
-  
-      
+        <div class="places_been col-md-6">
+          <h4 class="places_been_title">Places I have been</h4>
+          <div class="the_map">
+          <span>HOME</span> <img src="http://chart.apis.google.com/chart?chst=d_map_xpin_icon_withshadow&chld=pin_sright|home|C9DE55|FCFAE1" alt="">
+          <span>Places Going</span> <img src="http://chart.apis.google.com/chart?chst=d_map_xpin_letter_withshadow&chld=pin_star|G|B9121B|FCFAE1|FCFAE1" alt="Places going pin">
+          <span>Places Been</span> <img src="https://chart.googleapis.com/chart?chst=d_map_pin_letter_withshadow&chld=B|E6E2AF|046380" alt="Places I've been pin">
+          <span>Cluster of pins</span> <img src="http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerclusterer/images/m1.png" alt="Image of cluster">
+            <div id="map" style='width: 80%; height: 300px;'></div>
+          </div>
+          <div class="map_text_box">
+            <p>Keep track of the places you have traveled. Simply type in the city and a description and click 'pin it'.</p>
+            <%= form_tag '/place_beens' do %>
+              <div class="places_been_form">
+                <%= text_field_tag :address, nil, :placeholder => 'City or Address', :class => "been_address", :style => "background: #ffffff;, width: 100px;" %>
+                <%= text_field_tag :title, nil, :placeholder => 'Title of the vacation', :class => "been_title", :style => "background: #ffffff;" %>
+                <%= submit_tag "Pin it" %>
+              </div>
+              <div class="place_description_box">
+                <%= text_field_tag :description, nil, :placeholder => 'Brief description', :size => "60x20",  :class => "place_description", :style => "background: #ffffff;" %>            
+              </div>
+            </div>
+          <% end %>
+        </div><!-- END OF PLACES BEEN -->  
+      </div><!-- END OF ROW  -->
+    </section><!-- END OF SECTION  --> 
 
 
-<!--
-<section id="center">
-  <div class="row section_three message_center_box"> 
-    <div class="vacation_lounge shoadows col-md-12">
-      <h2>this was section three</h2>
-  </div>
-</section>
--->
 
-  
 
+    <br>
+    <br>
 
 
 <script type="text/javascript">
@@ -298,7 +288,7 @@
   handler.buildMap({ provider: {
     mapTypeId: google.maps.MapTypeId.TERRAIN,
     zoom: 1,
-    center: new google.maps.LatLng(41.8818,-87.6232)
+    center: new google.maps.LatLng(35,15)
     // pass in other Google Maps API options here
   }, internal: {id: 'map'}}, function(){
 

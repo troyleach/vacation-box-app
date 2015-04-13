@@ -23,16 +23,27 @@
   // box-shadow: 0 8px 6px -6px black;
 }
 
-section {
-  border: none;
-  margin: 0 15px 5px 15px;
-}
+// section {
+//   border: none;
+//   margin: 0 15px 5px 15px;
+// }
 
 .new_vacation_link {
-  text-align: center;
+  border: none;
+  width: 575px;
+  margin-bottom: 5px;
+  margin-top: 5px;
+}
+
+.home_city_title {
+  font-size: 1.4em;
   font-weight: 900;
-  font-size: 1.8em;
-  padding: 10px;
+  display: inline-block;
+}
+
+.destination_button {
+  display: inline-block;
+  float: right;
 }
 
 .new_vacation_link a {
@@ -40,7 +51,7 @@ section {
 }
 
 .new_vacation_link a:hover {
-  color: #ff972c;
+  color: red;
 }
 
 .lounge_title {
@@ -52,8 +63,11 @@ section {
 
 
 .body_one {
-  border: none;
-  height: 500px;
+  margin: 15px 0 5px 0;
+}
+
+.body_two {
+  margin: 15px 0 5px 0;
 }
 
 .section_one {
@@ -63,11 +77,11 @@ section {
 }
 
 .points_of_interest_box {
-  border-radius: 10px;
+  // border-radius: 10px;
   // border: 1px solid #849696;
-  background-color: #EDEFF1;
-  height: 100%;
-  width: 49.5%;
+  // background-color: #EDEFF1;
+  // height: 100%;
+  
 }
 
 .chat_box {
@@ -81,12 +95,8 @@ section {
 }
 
 .places_been {
-  border-radius: 10px;
-  // border: 1px solid #849696;
-  background-color: #EDEFF1;
-  float: right;
-  width: 49.5%;
-  height: 100%;
+  border: none;
+  background-color: #ffffff;
 }
 
 .places_been img {
@@ -154,13 +164,12 @@ vacations make up page
 }
 
 .home {
-  border-radius: 10px;
-  background-color: #EDEFF1;
-  float: right;
-  width: 49.5%;
-  padding-bottom: 20px;
-  margin-bottom: 30px;
-  height: 100%;
+  // border-radius: 10px;
+  background-color: #ffffff;
+  // width: 49.5%;
+  // padding-bottom: 20px;
+  // margin-bottom: 30px;
+  // height: 100%;
 
   // border-radius: 10px;
   // background-color: #EDEFF1;
@@ -170,29 +179,23 @@ vacations make up page
 }
 
 .section_two {
-  border: none;
+  border-bottom: 1px solid #849696;
   padding-top: 5px;
   padding-bottom: 20px;
-  height: 100%;
-  margin: 15px 0 20px 0;
 }
 
-.section_three {
-  border: none;
-  padding-top: 20px;
-  padding-bottom: 20px;
+#weather_div {
+  border-top: 1px solid #000000;
+  width: 95%;
+  margin: 0 0 10px 25px;
 }
 
 /************************************
 message box
 ************************************/
 .vacation_lounge {
-  border-radius: 10px;
-  background-color: #EDEFF1;
-  width: 49.5%;
-  padding-bottom: 20px;
-  margin-bottom: 30px;
-  height: 100%;
+  border: none;
+  background-color: #fffff;
 }
 
 .vacation_lounge_title {
@@ -202,13 +205,15 @@ message box
 
 .ask_question {
   text-align: left;
+  font-size: 1.2em;
+  font-weight: 200;
 }
 
 .message_center_box {
   // border: 2px solid #849696;
   // background-color: #fefffb;
   // width: 520px;
-  height: 400px;
+  height: 200px;
   // text-align: center;
 }
 
@@ -219,17 +224,19 @@ message box
   overflow: scroll;
   margin-bottom: 10px;
   margin-top: 15px;
-  padding-left: 45px;
+  // padding-left: 45px;
   // margin: auto;
-  background-color: #EDEFF1;
+  // background-color: #EDEFF1;
+  margin: auto;
 }
 
 .message_center_table {
   margin-bottom: 15px;
   margin-top: 15px;
+  margin: auto;
 }
 
-.message_table_row {
+.message_table_col {
   
 }
 
@@ -254,9 +261,10 @@ p.message_date {
 }
 
 .message_title {
-  color: #85DB18;
+  color: #000000;
   font-size: 1.2em;
   font-weight: 900;
+  padding-bottom: 5px;
   border-bottom: 1px solid #849696;
 }
 
@@ -330,7 +338,7 @@ WEATHER FEATURE
   float: right;
   position: relative;
   padding: 45px 5px 0px;
-  margin-left: 10px;
+  margin: 40px 100px 0 0;
 }
 
 .day {
@@ -350,7 +358,27 @@ WEATHER FEATURE
   position: absolute;
   right: -5px;
   top: 15px;
--webkit-transform: rotate(-90deg); 
--moz-transform: rotate(-90deg); 
+  -webkit-transform: rotate(-90deg); 
+  -moz-transform: rotate(-90deg); 
 }
+
+// Map
+.the_map {
+  border: 1px solid #666;
+  text-align: center;
+  padding-bottom: 10px;
+}
+
+#map {
+  text-align: center;
+  margin: auto;
+}
+
+.map_text_box {
+  border: 1px solid #666;
+  margin-top: 5px;
+  padding: 5px;
+}
+
+
 

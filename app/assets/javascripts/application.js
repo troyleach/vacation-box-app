@@ -18,7 +18,8 @@
 //= require angular
 //= require app
 //= require_tree ./sitewide
-//=require lodging
+//= require lodging
+
 
 
 

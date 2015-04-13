@@ -1,86 +1,92 @@
 
 
-
-<div ng-app="app">
-  <div ng-controller="vacationSpotCtrl" ng-init="fetchData(<%= @spot.id %>)">
-  <div id="div-lat-lng" lat="<%= @profile.latitude %>" lng="<%= @profile.longitude %>"></div>
     <div class="vacation_spot_wrapper">
 
-      <div class="map row">
+      <div class="spot_spot row">
         <div class="col-md-12">
-          <div class="page_title"><span class="spot_title"><%= @spot.spot_name.capitalize %></span><span class="a_tag"><a href="/vacations/<%= @spot.vacation_id %>">Back to <%= @current_vacation.vacation_name %></a></span></div>
+          <div class="page_title"><span class="spot_title"><%= @spot.spot_name.capitalize %></span></div>
+          
         </div>
+        <hr class="directions_top_line">
       </div>
       
 
-      <div class="vacation_vitals row">
-        <div class="directions col-md-6">
-          <div id="directions-panel"></div>
-        </div>
-        <div class="about col-md-6"><h4>Things to know about <%= @spot.spot_name.capitalize %></h4>
-        <hr>
-          <div class="vacation_spot_image">
-            <img src="<%= @spot.image %>" alt="The image of the spot" width="200">
-          </div>
-          <div class="description_text">Description:</div>
-          <div class="vacation_spot_description"><%= @spot.description %></div>
-          <hr>
-          <table>
-          <th></th>
-            <tr class="table_row">
-              <td class="table_col_des">Address:</td>
-              <td class="table_col"><%= @full_address %>, <%= @spot.city %> <%= @spot.state %>, <%= @spot.zip %></td>
-            </tr>
-            <tr class="table_row">
-              <td class="table_col_des">Phone:</td>
-              <td class="table_col"><%= @spot.phone %></td>
-            </tr>
-            <tr class="table_row">
-              <td class="table_col_des">Hours:</td>
-              <td class="table_col"><%= @spot.open %></td>
-            </tr>
-            <tr class="table_row">
-              <td class="table_col_des">reservation:</td>
-              <% if @spot.reservation ==  nil %>
-              <td class="table_col">No reservation</td>
-              <% else %>
-              <td class="table_col"><%= @spot.reservation %></td>
-              <% end %>
-            </tr>
-            <tr class="table_row">
-              <td class="table_col_des">website:</td>
-              <td class="table_col"><a href="">Website</a></td>
-            </tr>
-          </table>
-          
-          <hr>
+      <div class="vacation_vitals shoadows row">
 
-          <div class="description_text">Notes:</div>
-          <div class="vacation_spot_description"><%= @spot.note %></div>
-          
-        </div>
-      </div>
+        <div class="directions col-md-4">
+          <div id="directions-panel"></div>
+        </div><!-- directions col-md-4  -->
+
+        <div class="map col-md-4">
+          <div id="map-canvas-directions"></div>
+        </div><!-- map col-md-4  -->
+
+        <div class="about col-md-4">
+          <div class="about_two">
+                    <h4>Things to know:</h4>
+                    <hr>
+                      <div class="vacation_spot_image">
+                        <img src="<%= @spot.image %>" alt="The image of the spot" width="250">
+                      </div>
+                      <div class="description_text">Description:</div>
+                      <div class="vacation_spot_description"><%= @spot.description %></div>
+                      <hr>
+                      <table>
+                      <th></th>
+                        <tr class="table_row">
+                          <td class="table_col_des">Address:</td>
+                          <td class="table_col"><%= @full_address %>, <%= @spot.city %> <%= @spot.state %>, <%= @spot.zip %></td>
+                        </tr>
+                        <tr class="table_row">
+                          <td class="table_col_des">Phone:</td>
+                          <td class="table_col"><%= @spot.phone %></td>
+                        </tr>
+                        <tr class="table_row">
+                          <td class="table_col_des">Hours:</td>
+                          <td class="table_col"><%= @spot.open %></td>
+                        </tr>
+                        <tr class="table_row">
+                          <td class="table_col_des">reservation:</td>
+                          <% if @spot.reservation ==  nil %>
+                          <td class="table_col">No reservation</td>
+                          <% else %>
+                          <td class="table_col"><%= @spot.reservation %></td>
+                          <% end %>
+                        </tr>
+                        <tr class="table_row">
+                          <td class="table_col_des">website:</td>
+                          <td class="table_col"><a href="">Website</a></td>
+                        </tr>
+                      </table>
+            <!--  -->
+                      <hr>
+                      <div class="pdf_button">
+                        <button><a href="/vacation_spots/<%= @spot.id %>.pdf">Get your PDF!</a></button>
+                      </div>
+                      <div class="description_text">Notes:</div>
+                      <div class="vacation_spot_description"><%= @spot.note %></div>
+                      <div id="form">
+                        <%= form_tag "/vacation_spots/#{@spot.id}", :method => :patch do %>
+                        <p class="make_notes_text">Make some notes about this spot <%= submit_tag "Update" %></p>
+                          <div class="notes_box">
+                            <%=text_area_tag :note, @spot.note, :size => "47x8" %>
+                          </div>
+                        <% end %>
+                      </div>
+          </div>
+        </div><!-- about col-md-4  -->
+
+      </div><!-- vacation_vitals row  -->
 
       <div class="note row">
-      <div class="col-md-6 box_one">
-        <%= form_tag "/vacation_spots/#{@spot.id}", :method => :patch do %>
-        <p>Make some notes about this spot <%= submit_tag "Update" %></p>
-          <div>
-            <%=text_area_tag :note, @spot.note, :size => "60x8" %>
-          </div>
-        <% end %>
+        <div class="col-md-12 box_one">
+            <button class="spots_button"><a href="/vacations/<%= @spot.vacation_id %>">Back to <%= @current_vacation.vacation_name %></a></button>    
         </div><!-- END OF BOX_ONE -->
-        <div class="col-md-6">
-          <div>
-            <div id="map-canvas-directions"></div>
-          </div>
-        </div><!-- END OF BOX_TWO -->
-
+        
 
       </div><!-- END OF NOTE ROW -->
     </div><!-- END OF VACATION WRAPPER -->
-  </div><!-- END OF NG-CONTROLLER -->
-</div><!-- END OF NG-APP-->
+
 
 
 <script>

@@ -3,37 +3,37 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 .vacation_spot_wrapper {
-  border: 1px solid pink;
+  border: none;
   margin-bottom: 25px;
+  margin-top: 20px;
+}
+
+.spot_spot {
+
 }
 
 .page_title {
   border: none;
-  margin-top: 50px;
+  display: block;
 }
 
 .spot_title {
   border: none;
   font-size: 3em;
   font-weight: 900;
-}
-
-.a_tag {
-  border: none;
-  text-align: right;
-  display: block;
+  display: inline-block;
 }
 
 .map {
-  border: 1px solid red;
+  border-left: 1px solid #000000;
+  margin-top: 10px;
   margin-left: 0;
   margin-right: 0;
 }
 
 .vacation_vitals {
-  border: 1px solid red;
-  margin-left: 0;
-  margin-right: 0;
+  border: none;
+  margin: 5px;
 }
 
 .vacation_spot_image {
@@ -60,11 +60,11 @@
 }
 
 .directions {
-  border: 1px solid blue;
+  margin-top: 10px;
 }
 
 .about {
-  border: 1px solid blue;
+  border: none;
 }
 
 .about h4 {
@@ -72,10 +72,14 @@
   padding-left: 10px;
 }
 
+.about_two {
+  margin: 3px;
+  border-left: 1px solid #000000;
+}
+
 .note {
- border: 1px solid red;
- margin-left: 0;
- margin-right: 0; 
+  margin-top: 20px;
+ text-align: center;
 }
 
 .note p {
@@ -93,6 +97,23 @@
 // *********************
 
 #map-canvas-directions {
-  width: 400px;
-  height: 400px;
+  width: 435px;
+  height: 450px;
 }
+
+.pdf_button {
+  text-align: right;
+}
+
+.notes_box {
+  text-align: center;
+}
+
+.directions_top_line {
+  width: 99%;
+}
+
+.make_notes_text {
+  padding: 5px 0 5px 10px;
+}
+

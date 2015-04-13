@@ -1,28 +1,33 @@
 <div class="show_page_wrapper">
 
-<section class="bing_search_container">
-  <div class="row">
+<section class="bing_search_container shoadows">
+  <div class="iframe_row row">
     <div class="col-lg-12">
-      <iframe src="http://www.bing.com" frameborder="2"></iframe>
+      <iframe name="DBox" src="http://www.bing.com" frameborder="2"></iframe>
     </div>
   </div>
 </section>
-
+<div>
+<span class="search_text">Do all your vacation searching from right here!</span>
+<span class="vacation_date">Travel dates - blah blah blah</span>
+<button class="bing_search_text"><a href="http://www.bing.com" target="DBox">Back to BING</a></button>
+</div>
 
 <div ng-app="app">
   <div ng-controller="vacationSpotCtrl" ng-init="fetchData(<%= @vacation.id %>)">
+  <div id="div-lat-lng" lat="<%= @vacation.latitude %>" lng="<%= @vacation.longitude %>"></div>
 
     <section class="vacation_section_two">
       <div class="save_spot row">
         <div class="save_spot col-md-6  ">
-          <p class="user_input_text">Type the name or the address of the place you wish to visit:</p>
-          <input type="text" id="user_input" placeholder="Type Name or Address">
+          <p class="user_input_text">Type the name or the address of the place you wish to visit and then hit return:</p>
+          <input type="text" id="user_input" placeholder="Type Name or Address" ng-model="userInput">
           <hr>
           <div class="row">
             <div class="stats_weather col-sm-6">
               <div id="spot_table">
                 <table class="current_stats" border="0">
-                  <th class="table_header" colspan="2">Current stats:</th>
+                  <th class="table_header" colspan="2">Things to know about your trip:</th>
                   <tr class="table_row">
                     <td class="table_col_description">Local time:</td>
                     <td class="vacation_table_col"><%= @vacation.time_date %></td>
@@ -32,6 +37,14 @@
                     <td class="vacation_table_col"><%= @hotel.name %></td>
                   </tr>
                   <tr class="table_row">
+                    <td class="table_col_description"></td>
+                    <td class="vacation_table_col_address"><%= @hotel.address %></td>
+                  </tr>
+                  <tr class="table_row">
+                    <td class="table_col_description"></td>
+                    <td class="vacation_table_col_city"><%= @hotel.city %></td>
+                  </tr>
+                  <tr class="table_row">
                     <td class="table_col_description">Transpertation:</td>
                     <td class="vacation_table_col"><%= @vacation.transpertation %></td>
                   </tr>
@@ -39,7 +52,7 @@
               </div><!--END OF TABLE  -->
             </div><!--END OF SPOT AND WEATHER  -->
             <div class="col-sm-6">
-              weather goes here
+              
             </div>
           </div><!--ROW  -->
         </div><!--END OF SAVE SPOT  -->
@@ -80,7 +93,7 @@
                       <li class="hours_open">{{ place.opening_hours.weekday_text[6]}}</li>
                     </ul>
                   </div>
-                  </div>
+                </div>
                 </td>
               </tr>
               
@@ -95,29 +108,29 @@
 <!-- thing to do, if restaurant | bar set to menu, else website -->
               <tr>
                 <td class="vacation_label">Website:</td>
-                <td class="wideField" colspan="2" ng-if="place.website"><a href="{{ place.website }}" target="_blank">website</a></td>
+                <td class="wideField" colspan="2" ng-if="place.website"><a href="{{ place.website }}" target="DBox">website</a></td>
                 <td class="wideField" colspan="2" ng-if="!place.website"></td>
               </tr>
               <tr>
                 <td class="vacation_label">Address:</td>
-                <td class="wideField">{{ place.address_components[0].long_name }} {{ place.address_components[1].long_name }}</td>
+                <td class="wideField">{{ spotInfo.street_number }} {{ spotInfo.route }}</td>
               </tr>
             
               <tr>
                 <td class="vacation_label">City:</td>
-                <td class="wideField" colspan="2">{{ place.address_components[2].long_name }}</td>
+                <td class="wideField" colspan="2">{{ spotInfo.locality }}</td>
               </tr>
               <tr>
                 <td class="vacation_label">State:</td>
-                <td class="wideField" colspan="2">{{ place.address_components[3].long_name }}</td>
+                <td class="wideField" colspan="2">{{ spotInfo.administrative_area_level_1 }}</td>
               </tr>
               <tr>
                 <td class="vacation_label">Zip:</td>
-                <td class="wideField" colspan="2">{{ place.address_components[5].long_name }}</td>
+                <td class="wideField" ng-model="spotInfo.postal_code" colspan="2">{{ spotInfo.postal_code }}</td>
               </tr>
               <tr>
                 <td class="vacation_label">Country:</td>
-                <td class="wideField" colspan="2">{{ place.address_components[4].long_name }}</td>
+                <td class="wideField" colspan="2">{{ spotInfo.country }}</td>
               </tr>
               <tr>
                 <td class="vacation_label">Reservations:</td>
@@ -144,33 +157,15 @@
 
     <section class="vacation_section_three">
       <div class="outter_box_row row">
-        <div class="col-sm-6">
-          
-          
-
-          <div class="inner_box_row row">
-            
-             <div ng-repeat="vacation_spot in vacations.vacation_spots" class="spot_name col-xs-8 col-sm-6">
-              <img src="{{vacation_spot.image}}" alt="Image of spot to be visited" class="spot_list_image"><span class="spot_list_name"><a href="/vacation_spots/{{vacation_spot.id}}">{{ vacation_spot.spot_name }}</a></span>
-             </div>
-            
-          </div>
-
-          <!-- <div>
-          <table>
-            <tr ng-repeat="spot in spots">
-            <div class="spot_name col-xs-8 col-sm-6">
-              <td class="col"><img src="{{spot.image}}" alt="Picture of the spot"></td>
-              <td class="col">{{spot.spot_name}}</td>
-            </tr>
-          </table>
-          </div>
- -->
-
+        <div class="inner_outter_box col-sm-6">
+            <div ng-repeat="vacation_spot in vacations.vacation_spots" class="spot_name col-xs-8">
+              <img src="{{vacation_spot.image}}" alt="Image of spot to be visited" class="spot_list_image">
+            <div class="spot_list_name"><a href="/vacation_spots/{{vacation_spot.id}}">{{ vacation_spot.spot_name }}</a></div>
+            </div>
         </div>
-          <div class="second_box col-sm-6">
+          <div class="second_box col-sm-4">
             <div class="current_stats col-md-3">
-            <textarea ng-model="spotNote" rows="4" cols="75"></textarea>
+            <textarea ng-model="spotNote" rows="4" cols="79"></textarea>
             </div>
           </div>
       </div>
@@ -190,3 +185,4 @@
 </section> -->
 
 </div><!-- End of page wrapper -->
+

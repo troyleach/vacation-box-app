@@ -12,9 +12,12 @@
 // ********  ***********
 
 .shoadows {
-  -webkit-box-shadow: 3px 6px 16px -4px rgba(0,0,0,0.48);
-  -moz-box-shadow: 3px 6px 16px -4px rgba(0,0,0,0.48);
-  box-shadow: 3px 6px 16px -4px rgba(0,0,0,0.48);
+  -webkit-box-shadow: 4px 4px 18px 0px rgba(50, 50, 50, 0.33);
+  -moz-box-shadow:    4px 4px 18px 0px rgba(50, 50, 50, 0.33);
+  box-shadow:         4px 4px 18px 0px rgba(50, 50, 50, 0.33);
+  // -webkit-box-shadow: 3px 6px 16px -4px rgba(0,0,0,0.48);
+  // -moz-box-shadow: 3px 6px 16px -4px rgba(0,0,0,0.48);
+  // box-shadow: 3px 6px 16px -4px rgba(0,0,0,0.48);
   // -webkit-box-shadow: 0 8px 6px -6px black;
   // -moz-box-shadow: 0 8px 6px -6px black;
   // box-shadow: 0 8px 6px -6px black;
@@ -319,5 +322,35 @@ WEATHER FEATURE
 // pictures
 .panoramio-wapi-tos {
   background-color: red;
+}
+
+// date block
+.date {
+  background-color: #987;
+  float: right;
+  position: relative;
+  padding: 45px 5px 0px;
+  margin-left: 10px;
+}
+
+.day {
+  font-size: 45px;
+  position: absolute;
+  left: 5px;
+  top: 0;
+}
+
+.month {
+  text-transform: uppercase;
+  font-size: 25px;
+}
+
+.year {
+  display: block;
+  position: absolute;
+  right: -5px;
+  top: 15px;
+-webkit-transform: rotate(-90deg); 
+-moz-transform: rotate(-90deg); 
 }
 

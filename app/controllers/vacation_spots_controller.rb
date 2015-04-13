@@ -1,4 +1,11 @@
+require "open-uri"
 class VacationSpotsController < ApplicationController
+
+    def index
+      @helper           = Vacation.new
+      @vacations        = Vacation.where({:user_id => current_user.id})
+
+    end
 
   def show
     @vacations        = Vacation.where({:user_id => current_user.id})
@@ -13,16 +20,38 @@ class VacationSpotsController < ApplicationController
     @hotel            = Accommodation.find_by(:vacation_id => @current_vacation.id)
 
     @helper.line
-    p @current_vacation
+    p @spot
 
-    @transite = Unirest.get("https://maps.googleapis.com/maps/api/directions/json?origin=Brooklyn&destination=Queens&mode=transit&key=AIzaSyCGrehijmS0whBx20TDfi4lZTH4pCuIjn4").body["routes"]
+    
 
-    @walking = Unirest.get("https://maps.googleapis.com/maps/api/directions/json?origin=Toronto&destination=Montreal&avoid=highways&mode=walking&key=AIzaSyCGrehijmS0whBx20TDfi4lZTH4pCuIjn4").body["routes"]
+    
 
-    @bicycling = Unirest.get("https://maps.googleapis.com/maps/api/directions/json?origin=Toronto&destination=Montreal&avoid=highways&mode=bicycling&key=AIzaSyCGrehijmS0whBx20TDfi4lZTH4pCuIjn4").body["routes"]
+# I don't think I need any of this code below, I wrote JS for it
+    # @transite = Unirest.get("https://maps.googleapis.com/maps/api/directions/json?origin=Brooklyn&destination=Queens&mode=transit&key=AIzaSyCGrehijmS0whBx20TDfi4lZTH4pCuIjn4").body["routes"]
+
+    # @walking = Unirest.get("https://maps.googleapis.com/maps/api/directions/json?origin=Toronto&destination=Montreal&avoid=highways&mode=walking&key=AIzaSyCGrehijmS0whBx20TDfi4lZTH4pCuIjn4").body["routes"]
+
+    # @bicycling = Unirest.get("https://maps.googleapis.com/maps/api/directions/json?origin=Toronto&destination=Montreal&avoid=highways&mode=bicycling&key=AIzaSyCGrehijmS0whBx20TDfi4lZTH4pCuIjn4").body["routes"]
         
          
-    @car = Unirest.get("https://maps.googleapis.com/maps/api/directions/json?origin=38.914638,-77.040386&destination=38.9017,-77.0375&key=AIzaSyCGrehijmS0whBx20TDfi4lZTH4pCuIjn4").body["routes"]
+    # @car = Unirest.get("https://maps.googleapis.com/maps/api/directions/json?origin=38.914638,-77.040386&destination=38.9017,-77.0375&key=AIzaSyCGrehijmS0whBx20TDfi4lZTH4pCuIjn4").body["routes"]
+
+    respond_to do |format|
+      format.html
+      format.pdf do
+        pdf = ReportPdf.new(@spot)
+        send_data pdf.render, filename: 'report.pdf', type: 'application/pdf'
+      end
+    end
+        
+
+    # respond_to do |format|
+    #   format.html
+    #   format.pdf do
+    #     pdf = ReportPdf.new(@spot)
+    #     send_data pdf.render, type: 'application/pdf', disposition: "inline"
+    #   end
+    # end
     
   end
 

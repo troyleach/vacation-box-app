@@ -35,6 +35,9 @@ gem 'gmaps4rails'
 #
 gem 'dotenv-rails'
 
+# to make PDF's
+gem 'prawn'
+
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'

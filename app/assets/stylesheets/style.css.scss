@@ -4,6 +4,16 @@ body {
   // line-height: 1em;
 }
 
+a {
+  color: #849696;
+  text-decoration: none;
+}
+
+a:hover {
+  color: red;
+  text-decoration: none;
+}
+
 .no_profile {
   color: #FF972C; 
 }

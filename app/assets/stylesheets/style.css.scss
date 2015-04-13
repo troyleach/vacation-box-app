@@ -24,11 +24,11 @@ a:hover {
 }
 
 .alert {
-  background-color: #232d33;
+  background-color: #666;
   width: 250px;
   height: 20px;
-  padding: 0;
-  margin-bottom: 0;
+  padding: 2px;
+  margin-bottom: 5px;
   border: none;
 }
 
@@ -36,21 +36,21 @@ a:hover {
   display: inline-block;
   color: #4fb34f;
   background-color: none;
-  margin-top: 8px;
+  margin-top: 4px;
 }
 
 .alert-danger {
   display: inline-block;
   color: #e51824;
   background-color: none;
-  margin-top: 8px;
+  margin-top: 4px;
 }
 
 .alert-notice {
   display: inline-block;
   color: #4fb34f;
   background-color: none;
-  margin-top: 8px;
+  margin-top: 4px;
 }
 
 .date_time {
@@ -103,13 +103,14 @@ header {
   position:fixed;
   top:0px;
   background-color: #ffffff;
+
 }
 
 .header_one {
   padding-left: 1%;
-  padding-right: 1%;
-  border: none;
-  background-color: #232d33;
+  padding-right: 2%;
+  border-bottom: 1px solid #666;
+  background-color: #ffffff;
 }
 
 .main_nav_bar {
@@ -129,7 +130,9 @@ header {
 }
 
 .header_one ul li {
+  color: #849696;
   display: inline-block;
+  padding-right: 6px;
 }
 
 .main_logo p {
@@ -163,7 +166,7 @@ header {
   padding-left: 1%;
   padding-right: 1%;
   border-top: 1px solid #849696;
-  background-color: #232d33;
+  background-color: #ffffff;
 }
 
 .saved_vations {
@@ -186,7 +189,7 @@ header {
 }
 
 .container {
-  margin-top: 80px;
+  margin-top: 50px;
   background-color: #ffffff;
   width: 98%;
 }

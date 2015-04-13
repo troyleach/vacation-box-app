@@ -1,3 +1,20 @@
+# this is use to be the menu on the right side of the header
+<nav id="primary_nav_wrap" class="saved_vac_menu">
+  <ul>
+    <li>Saved Vacations <span class="caret"></span>
+      <ul>
+        <% if @vacations != [] %>
+          <% @vacations.each do |vacation_name| %>
+              <li><a href="/vacations/<%= vacation_name.id %>"><%= vacation_name.vacation_name %></a></li>
+          <% end %>
+        <% else %>
+          <li><a href='<%= new_vacation_path %>'>- Create a vacation -</a></li>
+        <% end %>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
 # self
 
 

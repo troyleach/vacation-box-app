@@ -18,15 +18,30 @@
   <% if user_signed_in? %>
     
       <header>
-        <div class="header_one row">
+        <div class="header_one shoadows row">
           <div class="col-lg-12">
             
-            <div class="main_nav_bar row">
-              <div class="first_menu col-md-4">
-                <ul>
-                  <li><a href="/">Home Dashboard |</a></li>
-                  <li class="date_time">Local time: <%= @helper.time_date %></li>
-                </ul>
+            <div class="saved_vations row">
+              <div class="col-md-4">
+                <nav id="primary_nav_wrap" class="saved_vac_menu">
+                  <ul>
+                  <li><a href="/">Home Dashboard</a></li>
+                  <li>|</li>
+                    <li>Saved Vacations <span class="caret"></span>
+                      <ul>
+                        <% if @vacations != [] %>
+                          <% @vacations.each do |vacation_name| %>
+                              <li><a href="/vacations/<%= vacation_name.id %>"><%= vacation_name.vacation_name %></a></li>
+                          <% end %>
+                        <% else %>
+                          <li><a href='<%= new_vacation_path %>'>- Create a vacation -</a></li>
+                        <% end %>
+                      </ul>
+                    </li>
+                    <li>|</li>
+                    <li class="date_time">Local time: <%= @helper.time_date %></li>
+                  </ul>
+                </nav>
               </div>
             
               <div class="main_logo col-md-4">
@@ -46,13 +61,15 @@
                       <% if @profile == nil || @profile.first_name == nil  %>
                       <a href="/profiles/<%= current_user.id %>/edit"><p class="no_profile">| Please update your profile HERE |</p></a>
                       <% else %>
-                      <a href="/profiles/<%= current_user.id %>/edit"><p><%= @profile.first_name %>'s profile |</p></a>
+                      <a href="/profiles/<%= current_user.id %>/edit"><p><%= @profile.first_name %>'s profile</p></a>
                       <% end %>
                     </div>
                   </li>
+                  <li>|</li>
                   <li class="logout_text">
-                    <p><a href="/users/sign_out">logout |</a></p>
+                    <p><a href="/users/sign_out">logout</a></p>
                   </li>
+                  <li>|</li>
                   <li>
                     <div class="gravatar_image_div">
                     <%= image_tag current_user.gravatar_url,  :class => "gravatar_image" %>
@@ -65,65 +82,18 @@
           </div>
         </div><!-- End of header one -->
 
-        <div class="header_two shoadows row">
-          <div class="saved_vations row">
-            <div class="col-md-4">
-              <nav id="primary_nav_wrap" class="saved_vac_menu">
-                <ul>
-                  <li>Saved Vacations <span class="caret"></span>
-                    <ul>
-                      <% if @vacations != [] %>
-                        <% @vacations.each do |vacation_name| %>
-                            <li><a href="/vacations/<%= vacation_name.id %>"><%= vacation_name.vacation_name %></a></li>
-                        <% end %>
-                      <% else %>
-                        <li><a href='<%= new_vacation_path %>'>- Create a vacation -</a></li>
-                      <% end %>
-                    </ul>
-                  </li>
-                </ul>
-              </nav>
-            </div>
-              <div class="dropdown">
-              
-              </div>
-
-            <div class="app_alerts col-md-4">
-              <% flash.each do |name, message| %>
-                <div class="alert alert-<%= name %>" role="alert">
-                  <button type="button" class="close" data-dismiss="alert"></button>
-                  <%= message %>
-                </div>
-              <% end %>
-            </div>
-            <div class="points_of_interest col-md-4">
-              <div class="dropdown">
-<!-- NOTE = need the api of points of interest -->
-                <% if @profile == nil || @profile.locality == nil  %>
-                    <span class="caret"></span>
-                    'UPDATE PROFILE'
-                <% else %>
-                  <nav id="primary_nav_wrap">
-                    <ul>
-                      <li><span class="caret"></span> Points of interest in <%= @profile.locality %>
-                        <ul>
-                          <li><a href="#">Sub Menu 1</a></li>
-                          <li><a href="#">Sub Menu 2</a></li>
-                          <li><a href="#">Sub Menu 3</a></li>
-                          <li><a href="#">Sub Menu 4</a></li>
-                        </ul>
-                      </li>
-                    </ul>
-                  </nav>
-                <% end %>
-              </div><!-- End of dropdown -->
-            </div><!-- End of points of interest -->
-          </div><!-- End of header two row -->
-        </div><!-- End of header two -->
+        
       </header>
   <% end %>
   <div class="container">
-
+  <div class="app_alerts">
+    <% flash.each do |name, message| %>
+      <div class="alert alert-<%= name %>" role="alert">
+        <button type="button" class="close" data-dismiss="alert"></button>
+        <%= message %>
+      </div>
+    <% end %>
+  </div>
   
 
   <%= yield %>

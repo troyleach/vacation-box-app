@@ -2,7 +2,7 @@
 /* spacing from the top */
 #primary_nav_wrap
 {
-  margin-top: 6px;
+  margin-top: 15px;
 }
 
 .saved_vac_menu {
@@ -20,14 +20,14 @@
 /* main link text */
 #primary_nav_wrap ul a
 {
-  display:block;
-  color: #ffffff;
-  text-decoration:none;
-  font-weight:700;
-  font-size:12px;
-  line-height:32px;
-  padding:0 15px;
-  font-family:"HelveticaNeue","Helvetica Neue",Helvetica,Arial,sans-serif
+  // display:block;
+  // color: #ffffff;
+  // text-decoration:none;
+  // font-weight:700;
+  // font-size:12px;
+  // line-height:32px;
+  // padding:0 15px;
+  // font-family:"HelveticaNeue","Helvetica Neue",Helvetica,Arial,sans-serif
 }
 
 /* this is the box around the main link */
@@ -35,20 +35,20 @@
 {
   position:relative;
   float:left;
-  margin:0;
-  padding:0
+  // margin:0;
+  // padding:0
 }
 
 
 /* this is the box around the sub menu */
 #primary_nav_wrap ul ul
 {
-  border: 1px solid green;
+  border: 1px solid #666;
   display:none;
   position:absolute;
   top:100%;
   left:0;
-  background:#17384C;
+  background: #ffffff;
   padding:0;
   opacity: 0.9;
   
@@ -57,8 +57,8 @@
 /* border around each sub_menu text */
 #primary_nav_wrap ul ul li
 {
-  float:none;
-  width:200px;
+  float: none;
+  width: 200px;
 }
 
 #primary_nav_wrap ul ul a

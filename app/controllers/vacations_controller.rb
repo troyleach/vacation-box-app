@@ -116,9 +116,6 @@ class VacationsController < ApplicationController
     @hotel      = Accommodation.find_by(:vacation_id => @vacation.id)
     @helper     = Vacation.new
     @page_title = @vacation.vacation_name
-
-    @helper.line
-    p @vacation
     
   end
 

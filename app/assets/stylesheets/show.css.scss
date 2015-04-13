@@ -1,19 +1,26 @@
 /************************************
   SHOW PAGE FOR THE VACATION
 ************************************/
-
+.iframe_row {
+  margin-left: -10px;
+  margin-right: 0;
+}
 .show_page_wrapper {
-  border: 1px solid blue;
+  // border: 1px solid blue;
 }
 
 .outter_box_row {
   border: none;
+  margin-right: -15px;
+  margin-left: -25px;
+  text-align: center;
 }
 
 .inner_box_row {
   border-radius: 5px;
-  background-color: #eaede9;
+  // background-color: #f2f2f2;
   margin-left: 1px;
+  margin-bottom: 20px;
 }
 
 .second_box {
@@ -21,7 +28,7 @@
 }
 
 .bing_search_container {
-  
+  margin: 15px 0 5px 0;
 }
 
 iframe {
@@ -29,7 +36,29 @@ iframe {
   height: 450px;
   margin: 10px;
   padding: 10px;
-  border: 1px solid blue;
+  border: none;
+}
+
+.search_text {
+  font-size: 1.8em;
+  font-weight: 200;
+  margin-left: 15px;
+}
+
+.vacation_date {
+  font-size: 1.6em;
+  font-weight: 200;
+  margin-left: 15px;
+}
+
+.bing_search_text {
+  font-size: 1.4em;
+  font-weight: 200;
+  float: right;
+}
+
+.bing {
+  transform: rotate(-5deg);
 }
 
 .vacation_section_two {
@@ -44,9 +73,7 @@ iframe {
   border: 1px solid black;
 }
 
-.current_stats {
-  border: 1px solid black;
-}
+
 
 .vacation_section_three {
   // border: 1px solid black;
@@ -56,7 +83,7 @@ iframe {
   border: none;
   padding-left: 1px;
   padding-right: 0;
-  width: 250px;
+  width: 320px;
 }
 
 
@@ -69,12 +96,6 @@ iframe {
   border: none;
   padding-left: 13px;
 }
-
-.table_col_description {
-  padding-left: 5px;
-  border: none;
-}
-
 
 #spot_table {
   border-right: none;
@@ -92,16 +113,30 @@ input#placeTitle {
 }
 
 .table_col_description {
-  font-size: 1.3em;
+  font-size: 1.2em;
   font-weight: 500;
   padding: 3px;
 }
 
 .vacation_table_col {
-  font-size: 1.3em;
+  font-size: 1.2em;
   font-weight: 200;
   padding: 3px;
-  width: 50%;
+  width: 65%;
+}
+
+.vacation_table_col_address {
+  font-size: 1.2em;
+  font-weight: 200;
+  padding: 0;
+  width: 65%;
+}
+
+.vacation_table_col_city {
+  font-size: 1.2em;
+  font-weight: 200;
+  padding: 0;
+  width: 65%;
 }
 
 .place_data {
@@ -143,6 +178,7 @@ input#placeTitle {
 }
 
 .user_input_text {
+  font-size: 1.2em;
   margin-left: 10px;
   font-weight: 200;
 }
@@ -230,18 +266,27 @@ input#placeTitle {
 // list of saved spots
 // **************************
 
+.outter_box_row {
+  margin-bottom: 25px;
+  
+}
+
 .spot_name {
-  border: none;
+  border: 1px solid #000000;
+  height: 175px;
+  margin: 4px;
+  width: 23%;
+  text-align: center;
 }
 
 .spot_list_name {
-  padding-left: 5px;
+  padding-top: 10px;
 }
 
 .spot_list_image {
-  width: 80px;
-  height: 80px;
-  margin-top: 5px;
+  width: 90px;
+  height: 90px;
+  margin-top: 15px;
 }
 
 

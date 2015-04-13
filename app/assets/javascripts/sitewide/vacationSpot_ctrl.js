@@ -10,35 +10,42 @@
         $scope.vacations = response.data;
       });
 
+// window.onload = function() {
+//   // CODE GOES HERE
+// }
       var floor = Math.floor;
       var div = document.getElementById('div-lat-lng');
       var lat = div.getAttribute("lat");
       var lng = div.getAttribute("lng");
 
+      console.log(lat);
+      console.log(lng);
+
       var latlng = [parseFloat(lat), parseFloat(lng)];
 
-      console.log(latlng);
+      // console.log(latlng);
+      var vacationBounds = getBoundingBox(latlng, 15);
+      console.log(vacationBounds.sw.lat,vacationBounds.sw.lng);
+      console.log(vacationBounds.ne.lat,vacationBounds.ne.lng);
+      // console.log('just before this line of text')
 
-
+      var vacationBounds = new google.maps.LatLngBounds(
+        new google.maps.LatLng(vacationBounds.sw.lat,vacationBounds.sw.lng),
+        new google.maps.LatLng(vacationBounds.ne.lat,vacationBounds.ne.lng)
+        );
+     
         // var vacationBounds = new google.maps.LatLngBounds(
-        //   new google.maps.LatLng(39.8055204953369,-75.88245927974606),
-        //   new google.maps.LatLng(38.00887950466311,-78.19134072025393)
+        //   new google.maps.LatLng(41.95894884458032,-87.52121488584687),
+        //   new google.maps.LatLng(41.79725115541969,-87.73838511415313)
         //   );
 
         var input = document.getElementById('user_input');
+
         var options = {
-          bounds: getBoundingBox(latlng, 9)
-          // bounds: vacationBounds
+          // bounds: getBoundingBox(latlng, 9)
+          bounds: vacationBounds
         };
 
-        var componentForm = {
-          street_number: 'short_name',
-          route: 'long_name',
-          locality: 'long_name',
-          administrative_area_level_1: 'short_name',
-          country: 'long_name',
-          postal_code: 'short_name'
-        };
 
         autocomplete = new google.maps.places.Autocomplete(input, options);
         
@@ -46,109 +53,157 @@
             fillInAddress();
           });
 
+          
+
+
+
         function fillInAddress() {
           // Get the place details from the autocomplete object.
           $scope.place = autocomplete.getPlace();
-          $scope.$apply();
-          // Display misc items on in view (i need to change this bc of XSS)
-          // var name = $scope.place.name;
-          // var rate = $scope.place.rating;
-          // var phone = $scope.place.international_phone_number;
-          // var price = $scope.place.price_level;
-          // var website = $scope.place.website;
-          // var picture = $scope.place.photos[0].getUrl({ 'maxWidth': 250, 'maxHeight': 250 });
-          // var reviews = $scope.place.review
-          
-          // document.getElementById('placeTitle').value = name;
-          // document.getElementById('placeRate').value = rate;
-          // if (place.opening_hours === undefined) {
-          //   document.getElementById('placeOpen').value = ''; 
-          // } else if (place.opening_hours.open) {
-          //   document.getElementById('placeOpen').value = 'We are open!';
-          // } else {
-          //   document.getElementById('placeOpen').value = 'Sorry, we are closed'; 
+        
+// not sure I need below
+          // for (var component in componentForm) {
+          //   document.getElementById(component).value = '';
+          //   document.getElementById(component).disabled = false;
           // }
-          // document.getElementById('placePhone').value = phone;
-          // document.getElementById('placePrice').value = price;
-          // document.getElementById('placeMenu').value = website;
-          // document.getElementById('placePhoto').src = picture;
-
-          
-          
-
-
-          for (var component in componentForm) {
-            document.getElementById(component).value = '';
-            document.getElementById(component).disabled = false;
-          }
           
           // Get each component of the address from the place details
           // and fill the corresponding field on the form.
+          var addressComponentMapping = {
+            street_number: 'short_name',
+            route: 'long_name',
+            locality: 'long_name',
+            administrative_area_level_1: 'short_name',
+            country: 'long_name',
+            postal_code: 'short_name'
+          }
+
+          $scope.spotInfo = {};
+
           for (var i = 0; i < $scope.place.address_components.length; i++) {
             var addressType = $scope.place.address_components[i].types[0];
             
-            if (componentForm[addressType]) {
-              var val = $scope.place.address_components[i][componentForm[addressType]];
-              document.getElementById(addressType).value = val;
-            }
-          }
-
+              var val = $scope.place.address_components[i][addressComponentMapping[addressType]];
+              $scope.spotInfo[addressType] = val;
+            } 
+          
+          $scope.$apply();
         }
-    };
 
+        $scope.addNewSpot = function(spotNote) {
 
-// thing I have to do is iterate over the type, if bar restaurant set website to menu, else website
+              var newSpot = {
+                lat: $scope.place.geometry.location.lat(),
+                lng: $scope.place.geometry.location.lng(),
+                image: $scope.place.photos ? $scope.place.photos[0].getUrl({ 'maxWidth': 250, 'maxHeight': 250 }) : null,
+                spot_name: $scope.place.name,
+                // description: newDescription,
+                route: $scope.spotInfo.route,
+                phone: $scope.place.international_phone_number,
+                // open: newOpen,
+                // reservation: newReservation,
+                website: $scope.place.website,
+                note: spotNote,
+                city: $scope.spotInfo.locality,
+                state: $scope.spotInfo.administrative_area_level_1,
+                zip: $scope.spotInfo.postal_code,
+                street_number: $scope.spotInfo.street_number,
+                vacation_id: $scope.vacation_id
+                };
 
-    $scope.addNewSpot = function(spotNote) {
-        //newLat, newLng, newImage, newSpotName, newDescription, newRout, newPhone, newOpen, newReservation, newWebsite, newCity, newState, newZip, newStreetNumber
+            $http.post('/api/v1/vacation_spots.json', newSpot).then(function(response) {
+                    $scope.vacations.vacation_spots.push(newSpot); 
+                    newSpot.id = response.data.id;
+                    $scope.userInput = null;
+                  }, function (error) {
+                    $scope.error = error.statusText;
+                  });
+              };
 
-          var newSpot = {
-            lat: $scope.place.geometry.location.lat(),
-            lng: $scope.place.geometry.location.lng(),
-            image: $scope.place.photos[0].getUrl({ 'maxWidth': 250, 'maxHeight': 250 }),
-            spot_name: $scope.place.name,
-            // description: newDescription,
-            route: $scope.place.address_components[1].long_name,
-            phone: $scope.place.international_phone_number,
-            // open: newOpen,
-            // reservation: newReservation,
-            website: $scope.place.website,
-            note: spotNote,
-            city: $scope.place.address_components[2].long_name,
-            state: $scope.place.address_components[3].long_name,
-            zip: $scope.place.address_components[5].long_name,
-            street_number: $scope.place.address_components[0].long_name,
-            vacation_id: $scope.vacation_id
+// ****I DO NOT KNOW WHY I CAN'T PULL THIS OUT INTO IT'S OWN FILE*********************************************
+          'use strict';
+
+          /**
+           * @param {number} distance - distance (km) from the point represented by centerPoint
+           * @param {array} centerPoint - two-dimensional array containing center coords [latitude, longitude]
+           * @description
+           *   Computes the bounding coordinates of all points on the surface of a sphere
+           *   that has a great circle distance to the point represented by the centerPoint
+           *   argument that is less or equal to the distance argument.
+           *   Technique from: Jan Matuschek <http://JanMatuschek.de/LatitudeLongitudeBoundingCoordinates>
+           * @author Alex Salisbury
+          */
+
+          function getBoundingBox(centerPoint, distance) {
+            var MIN_LAT, MAX_LAT, MIN_LON, MAX_LON, R, radDist, degLat, degLon, radLat, radLon, minLat, maxLat, minLon, maxLon, deltaLon;
+            if (distance < 0) {
+              return 'Illegal arguments';
+            }
+            // helper functions (degrees<–>radians)
+            Number.prototype.degToRad = function () {
+              return this * (Math.PI / 180);
             };
-
-        $http.post('/api/v1/vacation_spots.json', newSpot).then(function(response) {
-                $scope.vacations.vacation_spots.push(newSpot); 
-                newSpot.id = response.data.id;
-              }, function (error) {
-                $scope.error = error.statusText;
-              });
+            Number.prototype.radToDeg = function () {
+              return (180 * this) / Math.PI;
+            };
+            // coordinate limits
+            MIN_LAT = (-90).degToRad();
+            MAX_LAT = (90).degToRad();
+            MIN_LON = (-180).degToRad();
+            MAX_LON = (180).degToRad();
+            // Earth's radius (km)
+            R = 6378.1;
+            // angular distance in radians on a great circle
+            radDist = distance / R;
+            // center point coordinates (deg)
+            degLat = centerPoint[0];
+            degLon = centerPoint[1];
+            // center point coordinates (rad)
+            radLat = degLat.degToRad();
+            radLon = degLon.degToRad();
+            // minimum and maximum latitudes for given distance
+            minLat = radLat - radDist;
+            maxLat = radLat + radDist;
+            // minimum and maximum longitudes for given distance
+            minLon = void 0;
+            maxLon = void 0;
+            // define deltaLon to help determine min and max longitudes
+            deltaLon = Math.asin(Math.sin(radDist) / Math.cos(radLat));
+            if (minLat > MIN_LAT && maxLat < MAX_LAT) {
+              minLon = radLon - deltaLon;
+              maxLon = radLon + deltaLon;
+              if (minLon < MIN_LON) {
+                minLon = minLon + 2 * Math.PI;
+              }
+              if (maxLon > MAX_LON) {
+                maxLon = maxLon - 2 * Math.PI;
+              }
+            }
+            // a pole is within the given distance
+            else {
+              minLat = Math.max(minLat, MIN_LAT);
+              maxLat = Math.min(maxLat, MAX_LAT);
+              minLon = MIN_LON;
+              maxLon = MAX_LON;
+            }
+            
+            var boxObject = {
+              'sw': {
+                'lat': minLat.radToDeg(),
+                'lng': minLon.radToDeg()
+              },
+              'ne': {
+                'lat': maxLat.radToDeg(),
+                'lng': maxLon.radToDeg()
+              }  
+            };
+            return boxObject;
           };
+        
 
-    //   $http.post('/api/v1/lumbers.json', wood).then(function(response) {
-    //       $scope.lumbers.push(wood);
-    //       $scope.newWoodDim = "";
-    //       $scope.newWoodSpecies = "";
-    //       $scope.newWoodsize = "";
-    //       $scope.newWoodUse = "";
-    //       $scope.errors = null;
-    //     }, function (error) {
-    //       $scope.errors = error.data.errors;
-    //     });
 
-    // };
- 
-    //   $scope.descending = true;
 
-    // $scope.changeOrder = function(attribute) {
-    //       $scope.orderByAttribute = attribute;
-    //       $scope.descending = !$scope.descending;
-    //     };
-    
+    };
 
 
     window.scope = $scope;

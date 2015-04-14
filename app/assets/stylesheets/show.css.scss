@@ -12,7 +12,7 @@
 .outter_box_row {
   border: none;
   margin-right: -15px;
-  margin-left: -25px;
+  margin-left: -18px;
   text-align: center;
 }
 
@@ -23,9 +23,9 @@
   margin-bottom: 20px;
 }
 
-.second_box {
-  border: none;
-}
+// .second_box {
+//   border: none;
+// }
 
 .bing_search_container {
   margin: 15px 0 5px 0;
@@ -42,7 +42,7 @@ iframe {
 .search_text {
   font-size: 1.8em;
   font-weight: 200;
-  margin-left: 15px;
+  margin-left: 10px;
 }
 
 .vacation_date {
@@ -81,9 +81,14 @@ iframe {
 
 .current_stats {
   border: none;
-  padding-left: 1px;
-  padding-right: 0;
-  width: 320px;
+  padding: 0;
+  // padding-left: 1px;
+  // padding-right: 0;
+  // width: 320px;
+}
+
+.text_box {
+  text-align: left;
 }
 
 
@@ -181,6 +186,7 @@ input#placeTitle {
   font-size: 1.2em;
   margin-left: 10px;
   font-weight: 200;
+  margin-bottom: 0;
 }
 
 #user_input {
@@ -272,8 +278,8 @@ input#placeTitle {
 }
 
 .spot_name {
-  border: 1px solid #000000;
-  height: 175px;
+  border: 1px solid #666;
+  height: 190px;
   margin: 4px;
   width: 23%;
   text-align: center;
@@ -281,12 +287,74 @@ input#placeTitle {
 
 .spot_list_name {
   padding-top: 10px;
+  border-top: 1px solid #666;
+  padding-bottom: 10px;
+  
 }
 
 .spot_list_image {
   width: 90px;
   height: 90px;
   margin-top: 15px;
+  padding-bottom: 10px;
 }
 
+// this is where the vacation stuff lives
+
+.vacation_stuff {
+  margin: 10px 0 10px 0;
+  width: 625px;
+  border: none;
+}
+
+#map-canvas-vacation {
+  height: 215px;
+  width: 250px;
+  margin-bottom: 10px;
+}
+
+.vacation_spot_text {
+  font-size: 1.3em;
+  font-weight: 500;
+  padding: 0;
+  margin: 0;
+}
+
+.vacation_spot_line {
+  margin: 0 0 0 0;
+  padding: 0;
+  width: 47%;
+}
+
+// weather
+.spot_temp {
+  text-align: center;
+  font-size: 4em;
+  font-weight: 400;
+}
+
+.spot_summary {
+  
+}
+
+.spot_summary_text {
+  float: right;
+  margin-top: 20px;
+}
+
+.spot_high_low {
+  text-align: center;
+}
+
+.spot_weather_table {
+  width: 140px;
+  margin-left: 38px;
+}
+.spot_cloud_div {
+  display: inline-block;
+}
+.spot_summary_div {
+  display: inline-block;
+  height: 100%;
+}
 

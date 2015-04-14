@@ -116,6 +116,14 @@ class VacationsController < ApplicationController
     @hotel      = Accommodation.find_by(:vacation_id => @vacation.id)
     @helper     = Vacation.new
     @page_title = @vacation.vacation_name
+
+    @current_weather = DarkSkyWeather::CurrentWeather.currently(ENV['WEATHER_API_KEY'], @vacation.latitude, @vacation.longitude)
+    @helper.line
+    p @current_weather
+
+    @week_of_weather = DarkSkyWeather::CurrentWeather.daily(ENV['WEATHER_API_KEY'], @profile.latitude, @profile.longitude)
+
+    p @week_of_weather[1].to_date
     
   end
 

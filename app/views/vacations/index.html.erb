@@ -31,11 +31,7 @@
                         <a href="/profiles/<%= current_user.id %>/edit"><p class="no_profile">- Please update your profile -</p></a>
                       <% else %>
 
-                      <!-- <div class="date">
-                        <span class="day"><%= @current_weather.day %></span> 
-                        <span class="month"><%= @current_weather.month %></span> 
-                        <span class="year"><%= @current_weather.year %></span>
-                      </div> -->
+                      
 
                         <P><%= @current_weather.to_date %> | &degF</P>
                         <table class="weather_table" border="0">

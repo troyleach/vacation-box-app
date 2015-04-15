@@ -1,7 +1,88 @@
+
 // This applies to all layouts
 body {
   background-color: #e8e8e2;
   // line-height: 1em;
+}
+
+// below is for the travel stamp
+.logo_placement {
+  text-align: center;
+  border: none;
+  position: absolute;
+  z-index: 1;
+  width: 100%;
+  top: 402px;
+  left: 245px;
+  /* Rotate div */
+  -ms-transform: rotate(7deg); /* IE 9 */
+  -webkit-transform: rotate(7deg); /* Chrome, Safari, Opera */
+  transform: rotate(7deg);
+}
+
+.logo {
+  border: none;
+  width: 150px;
+  height: auto;
+}
+
+.time_stamp {
+  font-family: 'Special Elite', cursive;
+  position: absolute;
+  z-index: 1;
+  top: 40px;
+  left: 300px;
+  color: #c31103;
+}
+
+// stamp number two
+
+.stamp2_placement {
+  text-align: center;
+  border: none;
+  position: absolute;
+  z-index: 1;
+  width: 100%;
+  top: 90px;
+  left: 394px;
+  /* Rotate div */
+  -ms-transform: rotate(9deg); /* IE 9 */
+  -webkit-transform: rotate(9deg); /* Chrome, Safari, Opera */
+  transform: rotate(9deg);
+}
+
+.stamp2 {
+  border: none;
+  width: 200px;
+  height: auto;
+}
+
+.time_stamp2 {
+  font-family: 'Special Elite', cursive;
+  position: absolute;
+  z-index: 1;
+  top: 42px;
+  left: 134px;
+  color: #c31103;
+}
+
+.stamp_des {
+  font-family: 'Special Elite', cursive;
+  font-size: 1.2em;
+  position: absolute;
+  width: 200px;
+  z-index: 1;
+  top: 57px;
+  left: 72px;
+  color: #229e82;
+}
+
+// end of travel stamp
+
+.home_symb {
+  color: #c31103;
+  // font-size: 1.5em;
+  height: auto;
 }
 
 a {
@@ -102,15 +183,16 @@ header {
   width:100%;
   position:fixed;
   top:0px;
-  background-color: #ffffff;
+  background-color: #e4d7a0;
 
 }
 
 .header_one {
   padding-left: 1%;
   padding-right: 2%;
-  border-bottom: 1px solid #666;
-  background-color: #ffffff;
+  border-bottom: 1px solid #7cb89c;
+  background-color: #e4d7a0;
+  z-index: -2;
 }
 
 .main_nav_bar {
@@ -135,12 +217,36 @@ header {
   padding-right: 6px;
 }
 
+.main_logo {
+  width: 33%;
+  height: 55px;
+
+}
+
+// text-align: center;
+// border: none;
+// position: absolute;
+// z-index: 1;
+// width: 100%;
+// top: 90px;
+// left: 394px;
+
+
+
 .main_logo p {
   text-align: center;
-  font-size: 2em;
-  color: #FF972C;
+  font-size: 2.1em;
   line-height: 1em;
-  margin-top: 10px;
+  margin-top: 15px;
+  font-family: 'Special Elite', cursive;
+  color: #c31103;
+  position: absolute;
+  left: 20%;
+  z-index: 1;
+  /* Rotate div */
+  -ms-transform: rotate(-3deg); /* IE 9 */
+  -webkit-transform: rotate(-3deg); /* Chrome, Safari, Opera */
+  transform: rotate(-3deg);
 }
 
 .profile {
@@ -170,7 +276,8 @@ header {
 }
 
 .saved_vations {
-  padding-left: 15px;
+  padding-left: 25px;
+  padding-right: 25px;
 }
 
 .app_alerts {
@@ -192,6 +299,7 @@ header {
   margin-top: 50px;
   background-color: #ffffff;
   width: 98%;
+  height: 100%;
 }
 
 footer {

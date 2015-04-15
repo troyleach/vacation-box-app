@@ -18,9 +18,15 @@ class Vacation < ActiveRecord::Base
     Time.now.strftime("%b %d, %Y")
   end
 
+  def time_stamp
+    Time.now.strftime("%e %b %Y")
+  end
+
   def convert_date(date)
     Date.parse(date).strftime("%b %d, %Y")
   end
+
+
  
 
   def line

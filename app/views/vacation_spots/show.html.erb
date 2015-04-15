@@ -14,7 +14,9 @@
       <div class="vacation_vitals shoadows row">
 
         <div class="directions col-md-4">
+          <h4>From <%= @hotel.name %></h4>
           <div id="directions-panel"></div>
+          <h4>To <%= @spot.spot_name %></h4>
         </div><!-- directions col-md-4  -->
 
         <div class="map col-md-4">
@@ -26,12 +28,12 @@
                     <h4>Things to know:</h4>
                     <hr>
                       <div class="vacation_spot_image">
-                        <img src="<%= @spot.image %>" alt="The image of the spot" width="250">
+                        <img src="<%= @spot.image %>" alt="REALLY??? No image to be found!" width="250">
                       </div>
-                      <div class="description_text">Description:</div>
-                      <div class="vacation_spot_description"><%= @spot.description %></div>
+                      <!-- <div class="description_text">Description:</div> -->
+                      <!-- <div class="vacation_spot_description"><%= @spot.description %></div> -->
                       <hr>
-                      <table>
+                      <table class="spot_table">
                       <th></th>
                         <tr class="table_row">
                           <td class="table_col_des">Address:</td>
@@ -63,13 +65,14 @@
                       <div class="pdf_button">
                         <button><a href="/vacation_spots/<%= @spot.id %>.pdf">Get your PDF!</a></button>
                       </div>
-                      <div class="description_text">Notes:</div>
-                      <div class="vacation_spot_description"><%= @spot.note %></div>
+                      <div class="description_text">Edit and or modify the notes for this spot:</div>
                       <div id="form">
                         <%= form_tag "/vacation_spots/#{@spot.id}", :method => :patch do %>
-                        <p class="make_notes_text">Make some notes about this spot <%= submit_tag "Update" %></p>
                           <div class="notes_box">
                             <%=text_area_tag :note, @spot.note, :size => "47x8" %>
+                            <div class="pdf_button">
+                        <p class="make_notes_text"><%= submit_tag "Update" %></p>
+                        </div>
                           </div>
                         <% end %>
                       </div>
@@ -82,8 +85,6 @@
         <div class="col-md-12 box_one">
             <button class="spots_button"><a href="/vacations/<%= @spot.vacation_id %>">Back to <%= @current_vacation.vacation_name %></a></button>    
         </div><!-- END OF BOX_ONE -->
-        
-
       </div><!-- END OF NOTE ROW -->
     </div><!-- END OF VACATION WRAPPER -->
 
@@ -115,7 +116,7 @@ window.onload = function() {
   var request = {
       origin:start,
       destination:end,
-      travelMode: google.maps.TravelMode["<%= @current_vacation.transpertation.upcase %>"]
+      travelMode: google.maps.TravelMode["<%= @transpertation.upcase %>"]
   };
   directionsService.route(request, function(response, status) {
     if (status == google.maps.DirectionsStatus.OK) {

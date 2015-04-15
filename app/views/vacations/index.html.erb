@@ -5,6 +5,7 @@
 
 <div id="div-lat-lng" lat="<%= @profile.latitude %>" lng="<%= @profile.longitude %>"></div>
 
+
     <section class"section_one">
       <div class="body_one shoadows row">
 
@@ -33,7 +34,7 @@
 
                       
 
-                        <P><%= @current_weather.to_date %> | &degF</P>
+                        <P><%= @current_weather.day_of_week %> | &degF</P>
                         <table class="weather_table" border="0">
                           <tr>
                             <td class="current_summary"><%= @current_weather.summary %></td>
@@ -63,6 +64,10 @@
                         <p class="data_provided_by">Data provided by <a href="<%= @current_weather.data_provided_by %>" target="_blank"><%= @current_weather.forecast %></a></p>
                       <% end %>
                     </div><!-- END OF WEATHER DIV -->
+                    <div class="logo_placement">
+                      <div class="time_stamp"><%= @helper.time_stamp %></div>
+                      <%= image_tag("logo.png", :alt => "Logo", :class => "logo") %>
+                    </div>
                     </div><!-- END OF WEATHER DIV ROW TAG -->
             </div><!-- END OF ROW  GOOD -->
         </div><!-- home shoadows col-md-6  GOOD --> 

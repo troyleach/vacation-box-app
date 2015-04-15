@@ -1,192 +1,202 @@
-<h2>Create a new vacation</h2>
-<div>
+
 <section>
-  <div class="row">
+  <div class="body_one shoadows row">
+    <div class="accomondations col-md-6">
+      <span class="loding_title">Find Lodging</span>
+        <div class="row section_three">
+          <div class="col-md-4">
+            <div id="findhotels">
+              Find hotels in:
+            </div>
+            
+            <div id="locationFieldVacation">
+              <input id="autocomplete" placeholder="Enter a city" type="text" />
+            </div>
 
-  <%= form_tag vacations_path do %>
-    <div class="accomondations col-xs-6 col-md-4">
-    <p>Where do you plan on staying while on vacation?</p>
-      <div>
-        <%= label_tag :name, "Living Quarters:" %>
-      </div>
-      <div>
-        <%= text_field_tag :name %> 
-      </div>
-      
-      <div>
-        <%= label_tag :address, "Address:" %>
-      </div>
-      <div>
-        <%= text_field_tag :address %> 
-      </div>
+            <div id="controlsVacation">
+              <select id="country">
+                <option value="all">All</option>
+                <option value="au">Australia</option>
+                <option value="br">Brazil</option>
+                <option value="ca">Canada</option>
+                <option value="fr">France</option>
+                <option value="de">Germany</option>
+                <option value="mx">Mexico</option>
+                <option value="nz">New Zealand</option>
+                <option value="it">Italy</option>
+                <option value="za">South Africa</option>
+                <option value="es">Spain</option>
+                <option value="pt">Portugal</option>
+                <option value="us" selected>U.S.A.</option>
+                <option value="uk">United Kingdom</option>
+              </select>
+            </div>
 
-      <div>
-        <%= label_tag :city, "City:" %>
-      </div>
-      <div>
-        <%= text_field_tag :city %> 
-      </div>
+            <div id="map-canvas-lodging"></div>
+          </div><!-- END OF FIRST BOX  -->
 
-      <div>
-        <%= label_tag :zip, "Zip code:" %>
-      </div>
-      <div>
-        <%= text_field_tag :zip %> 
-      </div>
+          <div class="col-md-4">  
+            <div id="listingVacation">
+              <table id="resultsTable">
+                <tbody id="results"></tbody>
+              </table>
+            </div>
+
+            <div id="info-content-vacation">
+              <table>
+                <tr id="iw-url-row" class="iw_table_row">
+                  <td id="iw-icon" class="iw_table_icon"></td>
+                  <td id="iw-url"></td>
+                </tr>
+                <tr id="iw-address-row" class="iw_table_row">
+                  <td class="iw_attribute_name">Address:</td>
+                  <td id="iw-address"></td>
+                </tr>
+                <tr id="iw-phone-row" class="iw_table_row">
+                  <td class="iw_attribute_name">Telephone:</td>
+                  <td id="iw-phone"></td>
+                </tr>
+                <tr id="iw-rating-row" class="iw_table_row">
+                  <td class="iw_attribute_name">Rating:</td>
+                  <td id="iw-rating"></td>
+                </tr>
+                <tr id="iw-website-row" class="iw_table_row">
+                  <td class="iw_attribute_name">Website:</td>
+                  <td id="iw-website"></td>
+                </tr>
+              </table>
+            </div>
+          </div><!-- END OF SECOND BOX  -->
+            
+          <div class="col-md-4"><!-- nothing in this box --></div>
+        </div><!-- end of the row div -->
+
     </div>
 
-    <div class="vacation_name col-xs-6 col-md-4">
-    <p>What would you like to name your vacation?</p>
-      <div>
-        <%= label_tag :vacation_name, "Vacation Name:" %>
-      </div>
-      <div>
-        <%= text_field_tag :vacation_name %> 
-      </div>
-      <div>
-        <%= label_tag :city, "City:" %>
-        </div>
-        <div>
-        <%= text_field_tag :city %>
-      </div>
-      <div>
-        <%= label_tag :state, "State:" %>
-        </div>
-        <div>
-        <%= text_field_tag :state %>
-      </div>
-      <p>how do you plan on getting around while on vacation?</p>
-      <!-- The below code will need to be enum, so I think I have to change it to arive_by to match the table -->
-      <div>
-        <%= label_tag :transpertation, "Car rental" %>
-        </div>
-        <div>
-        <%= check_box_tag :transpertation, :'car rental' %>
+    <div class="vacation_name col-md-6">
+    <%= form_tag vacations_path do %>
+      <div class="right_side row">
+        <div class="right_box_left col-md-6">
 
-      </div>
-      <div>
-        <%= label_tag :transpertation, "Bus/Train" %>
-        </div>
-        <div>
-        <%= check_box_tag :transpertation, :'bus or train' %>
-      </div>
-      <div>
-        <%= label_tag :transpertation, "walking" %>
-        </div>
-        <div>
-        <%= check_box_tag :transpertation, :walking %>
-      </div>
-      <hr>
-      <div><%= submit_tag "Set up my vacation!" %></div>
-    </div>
-
-    <div class="arive_by col-xs-6 col-md-4">
-    <p>How are you getting to your destination?</p>
-        <div>
-          <%= label_tag :arrive_by, "By air" %>
+        <div class="vacation_box">
+          <p class="vacaiton_box_title">Name your vacation?</p>
+          <div>
+            <%= label_tag :vacation_name, "Vacation Name:" %>
           </div>
           <div>
-          <%= check_box_tag :arrive_by, :air %>
-        </div>
-        <div>
-          <%= label_tag :arrive_by, "Car" %>
+            <%= text_field_tag :vacation_name %> 
           </div>
           <div>
-          <%= check_box_tag :arrive_by, :car %>
-        </div>
-        <div>
-          <%= label_tag :arrive_by, "Train" %>
+            <%= label_tag :city, "City:" %>
+            </div>
+            <div>
+            <%= text_field_tag :city %>
           </div>
           <div>
-          <%= check_box_tag :arrive_by, :train %>
-        </div>
-      </div>
-    </div>
+            <%= label_tag :state, "State:" %>
+            </div>
+            <div>
+            <%= text_field_tag :state %>
+          </div>
+        </div><!-- end of vacation box -->
 
-    <% end %>
-  </div>
+        <div class="vacation_box">
+          <p class="vacaiton_box_title">Where do you plan on staying while on vacation?</p>
+          <div>
+            <%= label_tag :name, "Living Quarters:" %>
+          </div>
+          <div>
+            <%= text_field_tag :name %> 
+          </div>
+          
+          <div>
+            <%= label_tag :address, "Address:" %>
+          </div>
+          <div>
+            <%= text_field_tag :address %> 
+          </div>
+
+          <div>
+            <%= label_tag :city, "City:" %>
+          </div>
+          <div>
+            <%= text_field_tag :city %> 
+          </div>
+
+          <div>
+            <%= label_tag :zip, "Zip code:" %>
+          </div>
+          <div>
+            <%= text_field_tag :zip %> 
+          </div>
+        </div><!-- end of vacation box -->
+        </div><!-- END right_box_left --> 
+
+        <div class="right_box_right col-md-6">
+<!-- TRANSPERTATION WHILE ON VACAITON -->
+        <div class="vacation_box">
+          <p class="vacaiton_box_title">how do you plan on getting around while on vacation?</p>
+          <!-- The below code will need to be enum, so I think I have to change it to arive_by to match the table -->
+          <div>
+            <%= label_tag :transpertation, "Car rental" %>
+            </div>
+            <div>
+            <%= check_box_tag :transpertation, :'car rental' %>
+
+          </div>
+          <div>
+            <%= label_tag :transpertation, "Bus/Train" %>
+            </div>
+            <div>
+            <%= check_box_tag :transpertation, :'bus or train' %>
+          </div>
+          <div>
+            <%= label_tag :transpertation, "walking" %>
+            </div>
+            <div>
+            <%= check_box_tag :transpertation, :walking %>
+          </div>
+        </div><!-- end of vacation box -->
+
+<!-- ARRIVE BY -->
+        <div class="vacation_box">
+          <p class="vacaiton_box_title">How are you getting to your destination?</p>
+          <div>
+            <%= label_tag :arrive_by, "By air" %>
+            </div>
+            <div>
+            <%= check_box_tag :arrive_by, :air %>
+          </div>
+          <div>
+            <%= label_tag :arrive_by, "Car" %>
+            </div>
+            <div>
+            <%= check_box_tag :arrive_by, :car %>
+          </div>
+          <div>
+            <%= label_tag :arrive_by, "Train" %>
+            </div>
+            <div>
+            <%= check_box_tag :arrive_by, :train %>
+          </div>
+        </div><!-- end of vacation box -->
+      </div><!-- END OF right_box_right -->
+      <hr class="vacation_submitt_line">
+      <divclass="vacation_submitt_button"><%= submit_tag "Set up my vacation!" %></div>
+    </div><!-- END OF RIGHT SIDE BOX -->  
+  </div><!-- END OF vacation_name -->
+
+       
+
+        <% end %>
+
+  </div><!-- END body_one shoadows row -->
 </section>
 
+
 <!-- FIND LODGING  -->
-    <h4>Find Lodging</h4>
-    <section>
     
-      <div class="row section_three">
-        <div class="col-md-4">
-          <div id="findhotels">
-            Find hotels in:
-          </div>
-          
-          <div id="locationField">
-            <input id="autocomplete" placeholder="Enter a city" type="text" />
-          </div>
 
-          <div id="controls">
-            <select id="country">
-              <option value="all">All</option>
-              <option value="au">Australia</option>
-              <option value="br">Brazil</option>
-              <option value="ca">Canada</option>
-              <option value="fr">France</option>
-              <option value="de">Germany</option>
-              <option value="mx">Mexico</option>
-              <option value="nz">New Zealand</option>
-              <option value="it">Italy</option>
-              <option value="za">South Africa</option>
-              <option value="es">Spain</option>
-              <option value="pt">Portugal</option>
-              <option value="us" selected>U.S.A.</option>
-              <option value="uk">United Kingdom</option>
-            </select>
-
-            <!-- <select id="placeType">
-              <option value="all">All</option>
-              <option value="restaurant">Restaurant</option>
-              <option value="lodging">Lodging</option>
-            </select> -->
-          </div>
-
-          <div id="map-canvas-lodging"></div>
-        </div><!-- END OF FIRST BOX  -->
-
-        <div class="point_interest_box_two col-md-4">  
-          <div id="listing">
-            <table id="resultsTable">
-              <tbody id="results"></tbody>
-            </table>
-          </div>
-
-          <div id="info-content">
-            <table>
-              <tr id="iw-url-row" class="iw_table_row">
-                <td id="iw-icon" class="iw_table_icon"></td>
-                <td id="iw-url"></td>
-              </tr>
-              <tr id="iw-address-row" class="iw_table_row">
-                <td class="iw_attribute_name">Address:</td>
-                <td id="iw-address"></td>
-              </tr>
-              <tr id="iw-phone-row" class="iw_table_row">
-                <td class="iw_attribute_name">Telephone:</td>
-                <td id="iw-phone"></td>
-              </tr>
-              <tr id="iw-rating-row" class="iw_table_row">
-                <td class="iw_attribute_name">Rating:</td>
-                <td id="iw-rating"></td>
-              </tr>
-              <tr id="iw-website-row" class="iw_table_row">
-                <td class="iw_attribute_name">Website:</td>
-                <td id="iw-website"></td>
-              </tr>
-            </table>
-          </div>
-        </div><!-- END OF SECOND BOX  -->
-          
-        <div class="col-md-4"><!-- nothing in this box --></div>
-      </div><!-- end of the row div -->
-    </section>
-
-</div>
 
 
 

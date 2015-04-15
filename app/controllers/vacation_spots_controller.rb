@@ -19,28 +19,23 @@ class VacationSpotsController < ApplicationController
     @key              = "#{ENV['GOOGLE_API_KEY']}"
     @hotel            = Accommodation.find_by(:vacation_id => @current_vacation.id)
 
-    @helper.line
-    p @spot
+    @transpertation   = @current_vacation.transpertation
+
+    if @current_vacation.transpertation.upcase == "CAR RENTAL"
+      @transpertation = "driving"
+    end
+
+    if @current_vacation.transpertation == "bus or train"
+      @transpertation = "transit"
+    end
 
     
-
-    
-
-# I don't think I need any of this code below, I wrote JS for it
-    # @transite = Unirest.get("https://maps.googleapis.com/maps/api/directions/json?origin=Brooklyn&destination=Queens&mode=transit&key=AIzaSyCGrehijmS0whBx20TDfi4lZTH4pCuIjn4").body["routes"]
-
-    # @walking = Unirest.get("https://maps.googleapis.com/maps/api/directions/json?origin=Toronto&destination=Montreal&avoid=highways&mode=walking&key=AIzaSyCGrehijmS0whBx20TDfi4lZTH4pCuIjn4").body["routes"]
-
-    # @bicycling = Unirest.get("https://maps.googleapis.com/maps/api/directions/json?origin=Toronto&destination=Montreal&avoid=highways&mode=bicycling&key=AIzaSyCGrehijmS0whBx20TDfi4lZTH4pCuIjn4").body["routes"]
-        
-         
-    # @car = Unirest.get("https://maps.googleapis.com/maps/api/directions/json?origin=38.914638,-77.040386&destination=38.9017,-77.0375&key=AIzaSyCGrehijmS0whBx20TDfi4lZTH4pCuIjn4").body["routes"]
 
     respond_to do |format|
       format.html
       format.pdf do
         pdf = ReportPdf.new(@spot)
-        send_data pdf.render, filename: 'report.pdf', type: 'application/pdf'
+        send_data pdf.render, filename: "#{@page_title}'.pdf", type: 'application/pdf'
       end
     end
         

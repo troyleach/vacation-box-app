@@ -12,6 +12,7 @@
   <link rel="shortcut icon" type="image/x-icon" href="/img/favicon.ico" />
   <script type="text/javascript" src="http://www.panoramio.com/wapi/wapi.js?v=1"></script>
   <script src="https://rawgithub.com/darkskyapp/skycons/master/skycons.js"></script>
+  <link href='http://fonts.googleapis.com/css?family=Fredericka+the+Great|Poiret+One|Limelight|Shadows+Into+Light|Frijole|Amatic+SC|Rock+Salt|Special+Elite' rel='stylesheet' type='text/css'>
   
 </head>
 <body>
@@ -25,7 +26,7 @@
               <div class="col-md-4">
                 <nav id="primary_nav_wrap" class="saved_vac_menu">
                   <ul>
-                  <li><a href="/">Home Dashboard</a></li>
+                  <li><a href="/"><span class="glyphicon glyphicon-home home_symb" aria-hidden="true"></span> Home</a></li>
                   <li>|</li>
                     <li>Saved Vacations <span class="caret"></span>
                       <ul>
@@ -39,7 +40,7 @@
                       </ul>
                     </li>
                     <li>|</li>
-                    <li class="date_time">Local time: <%= @helper.time_date %></li>
+                    <li class="date_time">Local time: <%= @helper.time_date %> (CT)</li>
                   </ul>
                 </nav>
               </div>
@@ -49,7 +50,7 @@
               <% if @profile == nil || @profile.locality == nil  %>
               <a href="/profiles/<%= current_user.id %>/edit"><p>- Please update your profile -</p></a>
               <% else %>
-              <p>- <%= @page_title %> -</p>
+              <p><%= @page_title %></p>
               <% end %>
               
               </div>

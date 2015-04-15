@@ -1,0 +1,113 @@
+.loding_title {
+  font-size: 1.4em;
+  font-weight: 900;
+  margin-left: -6px;
+}
+
+#map-canvas-lodging {
+  width: 425px;
+  height: 440px;
+  margin-top: 25px;
+  z-index: 1;
+  margin-top: 30px;
+}
+
+
+      #info-content-vacation {
+        margin-left: 0;
+        margin-top: 10px;
+      }
+
+      #listingVacation {
+        border: none;
+        position: absolute;
+        width: 235px;
+        height: 440px;
+        overflow: auto;
+        margin-left: 207px;
+        margin-top: 25px;
+        // left: 442px;
+        // top: 0px;
+        cursor: pointer;
+        overflow-x: hidden;
+      }
+//       #findhotels {
+//         position: absolute;
+//         text-align: right;
+//         width: 100px;
+//         font-size: 14px;
+//         padding: 4px;
+//         z-index: 5;
+//         background-color: #fff;
+//       }
+      #locationFieldVacation {
+        position: absolute;
+        width: 190px;
+        height: 25px;
+        left: 100px;
+        top: 0px;
+        z-index: 5;
+        background-color: #fff;
+      }
+      #controlsVacation {
+        position: absolute;
+        left: 296px;
+        width: 140px;
+        top: 0px;
+        z-index: 5;
+        background-color: #fff;
+      }
+//       #autocomplete {
+//         width: 100%;
+//       }
+      #countryVacation {
+        width: 100%;
+      }
+//       .placeIcon {
+//         width: 20px;
+//         height: 34px;
+//         margin: 4px;
+//       }
+//       .hotelIcon {
+//         width: 24px;
+//         height: 24px;
+//       }
+      #resultsTableVacation {
+        border-collapse: collapse;
+        width: 240px;
+      }
+//       #rating {
+//         font-size: 13px;
+//         font-family: Arial Unicode MS;
+//       }
+//       .iw_table_row {
+//         height: 18px;
+//       }
+//       .iw_attribute_name {
+//         font-weight: bold;
+//         text-align: right;
+//       }
+//       .iw_table_icon {
+//         text-align: right;
+//       }
+
+
+.vacation_box {
+  border: 1px solid #666;
+  padding: 5px;
+  margin-bottom: 15px;
+}
+
+.vacaiton_box_title {
+  font-size: 1.2em;
+  font-weight: 200;
+  border-bottom: 1px solid #666
+}
+
+.vacation_submitt_line {
+  width: 97%;
+}
+
+.vacation_submitt_button {
+  text-align: center;
+}

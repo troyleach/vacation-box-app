@@ -11,7 +11,7 @@ class ProfilesController < ApplicationController
     @vacations  = Vacation.where({:user_id => current_user.id})
     @profile    = Profile.find_by(:user_id => current_user.id)
     @helper     = Vacation.new
-    @page_title = "Update your profile!"
+    @page_title = "Update your profile"
     if !@profile
       Profile.create({:user_id => current_user.id})
     end

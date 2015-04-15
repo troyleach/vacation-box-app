@@ -8,7 +8,7 @@ class VacationsController < ApplicationController
     @places_been  = PlaceBeen.where(:user_id => current_user.id)
     @messages     = Message.all
     @users        = User.all
-    @page_title   = "LOGO"
+    @page_title   = "VACATION BOX"
 
     @current_weather = DarkSkyWeather::CurrentWeather.currently(ENV['WEATHER_API_KEY'], @profile.latitude, @profile.longitude)
     @week_of_weather = DarkSkyWeather::CurrentWeather.daily(ENV['WEATHER_API_KEY'], @profile.latitude, @profile.longitude)
@@ -95,7 +95,7 @@ class VacationsController < ApplicationController
     @vacations  = Vacation.where({:user_id => current_user.id})
     @profile    = Profile.find_by(:user_id => current_user.id)
     @helper     = Vacation.new
-    @page_title   = "Create a New Vacation!"
+    @page_title   = "Create a New Vacation"
   end
 
   def create
@@ -122,8 +122,6 @@ class VacationsController < ApplicationController
     p @current_weather
 
     @week_of_weather = DarkSkyWeather::CurrentWeather.daily(ENV['WEATHER_API_KEY'], @profile.latitude, @profile.longitude)
-
-    p @week_of_weather[1].to_date
     
   end
 

@@ -9,41 +9,32 @@ class ReportPdf < Prawn::Document
     header
     text_content
     # table_content
+    @directions = "https://maps.googleapis.com/maps/api/directions/json?origin=Toronto&destination=Montreal&avoid=highways&mode=bicycling&key=AIzaSyCGrehijmS0whBx20TDfi4lZTH4pCuIjn4"
 
   end
  
   def header
-    text "Vacation Box", size: 30, style: :bold, color: "#8d0505"
-    text "#{@spot.spot_name}", size: 25, style: :bold, color: "#A7C8DB" 
+    text "Vacation Box", size: 30, style: :bold, color: "#000000"
+    text "#{@spot.spot_name}", size: 25, style: :bold, color: "#7cb89c" 
     # text "#{@spot.phone} #{@spot.route} #{@spot.website} #{@spot.city} #{@spot.street_number}" , size: 10 
-    stroke_color "#A7C8DB"
+    stroke_color "#7cb89c"
     stroke_horizontal_rule 
-    # text "#{@spot.image}"
-
-    # image "image", width: 530, height: 150
-
-    image open(@spot.image)
-    
   end
 
 
   
  
   def text_content
-    
+    image open ("https://maps.googleapis.com/maps/api/directions/json?origin=Toronto&destination=Montreal&avoid=highways&mode=bicycling&key=AIzaSyCGrehijmS0whBx20TDfi4lZTH4pCuIjn4")
     gap = 10
     y_position = cursor - 30
     bounding_box([400, y_position], :width => 100) do
           # transparent(0.5) { stroke_bounds }
-          
-          text "SKILLS", size: 12, style: :bold, color: "#A7C8DB"    
+          text "Things about #{@spot.spot_name}", size: 12, style: :bold, color: "#A7C8DB"    
+          image open(@spot.image), width: 200, height: 200
 
             font_size 10
-            # pad_top(5) {
-            #   @student.skills.each do |x|
-            #     text "\u2022 #{x["skill_name"]}"
-            #   end
-            #   }
+            
             text "\u2022 Ruby on Rails"
             text "\u2022 REST"
             text "\u2022 Listening to Jay's lectures"

@@ -1,16 +1,34 @@
 // Place all the styles related to the profiles controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-.profile_row {
-  border: 3px solid black;
-  margin: 5px;
+#profile_container {
+  height: 600px;
 }
 
+.profile_page_title {
+  font-size: 2em;
+  font-weight: 200;
+  margin-top: 10px;
+  margin-left: 10px;
+
+}
+
+.body_one {
+  padding: 20px 0 20px 0;
+  margin-bottom: 100px;
+}
 .users_profile_image {
-  border: 1px solid #000000;
-  background-color: #fbeed6;
-  padding: 15px;
+  border-right: thin solid #666;
+  background-color: #ffffff;
   text-align: center;
+  height: 290px;
+}
+
+.profile_picture {
+  border: none;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
 .gravatar_image_profile {
@@ -19,22 +37,55 @@
 }
 
 .users_name {
-  border: 1px solid #000000;
-  background-color: #fbeed6;
-  padding: 15px;
+  border-right: thin solid #666;
+  background-color: #ffffff;
+  text-align: center;
+  height: 290px;
+}
+
+.user_name_box {
+  border: none;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
 .users_address {
-  border: 1px solid #000000;
-  background-color: #fbeed6;
-  padding: 15px;
+  background-color: #ffffff;
+  text-align: center;
+  height: 290px;
+}
+
+.user_address_box {
+  border: none;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+  text-align: center;
 }
 
 .profiles_submit_button {
-  border: 1px solid #000000;
   text-align: center;
+  margin-bottom: 10px;
+}
+
+.submit_line {
+  border: 1;
+  margin: 50px;
 }
 
 #autocompleteT {
   width: 350px;
 }
+
+// #city {
+//   width: 240px;
+//   border: 1px solid #000090;
+//   background-color: #f0f0ff;
+// }
+
+// #state {
+//   width: 240px;
+//   border: 1px solid #000090;
+//   background-color: #f0f0ff;
+// }

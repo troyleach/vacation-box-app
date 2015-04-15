@@ -1,109 +1,108 @@
+<div id="profile_container"> 
+<p class="profile_page_title">About <%= current_user.email %></p>
+<div class="body_one shoadows row">
 
-<h2>About <%= current_user.email %></h2>
-<h4>Update your profile</h4>
-
-  <div class="row profile_row">
   <div class="users_profile_image col-xs-6 col-md-4">
-    <%= image_tag current_user.gravatar_url,  :class => "gravatar_image_profile" %>
-    <p>Don't have a gravatar? It is very easy to get one just go <a href="https://en.gravatar.com/" target="_blank">here</a></p>
+    <div class="profile_picture">
+      <%= image_tag current_user.gravatar_url,  :class => "gravatar_image_profile" %>
+      <p>Don't have a gravatar? It is very easy to get one just go <a href="https://en.gravatar.com/" target="_blank">here</a></p>
+    </div>
   </div>
   <%= form_tag "/profiles/current_user.id", :method => :patch do %>
   
     <div class="users_name col-xs-6 col-md-4">
-      <div>
-        <%= label_tag :first_name, "First Name:" %>
-      </div>
-      <div>
-        <%= text_field_tag :first_name, @profile.first_name %> 
-      </div>
-      <div>
-        <%= label_tag :last_name, "Last Name:" %>
-      </div>
-      <div>
-        <%= text_field_tag :last_name, @profile.last_name %> 
-      </div>
-      <div>
-        <%= label_tag :email, "Email:" %>
-      </div>
-      <div>
-        <%= text_field_tag :email, current_user.email %> 
-      </div>
-      <div>
-        <%= label_tag :username, "Username:" %>
-      </div>
-      <div>
-        <%= text_field_tag :username, @profile.username %> 
+      <div class="user_name_box">
+        <div>
+          <%= label_tag :first_name, "First Name:" %>
+        </div>
+        <div>
+          <%= text_field_tag :first_name, @profile.first_name %> 
+        </div>
+        <div>
+          <%= label_tag :last_name, "Last Name:" %>
+        </div>
+        <div>
+          <%= text_field_tag :last_name, @profile.last_name %> 
+        </div>
+        <div>
+          <%= label_tag :email, "Email:" %>
+        </div>
+        <div>
+          <%= text_field_tag :email, current_user.email %> 
+        </div>
+        <div>
+          <%= label_tag :username, "Username:" %>
+        </div>
+        <div>
+          <%= text_field_tag :username, @profile.username %> 
+        </div>
       </div>
     </div><!-- End of second box users_name -->
     
-      <div class="users_address col-xs-6 col-md-4">
-  
-    <p>Where do you live. We only need city and state.</p>
+    <div class="users_address col-xs-6 col-md-4">
+      <div class="user_name_box">
 
+        <body onload="initialize()">
+          <div id="profileLocationField">
+            <input id="autocompleteT" placeholder="Enter your address"
+                   onFocus="geolocate()" type="text"></input>
+          </div>
+        </body>
+
+        <p>Where do you live. We only need city and state.</p>
+        <%= hidden_field_tag :street_number %>
+
+        <div>
+          <%= label_tag :route, "Address:" %>
+        </div>
+        <div>
+          <%= text_field_tag :route, "#{@profile.street_number} #{@profile.route}" %> 
+        </div>
+
+        <div>
+          <%= label_tag :locality, "City:", :placeholder => "Need the city" %>
+        </div>
+        <div>
+          <%= text_field_tag :locality, @profile.locality %> 
+        </div>
+
+        <div>
+          <%= label_tag :administrative_area_level_1, "State:" %>
+        </div>
+        <div>
+          <%= text_field_tag :administrative_area_level_1, @profile.administrative_area_level_1 %> 
+        </div>
+
+        <div>
+          <%= label_tag :postal_code, "Zip:" %>
+        </div>
+        <div>
+          <%= text_field_tag :postal_code, @profile.postal_code %> 
+        </div>
+        <div>
+          <%= label_tag :country, "Country:" %>
+        </div>
+        <div>
+          <%= text_field_tag :country, @profile.country %> 
+        </div>
+
+        <div>
+          <%= hidden_field_tag :place_id, @profile.place_id %> 
+        </div>
+        
+        <%= hidden_field_tag :user_id, current_user.id %>
       
-
-      <%= hidden_field_tag :street_number %>
-
-      <div>
-        <%= label_tag :route, "Address:" %>
       </div>
-      <div>
-        <%= text_field_tag :route, "#{@profile.street_number} #{@profile.route}" %> 
-      </div>
-
-      <div>
-        <%= label_tag :locality, "City:" %>
-      </div>
-      <div>
-        <%= text_field_tag :locality, @profile.locality %> 
-      </div>
-
-      <div>
-        <%= label_tag :administrative_area_level_1, "State:" %>
-      </div>
-      <div>
-        <%= text_field_tag :administrative_area_level_1, @profile.administrative_area_level_1 %> 
-      </div>
-
-      <div>
-        <%= label_tag :postal_code, "Zip:" %>
-      </div>
-      <div>
-        <%= text_field_tag :postal_code, @profile.postal_code %> 
-      </div>
-      <div>
-        <%= label_tag :country, "Country:" %>
-      </div>
-      <div>
-        <%= text_field_tag :country, @profile.country %> 
-      </div>
-
-      <div>
-        <%= label_tag :place_id, "Places ID" %>
-      </div>
-      <div>
-        <%= text_field_tag :place_id, @profile.place_id %> 
-      </div>
-      
-
-      <%= hidden_field_tag :user_id, current_user.id %>
-      
-      
     </div><!-- End of third box users_address -->
-
 
     <div class="profiles_submit_button"><%= submit_tag "Update me" %></div>
     
     <% end %>
-  </div><!-- End of row -->
 
+</div><!-- End of row -->
+</div><!-- End of container --> 
   
-  <body onload="initialize()">
-    <div id="profileLocationField">
-      <input id="autocompleteT" placeholder="Enter your address"
-             onFocus="geolocate()" type="text"></input>
-    </div>
-  </body>
+  
     <!-- <table id="address">
       <tr>
         <td class="label">Street address</td>
@@ -218,4 +217,3 @@ console.log(place)
   // [END region_geolocation]
   
 </script>
-

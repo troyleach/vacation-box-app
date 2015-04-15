@@ -82,7 +82,7 @@ function initialize() {
   lodgingMap = new google.maps.Map(document.getElementById('map-canvas-lodging'), myOptions);
 
   infoWindow = new google.maps.InfoWindow({
-      content: document.getElementById('info-content')
+      content: document.getElementById('info-content-vacation')
       });
 
   // Create the autocomplete object and associate it with the UI input control.

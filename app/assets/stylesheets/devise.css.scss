@@ -25,7 +25,15 @@
 .new_user_div {
   padding: 30px;
   width: 300px;
-  color: #849696;
-  background-color: #17384c;
-  opacity: 0.8;
+  color: #c31103;
+  background-color: #e4d7a0;
+  opacity: 0.9;
+  border-radius: 5px;
+  -webkit-box-shadow: 10px 10px 50px 0px rgba(0,0,0,0.75);
+  -moz-box-shadow: 10px 10px 50px 0px rgba(0,0,0,0.75);
+  box-shadow: 10px 10px 50px 0px rgba(0,0,0,0.75);
+}
+
+.field {
+  background-color: none;
 }
